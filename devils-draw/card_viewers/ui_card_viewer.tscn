@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ugq5obsryeiu"]
+
+[ext_resource type="Script" uid="uid://b3xlb3cwlg4gp" path="res://card_viewers/ui_card_viewer.gd" id="1_0f6f3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcv5"]
+size = Vector2(322, 437)
+
+[node name="UICardViewer" type="Area2D"]
+script = ExtResource("1_0f6f3")
+size = 0.25
+
+[node name="Display" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="MouseDetection" type="CollisionShape2D" parent="."]
+z_index = 1
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_mmcv5")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

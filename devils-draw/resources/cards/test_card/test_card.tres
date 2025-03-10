@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Card" load_steps=4 format=3 uid="uid://cccghgd5secoo"]
+
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://resources/cards/card.gd" id="1_5tor7"]
+[ext_resource type="Texture2D" uid="uid://blkoo4lb1fit4" path="res://resources/cards/test_card/test_back.png" id="1_pmfq7"]
+[ext_resource type="Texture2D" uid="uid://chnb6d7dt5dil" path="res://resources/cards/test_card/coin_card.png" id="2_i43wb"]
+
+[resource]
+script = ExtResource("1_5tor7")
+title = "Test Card"
+desc = "This is a test Card"
+cover = ExtResource("2_i43wb")
+back = ExtResource("1_pmfq7")
+cost = 5
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"
