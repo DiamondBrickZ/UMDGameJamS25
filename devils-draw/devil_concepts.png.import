@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chnb6d7dt5dil"
-path.s3tc="res://.godot/imported/coin_card.png-5cc65b4062407b96eca13314e5386664.s3tc.ctex"
+uid="uid://d2acvrfi8q0ak"
+path.s3tc="res://.godot/imported/devil_concepts.png-8f142a126bfb31197a35167d5c55251f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/cards/test_card/coin_card.png"
-dest_files=["res://.godot/imported/coin_card.png-5cc65b4062407b96eca13314e5386664.s3tc.ctex"]
+source_file="res://devil_concepts.png"
+dest_files=["res://.godot/imported/devil_concepts.png-8f142a126bfb31197a35167d5c55251f.s3tc.ctex"]
 
 [params]
 

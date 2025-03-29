@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CoinBag" load_steps=4 format=3 uid="uid://dhpte73ljvq6v"]
+
+[ext_resource type="Texture2D" uid="uid://blkoo4lb1fit4" path="res://resources/cards/test_card/test_back.png" id="1_oipjb"]
+[ext_resource type="Script" uid="uid://khgfgyv4qm53" path="res://resources/cards/coin_bag/coin_bag.gd" id="1_ut0e4"]
+[ext_resource type="Texture2D" uid="uid://chnb6d7dt5dil" path="res://resources/cards/test_card/coin_card.png" id="2_bxgte"]
+
+[resource]
+script = ExtResource("1_ut0e4")
+gold_amount = 5
+title = "Coin Bag"
+desc = "Gain 5 gold"
+cover = ExtResource("2_bxgte")
+back = ExtResource("1_oipjb")
+energy_cost = 0.5
+metadata/_custom_type_script = "uid://khgfgyv4qm53"

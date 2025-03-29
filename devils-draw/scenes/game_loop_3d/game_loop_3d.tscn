@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://r0an8h2qp351"]
+[gd_scene load_steps=21 format=3 uid="uid://r0an8h2qp351"]
 
 [ext_resource type="Script" uid="uid://dn06ptxs4svk5" path="res://scenes/game_loop_3d/game_loop_3d.gd" id="1_egdxf"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://scenes/game_loop_3d/ui.gd" id="1_hyvib"]
-[ext_resource type="Script" uid="uid://bwfph6hukh7yk" path="res://scenes/game_loop_3d/cards.gd" id="2_l8awu"]
 [ext_resource type="Script" uid="uid://64fdun2avjpw" path="res://scenes/game_loop_3d/hand_display.gd" id="4_g2xgf"]
+[ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://table/draw_pile/draw_pile.tscn" id="5_cdp0g"]
+[ext_resource type="Texture2D" uid="uid://d2acvrfi8q0ak" path="res://devil_concepts.png" id="5_tob6y"]
+[ext_resource type="Shader" uid="uid://q1hj44vs4iyd" path="res://scenes/game_loop_3d/abberation.gdshader" id="6_i2rac"]
+[ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://table/spirit_bottle/spirit_bottle.tscn" id="6_tob6y"]
+[ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://scenes/game_loop_3d/game_loop_3d.gdshader" id="7_i2rac"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6g0p"]
 albedo_color = Color(0.242092, 0.127615, 0.0862125, 1)
@@ -14,108 +18,155 @@ albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cdp0g"]
 albedo_color = Color(0.391549, 0.16785, 0.121936, 1)
 
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_g2xgf"]
-
 [sub_resource type="Environment" id="Environment_a6g0p"]
 background_mode = 1
 background_color = Color(0.38666, 0.21366, 0.217973, 1)
 tonemap_mode = 3
-fog_light_color = Color(0.582379, 0.127513, 0.29121, 1)
+glow_enabled = true
+glow_intensity = 1.1
+glow_bloom = 0.5
+glow_hdr_scale = 1.83
+fog_enabled = true
+fog_light_color = Color(0.493031, 0.0633311, 0.1168, 1)
+fog_light_energy = 1.34
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_g2xgf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytonn"]
+shader = ExtResource("6_i2rac")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
+shader_parameter/height = 1.0
+shader_parameter/width = 0.7
+shader_parameter/fade = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8v3b3"]
+shader = ExtResource("7_i2rac")
+shader_parameter/radius = 0.785
+shader_parameter/speed = 2.133
+shader_parameter/effect_color = Color(0.65223, 0, 0, 0.14902)
+
+[sub_resource type="Animation" id="Animation_cdp0g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnergyBar:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.6, 0.6, 0.6, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_g2xgf"]
+resource_name = "not_enough_energy"
+length = 0.621
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnergyBar:theme_override_styles/fill:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.6, 0.6, 0.6, 1), Color(0.639689, 0.0864751, 0.189283, 1), Color(0.6, 0.6, 0.6, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tob6y"]
+_data = {
+&"RESET": SubResource("Animation_cdp0g"),
+&"not_enough_energy": SubResource("Animation_g2xgf")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a6g0p"]
-bg_color = Color(0.197937, 0.197937, 0.197937, 1)
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.537255)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2xgf"]
 
 [node name="GameLoop3D" type="Node3D" node_paths=PackedStringArray("ui", "cam", "location_cams")]
 script = ExtResource("1_egdxf")
 ui = NodePath("UI")
 cam = NodePath("Camera")
-location_cams = [NodePath("TableCam"), NodePath("ShopCam")]
+location_cams = [NodePath("LocationCameras/TableCam"), NodePath("LocationCameras/ShopCam"), NodePath("LocationCameras/DevilCam"), NodePath("LocationCameras/SpiritCam")]
 
-[node name="Table" type="CSGCombiner3D" parent="."]
+[node name="Scene" type="Node3D" parent="."]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Table"]
+[node name="Table" type="CSGCombiner3D" parent="Scene"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Scene/Table"]
 radius = 1.00635
 height = 0.0810547
 sides = 32
 material = SubResource("StandardMaterial3D_a6g0p")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Table"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Scene/Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.793701, 0)
 radius = 0.241699
 height = 1.60205
 sides = 32
 material = SubResource("StandardMaterial3D_a6g0p")
 
-[node name="Room" type="CSGCombiner3D" parent="."]
+[node name="Room" type="CSGCombiner3D" parent="Scene"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Room"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Room"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.64633, -0.962047)
 size = Vector3(58.9255, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Room"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scene/Room"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -13.2244, 5.83701, -0.962047)
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Room"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Scene/Room"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11.931, 5.83701, -0.962047)
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Room"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Scene/Room"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.646718, 5.83701, -13.5398)
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Room"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Scene/Room"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.64672, 5.83701, 11.6157)
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="Shop" type="CSGCombiner3D" parent="."]
+[node name="Shop" type="CSGCombiner3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91563, 0, 2.69484)
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Shop"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Scene/Shop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.793701, 0)
 radius = 0.241699
 height = 1.60205
 sides = 32
 material = SubResource("StandardMaterial3D_a6g0p")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Shop"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Shop"]
 size = Vector3(1, 0.0800781, 3.91992)
 material = SubResource("StandardMaterial3D_cdp0g")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Shop"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scene/Shop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.309246, -1.18267)
 size = Vector3(0.587646, 0.0800781, 0.817383)
 material = SubResource("StandardMaterial3D_cdp0g")
 
-[node name="TableCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.725747, 0.687962, 0, -0.687962, 0.725747, 0, 0.725543, 1.55524)
-
-[node name="Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.725747, 0.687962, 0, -0.687962, 0.725747, 0, 0.725543, 1.55524)
-attributes = SubResource("CameraAttributesPractical_g2xgf")
-current = true
-
-[node name="ShopCam" type="Camera3D" parent="."]
-transform = Transform3D(0.199614, 0.409028, -0.890421, 0.000443387, 0.908672, 0.417511, 0.979875, -0.0837357, 0.181202, 0.264183, 0.725543, 2.10052)
-attributes = SubResource("CameraAttributesPractical_g2xgf")
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_a6g0p")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.77155, 0)
+[node name="SpotLight3D" type="SpotLight3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.88414, 0)
 light_color = Color(0.838479, 0.753008, 0.579599, 1)
-light_energy = 25.0
+light_energy = 10.0
 shadow_enabled = true
-spot_range = 2.21508
+spot_range = 2.22173
 spot_angle = 39.2956
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+[node name="SpotLight3D2" type="SpotLight3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.06083, 1.77155, 1.52783)
 light_color = Color(0.838479, 0.753008, 0.579599, 1)
 light_energy = 25.0
@@ -123,14 +174,84 @@ shadow_enabled = true
 spot_range = 2.21508
 spot_angle = 39.2956
 
-[node name="Cards" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0517621, 0.442352)
-script = ExtResource("2_l8awu")
-separation = 0.52
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Scene"]
+environment = SubResource("Environment_a6g0p")
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display")]
+[node name="Sprite3D" type="Sprite3D" parent="Scene"]
+transform = Transform3D(0.0845748, 0, 0, 0, 0.0845748, 0, 0, 0, 0.0845748, -0.0288875, 0, -1.70681)
+texture = ExtResource("5_tob6y")
+region_enabled = true
+region_rect = Rect2(3095.4, 0, 1930.75, 4000)
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.685298, 0.728263, 0, -0.728263, 0.685298, 0, 0.725543, 0.890729)
+current = true
+
+[node name="LocationCameras" type="Node3D" parent="."]
+
+[node name="TableCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(1, 0, 0, 0, 0.725747, 0.687962, 0, -0.687962, 0.725747, 0, 0.603273, 1.05402)
+
+[node name="ShopCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(0.199614, 0.409028, -0.890422, 0.000443387, 0.908672, 0.417511, 0.979875, -0.0837358, 0.181202, 0.264183, 0.725543, 2.10052)
+attributes = SubResource("CameraAttributesPractical_g2xgf")
+
+[node name="DevilCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(1, 0, 0, 0, 0.985656, 0.168764, 0, -0.168764, 0.985656, 0, 0.725543, 0.881415)
+fov = 59.7
+
+[node name="SpiritCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(0.688355, -0.173026, 0.704436, 0, 0.971134, 0.238533, -0.725374, -0.164196, 0.668485, 0.636, 0.468, 0.881)
+fov = 36.0
+
+[node name="DrawPile" parent="." node_paths=PackedStringArray("player_marker", "devil_marker") instance=ExtResource("5_cdp0g")]
+transform = Transform3D(0.286638, 0, 0, 0, 0.286638, 0, 0, 0, 0.286638, 0.70341, 0.056649, -0.10305)
+player_marker = NodePath("PlayerMarker")
+devil_marker = NodePath("DevilMarker")
+
+[node name="PlayerMarker" type="Marker3D" parent="DrawPile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49614, 0.953283, 4.51255)
+
+[node name="DevilMarker" type="Marker3D" parent="DrawPile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49614, 1.68031, -6.34057)
+
+[node name="SpiritBottle" parent="." instance=ExtResource("6_tob6y")]
+transform = Transform3D(0.256331, 0, 0.250887, 0, 0.358678, 0, -0.250887, 0, 0.256331, -0.788975, 0.0457284, 0.148437)
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "energy_bar", "ui_animations")]
 script = ExtResource("1_hyvib")
 hand_display = NodePath("Hand/HandDisplay")
+gold_label = NodePath("Stats/VBoxContainer/GoldLabel")
+time_left = NodePath("Stats/VBoxContainer/TimeLeft")
+energy_bar = NodePath("EnergyMeter/EnergyBar")
+ui_animations = NodePath("UIAnimations")
+
+[node name="ChromaticAbberation" type="ColorRect" parent="UI"]
+z_index = -805
+material = SubResource("ShaderMaterial_ytonn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DarkNoise" type="ColorRect" parent="UI"]
+visible = false
+z_index = -805
+material = SubResource("ShaderMaterial_8v3b3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UIAnimations" type="AnimationPlayer" parent="UI"]
+root_node = NodePath("../EnergyMeter")
+libraries = {
+&"": SubResource("AnimationLibrary_tob6y")
+}
 
 [node name="Hand" type="Panel" parent="UI"]
 anchors_preset = 12
@@ -143,23 +264,11 @@ grow_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_a6g0p")
 
-[node name="DrawCards" type="Button" parent="UI/Hand"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 36.0
-offset_top = -37.5
-offset_right = 165.0
-offset_bottom = 37.5
-grow_vertical = 2
-text = "Draw Cards"
-
 [node name="HandDisplay" type="Panel" parent="UI/Hand"]
 layout_mode = 0
 offset_left = 209.0
 offset_top = 13.0
-offset_right = 1082.0
+offset_right = 890.0
 offset_bottom = 138.0
 mouse_filter = 1
 script = ExtResource("4_g2xgf")
@@ -176,6 +285,24 @@ offset_bottom = -150.0
 grow_horizontal = 0
 grow_vertical = 2
 
+[node name="PanUp" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 63.0
+grow_horizontal = 2
+
+[node name="PanDown" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -218.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 0
+
 [node name="PanLeft" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 9
@@ -184,6 +311,60 @@ offset_right = 34.0
 offset_bottom = -150.0
 grow_vertical = 2
 
-[connection signal="pressed" from="UI/Hand/DrawCards" to="UI" method="_on_draw_cards_pressed"]
+[node name="EnergyMeter" type="Panel" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -365.0
+offset_top = 12.0
+offset_right = -21.0
+offset_bottom = 49.0
+grow_horizontal = 0
+metadata/_edit_group_ = true
+
+[node name="EnergyBar" type="ProgressBar" parent="UI/EnergyMeter"]
+layout_mode = 0
+offset_left = 108.0
+offset_top = 5.0
+offset_right = 335.0
+offset_bottom = 32.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2xgf")
+max_value = 10.0
+value = 4.65
+show_percentage = false
+
+[node name="Label" type="Label" parent="UI/EnergyMeter"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 5.0
+offset_right = 87.0
+offset_bottom = 32.0
+text = "Energy:"
+
+[node name="Stats" type="Panel" parent="UI"]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 230.0
+offset_bottom = 87.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GoldLabel" type="Label" parent="UI/Stats/VBoxContainer"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="TimeLeft" type="Label" parent="UI/Stats/VBoxContainer"]
+layout_mode = 2
+text = "Gold:"
+
+[connection signal="input_event" from="SpiritBottle" to="." method="_on_spirit_bottle_input_event"]
 [connection signal="gui_input" from="UI/PanRight" to="." method="_on_pan_right_gui_input"]
+[connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
+[connection signal="gui_input" from="UI/PanDown" to="." method="_on_pan_down_gui_input"]
 [connection signal="gui_input" from="UI/PanLeft" to="." method="_on_pan_left_gui_input"]

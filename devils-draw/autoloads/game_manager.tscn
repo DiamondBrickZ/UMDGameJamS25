@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://blanc8a1ss1ij"]
+
+[ext_resource type="Script" uid="uid://cmulyo5vwpjs8" path="res://autoloads/game_manager.gd" id="1_3ovu6"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://resources/cards/card.gd" id="2_es8io"]
+[ext_resource type="Resource" uid="uid://dhpte73ljvq6v" path="res://resources/cards/coin_bag/coin_bag.tres" id="3_es8io"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_3ovu6")
+available_cards = Array[ExtResource("2_es8io")]([ExtResource("3_es8io"), ExtResource("3_es8io"), ExtResource("3_es8io"), ExtResource("3_es8io"), ExtResource("3_es8io")])
