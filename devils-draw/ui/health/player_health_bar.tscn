@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgsj01wpn3fgw"]
+
+[ext_resource type="Script" uid="uid://cl7y55f8npl3i" path="res://ui/health/health_bar.gd" id="1_8dbxa"]
+[ext_resource type="PackedScene" uid="uid://b4fwq2850xrlk" path="res://ui/health/full_heart.tscn" id="2_uvqwq"]
+[ext_resource type="PackedScene" uid="uid://ch4inxpybdyj" path="res://ui/health/empty_heart.tscn" id="3_sced5"]
+[ext_resource type="PackedScene" uid="uid://c4x6nqr2k6nlw" path="res://ui/health/cool_heart.tscn" id="4_2der1"]
+
+[node name="PlayerHealthBar" type="Control" node_paths=PackedStringArray("hearts", "progress_bar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -831.0
+offset_bottom = -608.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8dbxa")
+hearts = NodePath("Hearts")
+progress_bar = NodePath("ProgressBar")
+separation = 19.81
+full_heart = ExtResource("2_uvqwq")
+empty_heart = ExtResource("3_sced5")
+cool_heart = ExtResource("4_2der1")
+
+[node name="Hearts" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_top = 8.0
+offset_right = 104.0
+offset_bottom = 31.0
+text = "Player Health"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+offset_left = 108.0
+offset_right = 310.0
+offset_bottom = 27.0
+mouse_filter = 2
+max_value = 10.0
+value = 10.0

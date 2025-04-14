@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://r0an8h2qp351"]
+
+[ext_resource type="Script" uid="uid://dn06ptxs4svk5" path="res://scenes/game_loop_3d/game_loop.gd" id="1_34y7g"]
+[ext_resource type="Texture2D" uid="uid://d2acvrfi8q0ak" path="res://devil_concepts.png" id="3_sofln"]
+[ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://scenes/table/draw_pile/draw_pile.tscn" id="4_nfu6u"]
+[ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://scenes/table/spirit_bottle/spirit_bottle.tscn" id="5_qcty8"]
+[ext_resource type="PackedScene" uid="uid://bjdm2862gtnje" path="res://scenes/table/play_area/play_area.tscn" id="6_tme6b"]
+[ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/game_loop_3d/casino.tres" id="6_wx4vp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6g0p"]
+albedo_color = Color(0.242092, 0.127615, 0.0862125, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2xgf"]
+albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
+
+[node name="MainRoom" type="Node3D"]
+script = ExtResource("1_34y7g")
+
+[node name="Scene" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53553, 0)
+
+[node name="Table" type="CSGCombiner3D" parent="Scene"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Scene/Table"]
+radius = 1.00635
+height = 0.0810547
+sides = 32
+material = SubResource("StandardMaterial3D_a6g0p")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Scene/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.793701, 0)
+radius = 0.241699
+height = 1.60205
+sides = 32
+material = SubResource("StandardMaterial3D_a6g0p")
+
+[node name="Room" type="CSGCombiner3D" parent="Scene"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.64633, -0.962047)
+size = Vector3(58.9255, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_g2xgf")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -13.2244, 5.83701, -0.962047)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_g2xgf")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11.931, 5.83701, -0.962047)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_g2xgf")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.646718, 5.83701, -13.5398)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_g2xgf")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Scene/Room"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.64672, 5.83701, 18.4404)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_g2xgf")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.88414, 0)
+light_color = Color(0.838479, 0.753008, 0.579599, 1)
+light_energy = 10.0
+shadow_enabled = true
+spot_range = 2.22173
+spot_angle = 39.2956
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.06083, 1.77155, 1.52783)
+light_color = Color(0.838479, 0.753008, 0.579599, 1)
+light_energy = 25.0
+shadow_enabled = true
+spot_range = 2.21508
+spot_angle = 39.2956
+
+[node name="Sprite3D" type="Sprite3D" parent="Scene"]
+transform = Transform3D(0.0845748, 0, 0, 0, 0.0845748, 0, 0, 0, 0.0845748, -0.0288875, 0, -1.70681)
+texture = ExtResource("3_sofln")
+region_enabled = true
+region_rect = Rect2(3095.4, 0, 1930.75, 4000)
+
+[node name="DrawPile" parent="." node_paths=PackedStringArray("player_marker", "devil_marker") instance=ExtResource("4_nfu6u")]
+transform = Transform3D(0.286638, 0, 0, 0, 0.286638, 0, 0, 0, 0.286638, 0.70341, 1.59218, -0.10305)
+player_marker = NodePath("PlayerMarker")
+devil_marker = NodePath("DevilMarker")
+
+[node name="PlayerMarker" type="Marker3D" parent="DrawPile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49614, 1.27732, 6.72765)
+
+[node name="DevilMarker" type="Marker3D" parent="DrawPile"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49614, 1.68031, -6.34057)
+
+[node name="SpiritBottle" parent="." instance=ExtResource("5_qcty8")]
+transform = Transform3D(0.256331, 0, 0.250887, 0, 0.358678, 0, -0.250887, 0, 0.256331, -0.788975, 1.58126, 0.148437)
+
+[node name="PlayArea" parent="." instance=ExtResource("6_tme6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59156, 0.371827)
+separation = 0.23
+size = 0.63
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("6_wx4vp")
+
+[connection signal="input_event" from="SpiritBottle" to="." method="_on_spirit_bottle_input_event"]

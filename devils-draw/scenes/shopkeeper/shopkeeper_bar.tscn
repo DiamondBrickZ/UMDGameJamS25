@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=3 uid="uid://bjrpvdndk0lo8"]
+
+[ext_resource type="Script" uid="uid://brd684e10dcpd" path="res://scenes/shopkeeper/shopkeeper_bar.gd" id="1_f720x"]
+[ext_resource type="Texture2D" uid="uid://cdgsyy1b3m5pl" path="res://scenes/shopkeeper/shopkeeper_temp.png" id="2_f720x"]
+[ext_resource type="Texture2D" uid="uid://bwuvxjqy1a1mf" path="res://scenes/shopkeeper/background/Door wall .png" id="3_t6w6l"]
+[ext_resource type="Texture2D" uid="uid://vojjk26ytefm" path="res://scenes/shopkeeper/background/Main wall.png" id="4_eu8u6"]
+[ext_resource type="Texture2D" uid="uid://dqnq435q07sjo" path="res://scenes/shopkeeper/background/Ceiling .png" id="5_bt1el"]
+[ext_resource type="Texture2D" uid="uid://68r14qdbfob" path="res://scenes/shopkeeper/background/Floor.png" id="6_eu8u6"]
+[ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/game_loop_3d/casino.tres" id="7_bt1el"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sql68"]
+albedo_color = Color(0.277258, 0.159961, 0.0265369, 1)
+
+[node name="ShopkeeperBar" type="Node3D"]
+script = ExtResource("1_f720x")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.0353621, 0.00514178, -1.92251, -0.00193396, 3.19873, 0.00306916, 2.45551, 0.0024453, 0.027687, 2.18718, 0.5742, 8.41718)
+size = Vector3(2.21195, 0.551727, 0.433105)
+material = SubResource("StandardMaterial3D_sql68")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.249939, 3.27819)
+size = Vector3(32.626, 0.500122, 16.1172)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.167031, 0, -0.308426, 0, 0.35075, 0, 0.308426, 0, 0.167031, 3.73969, 0.981939, 8.93824)
+modulate = Color(0.572988, 0.572988, 0.572988, 1)
+shaded = true
+texture = ExtResource("2_f720x")
+region_enabled = true
+region_rect = Rect2(1153.85, 25.4975, 583.434, 1399.5)
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.401795, 0, 0, 0, 0.305228, 0, 0, 0, 0.369864, 1.89899, 3.45006, 3.84292)
+shaded = true
+texture = ExtResource("3_t6w6l")
+
+[node name="Sprite3D3" type="Sprite3D" parent="."]
+transform = Transform3D(-1.44905e-08, 0, -0.31538, 0, 0.31538, 0, 0.331505, 0, -1.37857e-08, 6.94842, 3.50765, 10.0875)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("4_eu8u6")
+
+[node name="Sprite3D4" type="Sprite3D" parent="."]
+transform = Transform3D(-1.38603e-08, -0.596153, 3.2088e-08, 0, -2.60587e-08, -0.734087, 0.317088, -2.60587e-08, 1.40261e-15, -0.198781, 4.45833, 10.0824)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("5_bt1el")
+
+[node name="Sprite3D5" type="Sprite3D" parent="."]
+transform = Transform3D(1.38603e-08, 0.596153, 3.2088e-08, -1.21171e-15, -2.60587e-08, 0.734087, 0.317088, -2.60587e-08, 1.40261e-15, 4.8241, 0.0597284, 9.85429)
+shaded = true
+alpha_cut = 1
+texture = ExtResource("6_eu8u6")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 6.46217)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 9.17398)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73808, 4.04219, 6.46217)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21188, 4.04219, 9.17398)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 13.1113)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80973, 4.04219, 13.1113)
+light_color = Color(0.677948, 0.537823, 0.424626, 1)
+light_energy = 1.328
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("7_bt1el")
