@@ -1,0 +1,475 @@
+[gd_scene load_steps=23 format=3 uid="uid://sbmneegilonx"]
+
+[ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
+[ext_resource type="Shader" uid="uid://q1hj44vs4iyd" path="res://shaders/abberation.gdshader" id="3_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://bnyg1yodqens2" path="res://scenes/shopkeeper/shop/shop_menu.tscn" id="4_dinhu"]
+[ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://shaders/game_loop_3d.gdshader" id="4_gee14"]
+[ext_resource type="PackedScene" uid="uid://b455tw00jtaxu" path="res://ui/hand_display/hand_display.tscn" id="5_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://cvxtskj4ktqxy" path="res://ui/energy_meter/energy_meter.tscn" id="6_vtaks"]
+[ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
+[ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
+[ext_resource type="PackedScene" uid="uid://bgsj01wpn3fgw" path="res://ui/health/player_health_bar.tscn" id="9_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://da6yfbxd5gd35" path="res://ui/devil_health/devil_health.tscn" id="10_vtaks"]
+
+[sub_resource type="Animation" id="Animation_0tnpc"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2.03192, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(10.7728, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-0.397341, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_gee14"]
+resource_name = "move_to_shop"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.03192, -0.25, 0, 0.25, 0, 2.03192, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:z")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0.900377, -0.25, 0, 0.25, 0, 10.7728, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-0.397341, -0.25, 0, 0.566667, -0.602659, -0.267035, -0.633333, 1.26704, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.853466, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation:z")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtaks"]
+_data = {
+&"RESET": SubResource("Animation_0tnpc"),
+&"move_to_shop": SubResource("Animation_gee14")
+}
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_yqjtg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gee14"]
+albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+bg_color = Color(0.196078, 0.196078, 0.196078, 0.537255)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvpfn"]
+shader = ExtResource("3_u5sy4")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
+shader_parameter/height = 1.0
+shader_parameter/width = 0.7
+shader_parameter/fade = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dinhu"]
+shader = ExtResource("4_gee14")
+shader_parameter/radius = 0.48
+shader_parameter/speed = 2.133
+shader_parameter/effect_color = Color(0.65223, 0, 0, 0.14902)
+
+[sub_resource type="Animation" id="Animation_kvpfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageEffects:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.08, 0.08, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vtaks"]
+resource_name = "player_damaged"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DamageEffects:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.08, 0.08, 0), Color(1, 0.08, 0.08, 0.341176), Color(1, 0.08, 0.08, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dinhu"]
+_data = {
+&"RESET": SubResource("Animation_kvpfn"),
+&"player_damaged": SubResource("Animation_vtaks")
+}
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("ui", "cam", "casino_doors", "location_cams")]
+script = ExtResource("1_uwrxv")
+ui = NodePath("UI")
+cam = NodePath("Camera")
+casino_doors = NodePath("CasinoDoors")
+location_cams = [NodePath("LocationCameras/TableCam"), NodePath("LocationCameras/ShopCam"), NodePath("LocationCameras/DevilCam"), NodePath("LocationCameras/SpiritCam")]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.922093, 0.386968, 0, -0.386968, 0.922093, 0, 2.03192, 10.7728)
+current = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera"]
+libraries = {
+&"": SubResource("AnimationLibrary_vtaks")
+}
+
+[node name="LocationCameras" type="Node3D" parent="."]
+
+[node name="TableCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(1, 0, 0, 0, 0.906278, 0.422681, 0, -0.422681, 0.906278, 0, 2.16452, 1.60694)
+
+[node name="ShopCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(0.756447, 0, -0.654055, 0, 1, 0, 0.654055, 0, 0.756447, 0.746638, 2.0622, 12.5236)
+attributes = SubResource("CameraAttributesPractical_yqjtg")
+
+[node name="DevilCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(1, 0, 0, 0, 0.985656, 0.168764, 0, -0.168764, 0.985656, 0, 2.28679, 0.881415)
+fov = 59.7
+
+[node name="SpiritCam" type="Camera3D" parent="LocationCameras"]
+transform = Transform3D(0.688355, -0.173026, 0.704436, 0, 0.971134, 0.238534, -0.725374, -0.164196, 0.668485, 0.636, 2.02925, 0.881)
+fov = 36.0
+
+[node name="CasinoDoors" type="Node3D" parent="." node_paths=PackedStringArray("left_door_marker", "right_door_marker")]
+transform = Transform3D(2.98935, 0, 0, 0, 2.98935, 0, 0, 0, 2.98935, 0, 0, 3.41932)
+script = ExtResource("7_u5sy4")
+is_open = true
+left_door_marker = NodePath("Marker3D")
+right_door_marker = NodePath("Marker3D2")
+
+[node name="Marker3D" type="Marker3D" parent="CasinoDoors"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.508278, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CasinoDoors/Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260028, 0.489383, 0)
+size = Vector3(0.491699, 1, 0.0686035)
+
+[node name="Marker3D2" type="Marker3D" parent="CasinoDoors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.51256, 0, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CasinoDoors/Marker3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248575, 0.489383, 0)
+size = Vector3(0.491699, 1, 0.0686035)
+
+[node name="Room" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Room"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -13.2244, 5.83701, -0.962047)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_gee14")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Room"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 11.931, 5.83701, -0.962047)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_gee14")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.646718, 5.83701, 3.54056)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_gee14")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room/CSGBox3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35984, 7.15256e-07, -0.652039)
+operation = 2
+size = Vector3(2.99878, 1, 2.96838)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Room"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.64672, 5.83701, 13.4775)
+size = Vector3(25.5508, 0.223145, 41.1396)
+material = SubResource("StandardMaterial3D_gee14")
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu")]
+script = ExtResource("2_p57ef")
+hand_display = NodePath("Hand/HandDisplay")
+gold_label = NodePath("Stats/VBoxContainer/GoldLabel")
+time_left = NodePath("Stats/VBoxContainer/TimeLeft")
+ui_animations = NodePath("Effects/EffectsAnimations")
+shop_menu = NodePath("ShopMenu")
+
+[node name="ShopMenu" parent="UI" instance=ExtResource("4_dinhu")]
+offset_top = 166.0
+offset_right = -30.0
+offset_bottom = -209.0
+
+[node name="PanUp" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 135.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 2
+
+[node name="PanRight" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="PanDown" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -394.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="PanLeft" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 70.0
+offset_bottom = -40.0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="Hand" type="Panel" parent="UI"]
+z_index = -165
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -259.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_kvuet")
+metadata/_edit_lock_ = true
+
+[node name="HandDisplay" parent="UI/Hand" instance=ExtResource("5_0tnpc")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+offset_left = 258.0
+offset_top = -217.0
+offset_right = -258.0
+offset_bottom = -19.0
+grow_vertical = 0
+separation = 76.235
+rotation_amount = 11.41
+
+[node name="EnergyMeter" parent="UI" instance=ExtResource("6_vtaks")]
+mouse_filter = 2
+
+[node name="Stats" type="Panel" parent="UI"]
+offset_left = 13.0
+offset_top = 12.0
+offset_right = 230.0
+offset_bottom = 87.0
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GoldLabel" type="Label" parent="UI/Stats/VBoxContainer"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="TimeLeft" type="Label" parent="UI/Stats/VBoxContainer"]
+layout_mode = 2
+text = "Gold:"
+
+[node name="HealthBar" parent="UI" instance=ExtResource("9_0tnpc")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_bottom = 0.0
+offset_left = -335.0
+offset_top = 76.0
+offset_right = -335.0
+offset_bottom = 76.0
+grow_horizontal = 0
+grow_vertical = 1
+mouse_filter = 2
+
+[node name="Effects" type="Control" parent="UI" node_paths=PackedStringArray("dark_noise", "damage_effects", "anim_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_dinhu")
+dark_noise = NodePath("DarkNoise")
+damage_effects = NodePath("DamageEffects")
+anim_player = NodePath("EffectsAnimations")
+metadata/_edit_lock_ = true
+
+[node name="ChromaticAbberation" type="ColorRect" parent="UI/Effects"]
+visible = false
+z_index = -805
+material = SubResource("ShaderMaterial_kvpfn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DarkNoise" type="ColorRect" parent="UI/Effects"]
+z_index = -805
+material = SubResource("ShaderMaterial_dinhu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DamageEffects" type="ColorRect" parent="UI/Effects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.08, 0.08, 0)
+metadata/_edit_lock_ = true
+
+[node name="EffectsAnimations" type="AnimationPlayer" parent="UI/Effects"]
+libraries = {
+&"": SubResource("AnimationLibrary_dinhu")
+}
+
+[node name="DevilHealth" parent="UI" instance=ExtResource("10_vtaks")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 9.0
+offset_right = -52.0
+offset_bottom = 9.0
+grow_horizontal = 2
+
+[connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
+[connection signal="gui_input" from="UI/PanRight" to="." method="_on_pan_right_gui_input"]
+[connection signal="gui_input" from="UI/PanDown" to="." method="_on_pan_down_gui_input"]
+[connection signal="gui_input" from="UI/PanLeft" to="." method="_on_pan_left_gui_input"]

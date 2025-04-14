@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://da6yfbxd5gd35"]
+
+[ext_resource type="Script" uid="uid://wqksl627xg48" path="res://ui/devil_health/devil_health.gd" id="1_f4swd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4swd"]
+bg_color = Color(0.749083, 0.0981218, 0.330908, 1)
+
+[node name="DevilHealth" type="Control" node_paths=PackedStringArray("progress_bar")]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1_f4swd")
+progress_bar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = -100.0
+offset_top = 3.0
+offset_right = 236.0
+offset_bottom = 30.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_f4swd")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -205.0
+offset_top = 3.0
+offset_right = -110.0
+offset_bottom = 26.0
+text = "Devil Health"

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch4inxpybdyj"]
+
+[ext_resource type="Texture2D" uid="uid://b80o5li557a0r" path="res://ui/health/icons/Hearts (Health Bar).png" id="1_fci8g"]
+
+[node name="EmptyHeart" type="Sprite2D"]
+visible = false
+texture = ExtResource("1_fci8g")
+region_enabled = true
+region_rect = Rect2(0, 536.098, 168, 155.352)

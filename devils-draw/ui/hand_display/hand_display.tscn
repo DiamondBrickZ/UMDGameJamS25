@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://b455tw00jtaxu"]
+
+[ext_resource type="Script" uid="uid://64fdun2avjpw" path="res://ui/hand_display/hand_display.gd" id="1_vcdfl"]
+
+[node name="HandDisplay" type="Control" node_paths=PackedStringArray("card_name_label", "cards")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 602.0
+offset_top = 910.0
+offset_right = -602.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vcdfl")
+card_name_label = NodePath("CardName")
+cards = NodePath("Cards")
+
+[node name="CardName" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -210.0
+offset_right = 76.0
+offset_bottom = -187.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
+
+[node name="Cards" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1

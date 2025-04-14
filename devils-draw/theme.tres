@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dr5kpa83vsaek"]
+
+[sub_resource type="SystemFont" id="SystemFont_wvktn"]
+oversampling = 7.9
+
+[resource]
+RichTextLabel/colors/default_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+RichTextLabel/constants/line_separation = -4
+RichTextLabel/font_sizes/normal_font_size = 9
+RichTextLabel/fonts/normal_font = SubResource("SystemFont_wvktn")

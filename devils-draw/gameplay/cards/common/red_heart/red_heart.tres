@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://d2sorl8qyttnu"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_7l53j"]
+[ext_resource type="Script" uid="uid://vt8h5oblfhxw" path="res://gameplay/cards/card_actions/card_action_health.gd" id="2_pfwrl"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_u3vi0"]
+
+[sub_resource type="Resource" id="Resource_um66i"]
+script = ExtResource("2_pfwrl")
+health_gained = 1.0
+metadata/_custom_type_script = "uid://vt8h5oblfhxw"
+
+[resource]
+script = ExtResource("2_u3vi0")
+title = "Red Heart"
+desc = "Gain 1 heart"
+energy_cost = 5.0
+card_actions = Array[ExtResource("1_7l53j")]([SubResource("Resource_um66i")])
+card_rarity = 0
+card_method = 1
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

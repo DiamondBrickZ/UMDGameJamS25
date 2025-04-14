@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://b4gorxyoq1p6"]
+
+[ext_resource type="Script" uid="uid://d060w76yjbhgk" path="res://gameplay/status_effects/status_effect.gd" id="1_vfc3t"]
+
+[resource]
+script = ExtResource("1_vfc3t")
+effect_type = 1
+status_name = "Bleeding"
+status_desc = ""
+duration = 0.0
+metadata/_custom_type_script = "uid://d060w76yjbhgk"

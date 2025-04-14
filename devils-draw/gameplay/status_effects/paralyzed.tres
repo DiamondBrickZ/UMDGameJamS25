@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://ctbj2c8d1i7hb"]
+
+[ext_resource type="Script" uid="uid://d060w76yjbhgk" path="res://gameplay/status_effects/status_effect.gd" id="1_5r8pg"]
+
+[resource]
+script = ExtResource("1_5r8pg")
+effect_type = 4
+status_name = "Paralyzed"
+status_desc = ""
+metadata/_custom_type_script = "uid://d060w76yjbhgk"
