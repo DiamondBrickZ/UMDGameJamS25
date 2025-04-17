@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dh0shx7kijryx"]
+
+[node name="MenuItem" type="Button"]
+offset_right = 229.0
+offset_bottom = 96.0
+text = "asdasd"

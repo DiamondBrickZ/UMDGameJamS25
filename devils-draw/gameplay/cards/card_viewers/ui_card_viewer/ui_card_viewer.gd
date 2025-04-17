@@ -1,18 +1,20 @@
 @tool
 extends Area2D
 
+@export var base_scale : float = 1.0
+
 var can_hover = true
 var hovering = false:
 	set(new_val):
 		hovering = new_val
 		
-		if can_hover:
-			if hovering:
-				var tween = get_tree().create_tween()
-				tween.tween_property(self, "scale", Vector2(1.1, 1.1), 0.4).set_trans(Tween.TRANS_SINE)
-			else:
-				var tween = get_tree().create_tween()
-				tween.tween_property(self, "scale", Vector2(1, 1), 0.4).set_trans(Tween.TRANS_SINE)
+		#if can_hover:
+			#if hovering:
+				#var tween = get_tree().create_tween()
+				#tween.tween_property(self, "scale", Vector2(base_scale*1.1, base_scale*1.1), 0.4).set_trans(Tween.TRANS_SINE)
+			#else:
+				#var tween = get_tree().create_tween()
+				#tween.tween_property(self, "scale", Vector2(base_scale, base_scale), 0.4).set_trans(Tween.TRANS_SINE)
 
 var target_position : Vector2
 var target_rotation : float
@@ -24,6 +26,7 @@ var hand_display : Control
 @onready var mouse_detection = $MouseDetection
 @onready var title = $Title
 @onready var description = $Description
+@onready var energy_cost = $MeshInstance2D/EnergyCost
 
 
 @export var card : Card:
@@ -76,8 +79,8 @@ func _on_input_event(viewport, event, shape_idx):
 		#inspect_card()
 	if Input.is_action_just_pressed("action") and not picked:
 		var id = hand_display.get_card_viewer_index(self)
-		GameManager.play_card(0, card, id)
-		GameManager.devil_turn()
+		if GameManager.play_card(0, card, id):
+			GameManager.devil_turn()
 
 func play_card_animation():
 	var screen_size = get_viewport_rect().size
@@ -114,6 +117,7 @@ func refresh():
 	# set card text
 	title.text = card.title
 	description.text = card.desc
+	energy_cost.text = str(round(card.energy_cost))
 	
 	# set size
 	#mouse_detection.shape.size = border.texture.get_size()
