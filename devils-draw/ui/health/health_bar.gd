@@ -12,6 +12,11 @@ extends Control
 @export var empty_heart: PackedScene
 @export var cool_heart : PackedScene
 
+@export var refresh_button : bool = false:
+	set(new_val):
+		refresh_button = false
+		refresh()
+
 #func _process(delta):
 	#if Engine.is_editor_hint():
 		#refresh()
@@ -38,10 +43,10 @@ func refresh():
 		new_heart.position.x = i*separation
 	
 	# add empty hearts
-	for i in range(total_hearts - num_hearts):
-		var new_heart = empty_heart.instantiate()
-		hearts.add_child(new_heart)
-		new_heart.position.x = len(num_hearts)*separation + i*separation
+	#for i in range(total_hearts - num_hearts):
+		#var new_heart = empty_heart.instantiate()
+		#hearts.add_child(new_heart)
+		#new_heart.position.x = len(num_hearts)*separation + i*separation
 
 func _process(delta):
 	progress_bar.max_value = GameManager.game_info[0]["max_health"]

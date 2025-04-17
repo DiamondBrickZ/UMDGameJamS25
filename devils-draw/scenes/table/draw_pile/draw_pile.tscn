@@ -33,7 +33,8 @@ transform = Transform3D(0.207261, 0.00323059, -0.00179876, 0.00178783, 0.0007146
 texture = ExtResource("2_rinvf")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.25
+one_shot = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

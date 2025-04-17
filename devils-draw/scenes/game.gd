@@ -115,7 +115,6 @@ func _on_pan_up_gui_input(_event):
 		#change_location(Locations.DEVIL)
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and current_location == Locations.SHOP and can_navigate:
 		change_location(Locations.TABLE)
-		
 
 func _on_pan_down_gui_input(event):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_navigate:
@@ -129,3 +128,15 @@ func _on_pan_down_gui_input(event):
 func _on_spirit_bottle_input_event(camera, event, event_position, normal, shape_idx):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and current_location == Locations.TABLE and can_navigate:
 		change_location(Locations.SPIRITS)
+
+func _input(event):
+	if event.is_action_pressed("move_back") and can_navigate:
+		if current_location == Locations.TABLE:
+			change_location(Locations.SHOP)
+		elif current_location == Locations.SPIRITS:
+			change_location(Locations.TABLE)
+	elif event.is_action_pressed("move_forward") and can_navigate:
+		if current_location == Locations.SHOP:
+			change_location(Locations.TABLE)
+		elif current_location == Locations.TABLE:
+			change_location(Locations.SPIRITS)
