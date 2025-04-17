@@ -4,6 +4,7 @@
 oversampling = 7.9
 
 [resource]
+default_font_size = 16
 RichTextLabel/colors/default_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 RichTextLabel/constants/line_separation = -4
 RichTextLabel/font_sizes/normal_font_size = 9

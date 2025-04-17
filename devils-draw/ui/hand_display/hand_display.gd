@@ -6,6 +6,7 @@ extends Control
 
 var card_viewer_2d = preload("res://gameplay/cards/card_viewers/ui_card_viewer/ui_card_viewer.tscn")
 
+@export var base_scale : float = 1.0
 @export var separation : float = 10
 @export var rotation_amount : float = 8.0
 var selected_card : Area2D
@@ -21,6 +22,11 @@ func _on_card_drawn(card: Card, character: int):
 func _on_player_died():
 	for child in cards.get_children():
 		child.queue_free()
+	
+	for card in GameManager.next_hand:
+		add_card(card)
+	
+	GameManager.next_hand = []
 
 func add_card(card: Card):
 	var card_viewer : Area2D = card_viewer_2d.instantiate()
@@ -53,6 +59,10 @@ func _process(delta):
 		# lift selected card
 		if children[i] == selected_card:
 			children[i].target_position -= Vector2(0, 50)
+			# expand too
+			children[i].scale = lerp(children[i].scale, Vector2(base_scale*1.1,base_scale*1.1), 0.1)
+		else:
+			children[i].scale = lerp(children[i].scale, Vector2(base_scale,base_scale), 0.1)
 	
 	if selected_card:
 		card_name_label.text = selected_card.card.title

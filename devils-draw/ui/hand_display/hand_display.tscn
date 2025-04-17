@@ -16,6 +16,7 @@ mouse_filter = 2
 script = ExtResource("1_vcdfl")
 card_name_label = NodePath("CardName")
 cards = NodePath("Cards")
+base_scale = 1.5
 
 [node name="CardName" type="Label" parent="."]
 layout_mode = 1

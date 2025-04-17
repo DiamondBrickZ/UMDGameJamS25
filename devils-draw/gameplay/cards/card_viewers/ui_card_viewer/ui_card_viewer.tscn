@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ugq5obsryeiu"]
+[gd_scene load_steps=12 format=3 uid="uid://ugq5obsryeiu"]
 
 [ext_resource type="Script" uid="uid://b3xlb3cwlg4gp" path="res://gameplay/cards/card_viewers/ui_card_viewer/ui_card_viewer.gd" id="1_0f6f3"]
 [ext_resource type="Texture2D" uid="uid://ci5wfcomskv3o" path="res://gameplay/cards/rarities/Common Card Front.png" id="2_il51x"]
@@ -47,9 +47,14 @@ _data = {
 &"play_card": SubResource("Animation_eporg")
 }
 
+[sub_resource type="SphereMesh" id="SphereMesh_5tdhr"]
+radius = 10.0
+height = 20.0
+
 [node name="UICardViewer" type="Area2D"]
 script = ExtResource("1_0f6f3")
-size = 0.3
+base_scale = 1.5
+size = 0.25
 common_border = ExtResource("2_il51x")
 rare_border = ExtResource("3_vfsb6")
 super_rare_border = ExtResource("2_l35sr")
@@ -91,6 +96,23 @@ offset_bottom = 31.0
 theme = ExtResource("5_vfsb6")
 theme_override_font_sizes/normal_font_size = 7
 text = "A shot a day keeps the doctor away."
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 42)
+mesh = SubResource("SphereMesh_5tdhr")
+metadata/_edit_group_ = true
+
+[node name="EnergyCost" type="RichTextLabel" parent="MeshInstance2D"]
+offset_left = -34.0
+offset_top = -5.0
+offset_right = 34.0
+offset_bottom = 19.0
+theme = ExtResource("5_vfsb6")
+theme_override_font_sizes/normal_font_size = 7
+text = "1
+"
 scroll_active = false
 horizontal_alignment = 1
 

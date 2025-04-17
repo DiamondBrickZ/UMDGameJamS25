@@ -33,9 +33,11 @@ var game : Node3D
 }
 
 # DEVIL INFO
-var time_left : float = 60.0	# 7 minutes
+var time_left : float = 90.0
+var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 
 # PLAYER INFO
+var next_hand : Array[Card] = []
 
 # CARDS
 @export var available_cards : Array[Card] = []
@@ -55,6 +57,7 @@ signal dealt_damage(character: int, amount: float)
 signal player_died()
 signal game_end()
 signal card_played(card: Card, character: int)
+signal shop_dialogue(text: String)
 
 func _ready():
 	# get game loop node from scene to enact actions.
@@ -207,8 +210,13 @@ func draw_card(character: int = 0):
 func play_card(character: int, card: Card, _index : int):
 	# play a card action
 	
+	# drunken_high
+	var energy_amount = card.energy_cost
+	if is_drunk(character):
+		energy_amount /= 2
+	
 	# determine if the character has enough energy
-	if card.energy_cost > game_info[character]["energy"]:
+	if energy_amount > game_info[character]["energy"]:
 		# if doesn't have enough energy
 		if character == 0:
 			GameManager.not_enough_energy()
@@ -219,16 +227,17 @@ func play_card(character: int, card: Card, _index : int):
 		card_played.emit(card, character)
 		
 		# if in drunken high, deplete half energy
-		var energy_depletion = card.energy_cost
-		for effect in game_info[character]["status_effects"]:
-			if effect.effect_type == StatusEffect.Effects.DRUNKEN_HIGH:
-				energy_depletion = card.energy_cost/2
-		GameManager.deplete_energy(character, energy_depletion)
+		GameManager.deplete_energy(character, energy_amount)
 		
 		# remove card from hand
 		GameManager.game_info[character]["hand"].erase(card)
 		
 		return true
+
+func is_drunk(character:int):
+	for effect in game_info[character]["status_effects"]:
+		if effect.effect_type == StatusEffect.Effects.DRUNKEN_HIGH:
+			return true
 
 func deal_damage(character: int, amount: float):
 	# deals damage to character specified
@@ -282,18 +291,37 @@ func not_enough_energy():
 func player_death():
 	# player ded
 	game_info[0]["gold"] = 0.0
-	game_info[0]["energy"] = 0.0
+	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
-	game_info[0]["hand"] = []
 	game_info[1]["hand"] = []
+	game_info[0]["status_effects"] = []
+	
 	player_died.emit()
 	time_left = 90.0
 	gain_soul()
 	print("Player dies")
+	game.change_location(game.Locations.SHOP)
+	game.cam_speed = 0.5
+	await get_tree().create_timer(4.5).timeout
+	game.cam_speed = 1.0
+	shop_dialogue.emit("player_revived")
 
 func gain_soul():
 	# when the player gets a soul
-	game.change_location(game.Locations.SPIRITS)
-	await get_tree().create_timer(1).timeout
+	#game.change_location(game.Locations.SPIRITS)
 	game_info[0]["souls"] += 1
 	soul_gained.emit()
+
+func buy_card(card: Card, cost: int):
+	# add this card to the next hand.
+	
+	# determine if player has enough gold
+	if game_info[0]["gold"] >= cost:
+		game_info[0]["gold"] -= cost
+		var new_card = card.duplicate()
+		next_hand.append(new_card)
+		print("bought item")
+		shop_dialogue.emit("player_buys")
+	else:
+		print('not enough gold')
+		shop_dialogue.emit("not_enough_gold")
