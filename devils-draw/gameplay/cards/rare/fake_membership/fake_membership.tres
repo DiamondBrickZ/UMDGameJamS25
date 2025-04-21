@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://daliuwus672fr"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_tsvtm"]
+[ext_resource type="Script" uid="uid://bm0dm40arsbhj" path="res://gameplay/cards/card_actions/card_action_fake_membership.gd" id="2_g3dm5"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_i3ggx"]
+[ext_resource type="Texture2D" uid="uid://d2ixkt0e27u7f" path="res://gameplay/cards/rare/fake_membership/Fake_Coupon_Art.png" id="3_g3dm5"]
+
+[sub_resource type="Resource" id="Resource_fnqdw"]
+script = ExtResource("2_g3dm5")
+metadata/_custom_type_script = "uid://bm0dm40arsbhj"
+
+[resource]
+script = ExtResource("2_i3ggx")
+title = "Fake Membership"
+desc = "The user’s next bought shop item costs ½  its normal price."
+cover = ExtResource("3_g3dm5")
+energy_cost = 15.0
+card_actions = Array[ExtResource("1_tsvtm")]([SubResource("Resource_fnqdw")])
+card_rarity = 1
+card_method = 1
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

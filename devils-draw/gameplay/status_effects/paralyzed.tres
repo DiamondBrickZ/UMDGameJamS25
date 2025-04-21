@@ -4,7 +4,9 @@
 
 [resource]
 script = ExtResource("1_5r8pg")
+stacking = false
 effect_type = 4
 status_name = "Paralyzed"
-status_desc = ""
+status_desc = "Target’s energy bar is stunted (doesn’t increase) for a period of time."
+effect_tag = 0
 metadata/_custom_type_script = "uid://d060w76yjbhgk"

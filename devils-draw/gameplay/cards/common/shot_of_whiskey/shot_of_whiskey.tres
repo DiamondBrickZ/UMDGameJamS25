@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_a3ihn"]
 [ext_resource type="Resource" uid="uid://yiirr01o14tf" path="res://gameplay/status_effects/drunken_high.tres" id="2_p61ga"]
 [ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_iw8oo"]
-[ext_resource type="Texture2D" uid="uid://d2wch2hiobxl4" path="res://icon.svg" id="4_tr0e3"]
+[ext_resource type="Texture2D" uid="uid://dqtsr602u3kwh" path="res://gameplay/cards/common/shot_of_whiskey/Whiskey_Art.png" id="4_28jnk"]
 
 [sub_resource type="Resource" id="Resource_68qnu"]
 script = ExtResource("3_iw8oo")
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://bxjkgdcnwgjyv"
 script = ExtResource("2_a3ihn")
 title = "A Shot of Whiskey"
 desc = "A shot a day keeps the doctor away."
-cover = ExtResource("4_tr0e3")
+cover = ExtResource("4_28jnk")
 energy_cost = 10.0
 card_actions = Array[ExtResource("1_svgjf")]([SubResource("Resource_68qnu")])
 card_rarity = 0

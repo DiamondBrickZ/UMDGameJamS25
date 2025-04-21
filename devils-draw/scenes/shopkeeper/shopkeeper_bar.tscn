@@ -1,18 +1,26 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjrpvdndk0lo8"]
+[gd_scene load_steps=12 format=3 uid="uid://bjrpvdndk0lo8"]
 
 [ext_resource type="Script" uid="uid://brd684e10dcpd" path="res://scenes/shopkeeper/shopkeeper_bar.gd" id="1_f720x"]
-[ext_resource type="Texture2D" uid="uid://cdgsyy1b3m5pl" path="res://scenes/shopkeeper/shopkeeper_temp.png" id="2_f720x"]
+[ext_resource type="PackedScene" uid="uid://cf2xn4sjjsf3c" path="res://scenes/shopkeeper/shopkeeper/shopkeeper.tscn" id="2_bt1el"]
 [ext_resource type="Texture2D" uid="uid://bwuvxjqy1a1mf" path="res://scenes/shopkeeper/background/Door wall .png" id="3_t6w6l"]
 [ext_resource type="Texture2D" uid="uid://vojjk26ytefm" path="res://scenes/shopkeeper/background/Main wall.png" id="4_eu8u6"]
 [ext_resource type="Texture2D" uid="uid://dqnq435q07sjo" path="res://scenes/shopkeeper/background/Ceiling .png" id="5_bt1el"]
 [ext_resource type="Texture2D" uid="uid://68r14qdbfob" path="res://scenes/shopkeeper/background/Floor.png" id="6_eu8u6"]
-[ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/game_loop_3d/casino.tres" id="7_bt1el"]
+[ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="7_bt1el"]
+[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://theme.tres" id="8_sql68"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sql68"]
 albedo_color = Color(0.277258, 0.159961, 0.0265369, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_bt1el"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sql68"]
+bg_color = Color(0.855013, 0.811155, 0.753429, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="ShopkeeperBar" type="Node3D"]
 script = ExtResource("1_f720x")
@@ -22,13 +30,12 @@ transform = Transform3D(0.0353621, 0.00514178, -1.92251, -0.00193396, 3.19873, 0
 size = Vector3(2.21195, 0.551727, 0.433105)
 material = SubResource("StandardMaterial3D_sql68")
 
-[node name="ShopKeeper" type="Sprite3D" parent="."]
-transform = Transform3D(0.167031, 0, -0.308426, 0, 0.35075, 0, 0.308426, 0, 0.167031, 3.73969, 0.981939, 8.93824)
-modulate = Color(0.572988, 0.572988, 0.572988, 1)
+[node name="Shopkeeper" parent="." node_paths=PackedStringArray("shopkeeper_dialogue", "dialogue_timer", "sprite_3d") instance=ExtResource("2_bt1el")]
+transform = Transform3D(0.216238, 0, -0.311357, 0, 0.379081, 0, 0.311357, 0, 0.216238, 3.47794, 2.11895, 9.0314)
 shaded = true
-texture = ExtResource("2_f720x")
-region_enabled = true
-region_rect = Rect2(1153.85, 25.4975, 583.434, 1399.5)
+shopkeeper_dialogue = NodePath("../SubViewport/PanelContainer/MarginContainer/ShopkeeperDialogue")
+dialogue_timer = NodePath("../DialogueTimer")
+sprite_3d = NodePath("../Dialogue")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_bt1el")
@@ -96,9 +103,11 @@ shaded = true
 alpha_cut = 1
 texture = ExtResource("6_eu8u6")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="Dialogue" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50305, 0.474089, 7.90017)
+visible = false
 billboard = 2
+shaded = true
 texture = SubResource("ViewportTexture_bt1el")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -107,6 +116,7 @@ transparent_bg = true
 [node name="PanelContainer" type="PanelContainer" parent="SubViewport"]
 offset_right = 336.0
 offset_bottom = 79.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sql68")
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/PanelContainer"]
 layout_mode = 2
@@ -115,13 +125,14 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="ShopkeeperDialogue" type="Label" parent="SubViewport/PanelContainer/MarginContainer"]
+[node name="ShopkeeperDialogue" type="RichTextLabel" parent="SubViewport/PanelContainer/MarginContainer"]
 layout_mode = 2
+theme = ExtResource("8_sql68")
+theme_override_font_sizes/normal_font_size = 19
 text = "asdasdsaasudhkaushdkuahsdukhasukdhakudshasdasdasd"
-autowrap_mode = 3
 
 [node name="DialogueTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
-[connection signal="timeout" from="DialogueTimer" to="." method="_on_dialogue_timer_timeout"]
+[connection signal="timeout" from="DialogueTimer" to="Shopkeeper" method="_on_dialogue_timer_timeout"]

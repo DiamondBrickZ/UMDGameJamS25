@@ -266,7 +266,7 @@ libraries = {
 [node name="LocationCameras" type="Node3D" parent="."]
 
 [node name="TableCam" type="Camera3D" parent="LocationCameras"]
-transform = Transform3D(1, 0, 0, 0, 0.906278, 0.422681, 0, -0.422681, 0.906278, 0, 2.16452, 1.60694)
+transform = Transform3D(1, 0, 0, 0, 0.906278, 0.422681, 0, -0.422681, 0.906278, 0, 2.207, 1.24)
 
 [node name="ShopCam" type="Camera3D" parent="LocationCameras"]
 transform = Transform3D(0.756447, 0, -0.654055, 0, 1, 0, 0.654055, 0, 0.756447, 0.746638, 2.0622, 12.5236)
@@ -388,23 +388,23 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -259.0
+offset_top = -299.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_kvuet")
-metadata/_edit_lock_ = true
 
 [node name="HandDisplay" parent="UI/Hand" instance=ExtResource("5_0tnpc")]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 offset_left = 258.0
-offset_top = -217.0
+offset_top = -267.0
 offset_right = -258.0
-offset_bottom = -19.0
+offset_bottom = -69.0
 grow_vertical = 0
-separation = 120.0
+base_scale = 2.055
+separation = 162.585
 rotation_amount = 12.0
 
 [node name="EnergyMeter" parent="UI" instance=ExtResource("6_vtaks")]

@@ -2,7 +2,7 @@
 # Merges scenes between main room and shopkeeper, instancing to optimize
 extends Node3D
 
-var main_room = preload("res://scenes/game_loop_3d/main_room.tscn")
+var main_room = preload("res://scenes/main_room/main_room.tscn")
 var shopkeeper_bar = preload("res://scenes/shopkeeper/shopkeeper_bar.tscn")
 
 var main_room_instance : Node3D
@@ -78,9 +78,14 @@ func change_location(new_location: Locations):
 	if not transitioning:	# dont allow movement while moving
 		if current_location == Locations.TABLE and new_location == Locations.SHOP:
 			instance_scene(Locations.SHOP)
-			
+			var effect = AudioServer.get_bus_effect(1, 0)
+			var tween=get_tree().create_tween()
+			tween.tween_property(effect, "cutoff_hz", 1500.0, 1.0)
 		if current_location == Locations.SHOP and new_location == Locations.TABLE:
 			instance_scene(Locations.TABLE)
+			var effect = AudioServer.get_bus_effect(1, 0)
+			var tween=get_tree().create_tween()
+			tween.tween_property(effect, "cutoff_hz", 16000.0, 1.0)
 		
 		current_location = new_location
 		location_changed.emit(new_location)

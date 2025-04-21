@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_fukh1"]
 [ext_resource type="Script" uid="uid://b0p88mrxmt066" path="res://gameplay/cards/card_actions/card_action_damage.gd" id="2_aql83"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_xyv1l"]
-[ext_resource type="Texture2D" uid="uid://chnb6d7dt5dil" path="res://gameplay/cards/coin_card.png" id="3_bqyvo"]
+[ext_resource type="Texture2D" uid="uid://cs1fwye4417wu" path="res://gameplay/cards/common/bomb/Bomb_Art.png" id="3_060jd"]
 
 [sub_resource type="Resource" id="Resource_ybc5r"]
 script = ExtResource("2_aql83")
@@ -14,8 +14,8 @@ metadata/_custom_type_script = "uid://b0p88mrxmt066"
 [resource]
 script = ExtResource("2_xyv1l")
 title = "Bomb"
-desc = ""
-cover = ExtResource("3_bqyvo")
+desc = "This is a bomb."
+cover = ExtResource("3_060jd")
 energy_cost = 20.0
 card_actions = Array[ExtResource("1_fukh1")]([SubResource("Resource_ybc5r")])
 card_rarity = 0

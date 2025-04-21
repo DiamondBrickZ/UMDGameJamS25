@@ -4,8 +4,9 @@
 
 [resource]
 script = ExtResource("1_vfc3t")
+stacking = true
 effect_type = 1
 status_name = "Bleeding"
-status_desc = ""
-duration = 0.0
+status_desc = "Target’s health bar slowly decreases for a period of time (can stack and multiply the effect)."
+effect_tag = 0
 metadata/_custom_type_script = "uid://d060w76yjbhgk"

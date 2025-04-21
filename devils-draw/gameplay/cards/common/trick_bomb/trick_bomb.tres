@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://dlgqdv1aaacsh"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_tsgwe"]
+[ext_resource type="Script" uid="uid://b0p88mrxmt066" path="res://gameplay/cards/card_actions/card_action_damage.gd" id="2_4a5yh"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_7v7fy"]
+[ext_resource type="Texture2D" uid="uid://cqhb0y78p46hq" path="res://gameplay/cards/common/trick_bomb/Trick_Bomb_Art.png" id="3_4a5yh"]
+
+[sub_resource type="Resource" id="Resource_5hgbi"]
+script = ExtResource("2_4a5yh")
+subject = 0
+damage_amount = 2.0
+metadata/_custom_type_script = "uid://b0p88mrxmt066"
+
+[resource]
+script = ExtResource("2_7v7fy")
+title = "Trick Bomb"
+desc = "-2 hearts for the drawer"
+cover = ExtResource("3_4a5yh")
+energy_cost = 0.0
+card_actions = Array[ExtResource("1_tsgwe")]([SubResource("Resource_5hgbi")])
+card_rarity = 0
+card_method = 0
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

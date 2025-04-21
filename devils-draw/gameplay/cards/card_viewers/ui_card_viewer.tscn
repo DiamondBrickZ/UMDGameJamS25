@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://ugq5obsryeiu"]
+
+[ext_resource type="Script" uid="uid://b3xlb3cwlg4gp" path="res://gameplay/cards/card_viewers/ui_card_viewer.gd" id="1_0f6f3"]
+[ext_resource type="Texture2D" uid="uid://ci5wfcomskv3o" path="res://gameplay/cards/rarities/Common Card Front.png" id="2_il51x"]
+[ext_resource type="Texture2D" uid="uid://dkpe0ro82et3u" path="res://gameplay/cards/rarities/Super_Rare Card Front.png" id="2_l35sr"]
+[ext_resource type="Resource" uid="uid://d140615cqcvtx" path="res://gameplay/cards/common/coin_bag/coin_bag.tres" id="2_ski44"]
+[ext_resource type="Texture2D" uid="uid://digsx2legubq5" path="res://gameplay/cards/rarities/Rare Card Front.png" id="3_vfsb6"]
+[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://theme.tres" id="5_vfsb6"]
+[ext_resource type="Texture2D" uid="uid://bodudx2n3bba4" path="res://gameplay/cards/common/coin_bag/Coin_Bag_art.png" id="6_tndd0"]
+[ext_resource type="Shader" uid="uid://qmewkpp5cybr" path="res://shaders/blurry.gdshader" id="7_0p5vl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmcv5"]
+size = Vector2(322, 437)
+
+[sub_resource type="Animation" id="Animation_0kpd1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eporg"]
+resource_name = "play_card"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eb867"]
+_data = {
+&"RESET": SubResource("Animation_0kpd1"),
+&"play_card": SubResource("Animation_eporg")
+}
+
+[sub_resource type="SphereMesh" id="SphereMesh_5tdhr"]
+radius = 10.0
+height = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ski44"]
+shader = ExtResource("7_0p5vl")
+shader_parameter/strength = 4.453
+shader_parameter/mix_percentage = 0.3
+
+[node name="UICardViewer" type="Area2D"]
+script = ExtResource("1_0f6f3")
+base_scale = 1.5
+card = ExtResource("2_ski44")
+size = 0.25
+common_border = ExtResource("2_il51x")
+rare_border = ExtResource("3_vfsb6")
+super_rare_border = ExtResource("2_l35sr")
+
+[node name="Display" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -15)
+scale = Vector2(0.136, 0.136)
+texture = ExtResource("6_tndd0")
+
+[node name="Border" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_il51x")
+metadata/_edit_lock_ = true
+
+[node name="MouseDetection" type="CollisionShape2D" parent="."]
+visible = false
+z_index = 1
+scale = Vector2(0.25, 0.25)
+shape = SubResource("RectangleShape2D_mmcv5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eb867")
+}
+
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = -39.0
+offset_top = -50.0
+offset_right = 294.0
+offset_bottom = 1.0
+scale = Vector2(0.237, 0.237)
+theme = ExtResource("5_vfsb6")
+text = "Coin Bag"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Description" type="RichTextLabel" parent="."]
+offset_left = -34.0
+offset_top = 7.0
+offset_right = 330.0
+offset_bottom = 109.0
+scale = Vector2(0.187, 0.187)
+theme = ExtResource("5_vfsb6")
+text = "+5 Gold"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(0, 42)
+mesh = SubResource("SphereMesh_5tdhr")
+metadata/_edit_group_ = true
+
+[node name="EnergyCost" type="RichTextLabel" parent="MeshInstance2D"]
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 118.0
+offset_bottom = 41.0
+scale = Vector2(0.156, 0.156)
+theme = ExtResource("5_vfsb6")
+text = "10.0"
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Blur" type="ColorRect" parent="."]
+visible = false
+z_index = 1
+material = SubResource("ShaderMaterial_ski44")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -50.0
+offset_right = 39.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://ckjaki8xmotbc"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_n0lmo"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_rrveh"]
+[ext_resource type="Script" uid="uid://ddrdcpd66t7sk" path="res://gameplay/cards/card_actions/card_action_remove_effect.gd" id="2_urwgb"]
+[ext_resource type="Texture2D" uid="uid://c75rrwtx05rn7" path="res://gameplay/cards/common/bandages/Bandages_Art.png" id="3_urwgb"]
+
+[sub_resource type="Resource" id="Resource_i8m26"]
+script = ExtResource("2_urwgb")
+effect_type = 0
+max_num = 1
+metadata/_custom_type_script = "uid://ddrdcpd66t7sk"
+
+[resource]
+script = ExtResource("2_rrveh")
+title = "Bandages"
+desc = "Removes one negative status effect from the user."
+cover = ExtResource("3_urwgb")
+energy_cost = 15.0
+card_actions = Array[ExtResource("1_n0lmo")]([SubResource("Resource_i8m26")])
+card_rarity = 0
+card_method = 1
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

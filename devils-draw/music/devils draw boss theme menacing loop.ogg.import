@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://br167qpeqlxy5"
+path="res://.godot/imported/devils draw boss theme menacing loop.ogg-b1774a48fe4d94dc7b6c5d4483ca7b5d.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/devils draw boss theme menacing loop.ogg"
+dest_files=["res://.godot/imported/devils draw boss theme menacing loop.ogg-b1774a48fe4d94dc7b6c5d4483ca7b5d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

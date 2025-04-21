@@ -7,5 +7,6 @@ script = ExtResource("1_03f1p")
 stacking = false
 effect_type = 6
 status_name = "Drunken High"
-status_desc = "you are drunk."
+status_desc = "Temporarily playing cards costs half energy"
+effect_tag = 1
 metadata/_custom_type_script = "uid://d060w76yjbhgk"

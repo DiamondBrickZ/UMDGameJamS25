@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://vjllhird0soy"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_5bn0k"]
+[ext_resource type="Script" uid="uid://bg2v3qyd85rlb" path="res://gameplay/cards/card_actions/card_action_gain_gold.gd" id="2_6rlfm"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_exhhv"]
+
+[sub_resource type="Resource" id="Resource_p20et"]
+script = ExtResource("2_6rlfm")
+gold_amount = 15.0
+metadata/_custom_type_script = "uid://bg2v3qyd85rlb"
+
+[resource]
+script = ExtResource("2_exhhv")
+title = "Lottery"
+desc = "You won the lottery! Gain 15 gold."
+energy_cost = 0.0
+card_actions = Array[ExtResource("1_5bn0k")]([SubResource("Resource_p20et")])
+card_rarity = 2
+card_method = 0
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

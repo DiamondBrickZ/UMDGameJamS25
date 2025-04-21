@@ -7,8 +7,8 @@ func do_action(my_character : int):
 	if my_character == 1:	other_character = 0
 	
 	# get random card from their hand
-	var their_hand = GameManager.game_info[other_character]["hand"]
-	var stolen_card : Card = their_hand[randi_range(0, len(their_hand)-1)]
+	var their_hand : Array = GameManager.game_info[other_character]["hand"]
+	var stolen_card : Card = their_hand.pick_random()
 	
 	# add it to my hand
-	GameManager.game_info[my_character]["hand"].append(stolen_card)
+	GameManager.add_card(my_character, stolen_card)

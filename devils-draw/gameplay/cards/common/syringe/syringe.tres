@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://cg7jhlku7iicv"]
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://cg7jhlku7iicv"]
 
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_w7ssx"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_fbmbg"]
 [ext_resource type="Script" uid="uid://vt8h5oblfhxw" path="res://gameplay/cards/card_actions/card_action_health.gd" id="2_i7fhy"]
+[ext_resource type="Texture2D" uid="uid://c3r2em5hpjfq8" path="res://gameplay/cards/common/syringe/Syringe_Art.png" id="3_i7fhy"]
 
 [sub_resource type="Resource" id="Resource_rdy1y"]
 script = ExtResource("2_i7fhy")
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://vt8h5oblfhxw"
 script = ExtResource("2_fbmbg")
 title = "Syringe"
 desc = "Gain 1/2 heart"
+cover = ExtResource("3_i7fhy")
 energy_cost = 0.0
 card_actions = Array[ExtResource("1_w7ssx")]([SubResource("Resource_rdy1y")])
 card_rarity = 0

@@ -4,7 +4,7 @@ extends Control
 @export var card_name_label : Label
 @export var cards : Panel
 
-var card_viewer_2d = preload("res://gameplay/cards/card_viewers/ui_card_viewer/ui_card_viewer.tscn")
+var card_viewer_2d = preload("res://gameplay/cards/card_viewers/ui_card_viewer.tscn")
 
 @export var base_scale : float = 1.0
 @export var separation : float = 10
@@ -22,11 +22,6 @@ func _on_card_drawn(card: Card, character: int):
 func _on_player_died():
 	for child in cards.get_children():
 		child.queue_free()
-	
-	for card in GameManager.next_hand:
-		add_card(card)
-	
-	GameManager.next_hand = []
 
 func add_card(card: Card):
 	var card_viewer : Area2D = card_viewer_2d.instantiate()

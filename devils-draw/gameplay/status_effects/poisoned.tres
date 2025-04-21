@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://c4uxgpqnlc5bh"]
+
+[ext_resource type="Script" uid="uid://d060w76yjbhgk" path="res://gameplay/status_effects/status_effect.gd" id="1_b6ddi"]
+
+[resource]
+script = ExtResource("1_b6ddi")
+stacking = false
+effect_type = 2
+status_name = "Poisoned"
+status_desc = "Target’s health bar exponentially decreases faster for a period of time."
+effect_tag = 0
+metadata/_custom_type_script = "uid://d060w76yjbhgk"

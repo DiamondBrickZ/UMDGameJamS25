@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://bu5wcvxix20t0"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://bu5wcvxix20t0"]
 
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_kpdvu"]
 [ext_resource type="Resource" uid="uid://ctbj2c8d1i7hb" path="res://gameplay/status_effects/paralyzed.tres" id="2_jr3uf"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_u1xdx"]
 [ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_ojuvi"]
+[ext_resource type="Texture2D" uid="uid://dpkuiusbv7503" path="res://gameplay/cards/common/charged_battery/Charged_Battery_Art.png" id="4_ojuvi"]
 
 [sub_resource type="Resource" id="Resource_78410"]
 script = ExtResource("3_ojuvi")
@@ -16,6 +17,7 @@ metadata/_custom_type_script = "uid://bxjkgdcnwgjyv"
 script = ExtResource("2_u1xdx")
 title = "Charged Battery"
 desc = "Applies paralysis effect"
+cover = ExtResource("4_ojuvi")
 energy_cost = 0.0
 card_actions = Array[ExtResource("1_kpdvu")]([SubResource("Resource_78410")])
 card_rarity = 0

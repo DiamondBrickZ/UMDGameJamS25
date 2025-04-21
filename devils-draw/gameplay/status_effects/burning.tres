@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusEffect" load_steps=2 format=3 uid="uid://dknps8xrgmvd2"]
+
+[ext_resource type="Script" uid="uid://d060w76yjbhgk" path="res://gameplay/status_effects/status_effect.gd" id="1_tx1rc"]
+
+[resource]
+script = ExtResource("1_tx1rc")
+stacking = false
+effect_type = 0
+status_name = "Burning"
+status_desc = "Target’s health bar slowly decreases for a period of time."
+effect_tag = 0
+metadata/_custom_type_script = "uid://d060w76yjbhgk"

@@ -11,12 +11,13 @@ var game : Node3D
 		"hand": [],
 		"energy": 50.0,
 		"max_energy": 50.0,
-		"energy_growth": 0.8,
+		"energy_growth": 1.0,
 		"souls": 0,
 		"gold": 0,
 		"max_gold": 100,
 		"health": 5.0,
-		"max_health": 5.0
+		"max_health": 5.0,
+		"health_growth": 0.0
 	},
 	1: {		## DEVIL
 		"status_effects": [],
@@ -28,9 +29,12 @@ var game : Node3D
 		"gold": 0,
 		"max_gold": 100,
 		"health": 30.0,
-		"max_health": 30.0
+		"max_health": 30.0,
+		"health_growth": 0.0
 	}
 }
+
+var discard_pile : Array[Card] = []
 
 # DEVIL INFO
 var time_left : float = 90.0
@@ -38,6 +42,7 @@ var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 
 # PLAYER INFO
 var next_hand : Array[Card] = []
+var fake_membership : bool = false
 
 # CARDS
 @export var available_cards : Array[Card] = []
@@ -59,11 +64,15 @@ signal game_end()
 signal card_played(card: Card, character: int)
 signal shop_dialogue(text: String)
 
+@onready var background_music = $BackgroundMusic
+
 func _ready():
 	# get game loop node from scene to enact actions.
 	game = get_tree().current_scene
 	
 	dealt_damage.connect(_on_dealt_damage)
+	
+	background_music.bus = &"BackgroundMusic"
 
 func _process(delta):
 	
@@ -72,45 +81,9 @@ func _process(delta):
 	for card in game_info[1]["hand"]:
 		$Debug.text += card.title + "\n"
 	
-	# grow energy levels
 	for character in range(2):
 		
-		# determine if the character has paralysis effect
-		var has_paraylsis = false
-		var has_bleeding = false
-		for effect : StatusEffect in game_info[character]["status_effects"]:
-			if effect.effect_type == StatusEffect.Effects.PARALYZED:
-				has_paraylsis = true
-			elif effect.effect_type == StatusEffect.Effects.BLEEDING:
-				has_bleeding = true
-		
-		# otherwise, grow energy
-		if not has_paraylsis:
-			# increase energy levels
-			if game_info[character]["energy"] <= game_info[character]["max_energy"]:
-				game_info[character]["energy"] += game_info[character]["energy_growth"] * delta
-			
-			# don't let it go below 0
-			if game_info[character]["energy"] < 0.0:
-				game_info[character]["energy"] = 0.0
-		
-		# if bleeding, slowly drain health
-		if has_bleeding:
-			game_info[character]["health"] -= 0.1 * delta
-			if game_info[character]["health"] < 0 and character == 0:
-				player_death()
-			elif game_info[character]["health"] < 0 and character == 1:
-				game_end.emit()
-	
-	# decrease time
-	time_left -= 1 * delta
-	
-	# if the time limit ends, end the game
-	if time_left <= 0:
-		game_end.emit()
-	
-	# status effects
-	for character in range(2):
+		# status effects
 		for effect : StatusEffect in game_info[character]["status_effects"]:
 			
 			# decrease the time limit on the effect
@@ -119,7 +92,38 @@ func _process(delta):
 				#remove effect
 				game_info[character]["status_effects"].erase(effect)
 				status_effect_change.emit(character, effect, false)
-			#do_status_effect(character, effect, delta)
+		
+		if has_effect(character, StatusEffect.Effects.PARALYZED):
+			game_info[character]["energy_growth"] = 0.0
+		else:
+			game_info[character]["energy_growth"] = 1.0
+		
+		if has_effect(character, StatusEffect.Effects.BLEEDING):
+			game_info[character]["health_growth"] = -0.1
+		else:
+			game_info[character]["health_growth"] = 0.0
+		
+		# ENERGY
+		if game_info[character]["energy"] <= game_info[character]["max_energy"]:
+			game_info[character]["energy"] += game_info[character]["energy_growth"] * delta * game_info[character]["energy_growth"]
+		
+		# don't let it go below 0
+		if game_info[character]["energy"] < 0.0:
+			game_info[character]["energy"] = 0.0
+		
+		# HEALTH
+		game_info[character]["health"] += game_info[character]["health_growth"] * delta
+		if game_info[character]["health"] < 0 and character == 0:
+			player_death()
+		elif game_info[character]["health"] < 0 and character == 1:
+			game_end.emit()
+	
+	# decrease time
+	time_left -= 1 * delta
+	
+	# if the time limit ends, end the game
+	if time_left <= 0:
+		game_end.emit()
 
 func _on_dealt_damage(character: int, _amount: float):
 	if game_info[character]["health"] <= 0:
@@ -145,6 +149,13 @@ func apply_status_effect(character: int, effect: StatusEffect):
 #func do_status_effect(character: int, effect: StatusEffect, delta):
 	#if effect.effect_type == StatusEffect.Effects.PARALYZED:
 	#
+
+func has_effect(character: int, effect_type: StatusEffect.Effects) -> bool:
+	for e : StatusEffect in game_info[character]["status_effects"]:
+		if e.effect_type == effect_type:
+			return true
+	
+	return false
 
 func get_all_file_paths(path: String) -> Array[String]:  
 	var file_paths: Array[String] = []  
@@ -188,10 +199,10 @@ func draw_card(character: int = 0):
 	
 	# pick card
 	var rand_card : Card
-	if rarity < 0.75:
+	if rarity < 0.73:
 		# pick from common cards
 		rand_card = common_cards[randi_range(0, len(common_cards)-1)]
-	elif rarity < 0.98:
+	elif rarity < 0.96:
 		rand_card = rare_cards[randi_range(0, len(rare_cards)-1)]
 	else:
 		rand_card = super_rare_cards[randi_range(0, len(super_rare_cards)-1)]
@@ -225,14 +236,19 @@ func play_card(character: int, card: Card, _index : int):
 		# if does have enough energy
 		card.play_card(character)
 		card_played.emit(card, character)
+		GameManager.discard_pile.append(card)
 		
-		# if in drunken high, deplete half energy
 		GameManager.deplete_energy(character, energy_amount)
 		
 		# remove card from hand
 		GameManager.game_info[character]["hand"].erase(card)
 		
 		return true
+
+func add_card(character: int, card: Card):
+	game_info[character]["hand"].append(card)
+	if character == 0:
+		game.ui.hand_display.add_card(card)
 
 func is_drunk(character:int):
 	for effect in game_info[character]["status_effects"]:
@@ -296,6 +312,7 @@ func player_death():
 	game_info[1]["hand"] = []
 	game_info[0]["status_effects"] = []
 	
+	# emit signals, 
 	player_died.emit()
 	time_left = 90.0
 	gain_soul()
@@ -305,6 +322,12 @@ func player_death():
 	await get_tree().create_timer(4.5).timeout
 	game.cam_speed = 1.0
 	shop_dialogue.emit("player_revived")
+	
+	# add next hand after death
+	for card in next_hand:
+		add_card(0, card)
+		print('adadijaing caraddd ', card.title)
+	next_hand = []
 
 func gain_soul():
 	# when the player gets a soul
@@ -315,6 +338,10 @@ func gain_soul():
 func buy_card(card: Card, cost: int):
 	# add this card to the next hand.
 	
+	# half cost if has fake membership
+	if fake_membership:
+		cost /= 2
+	
 	# determine if player has enough gold
 	if game_info[0]["gold"] >= cost:
 		game_info[0]["gold"] -= cost
@@ -322,6 +349,9 @@ func buy_card(card: Card, cost: int):
 		next_hand.append(new_card)
 		print("bought item")
 		shop_dialogue.emit("player_buys")
+		
+		# remove fake membership
+		fake_membership = false
 	else:
 		print('not enough gold')
 		shop_dialogue.emit("not_enough_gold")

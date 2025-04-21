@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var shopkeeper_dialogue = $SubViewport/PanelContainer/MarginContainer/ShopkeeperDialogue
 @onready var dialogue_timer = $DialogueTimer
-@onready var sprite_3d = $Sprite3D
+@onready var sprite_3d = $Dialogue
 
 @export var player_buys : Array[String] = [
 	"Pleasure doing business with you.",

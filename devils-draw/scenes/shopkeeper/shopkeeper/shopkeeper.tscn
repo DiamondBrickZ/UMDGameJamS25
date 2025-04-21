@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf2xn4sjjsf3c"]
+
+[ext_resource type="Texture2D" uid="uid://0fsubnodt4uy" path="res://scenes/shopkeeper/shopkeeper/Shopkeeper stills.png" id="1_r8db2"]
+[ext_resource type="Script" uid="uid://c5vgrl8x02qtu" path="res://scenes/shopkeeper/shopkeeper/shopkeeper.gd" id="2_2ty1m"]
+
+[node name="Shopkeeper" type="Sprite3D"]
+texture = ExtResource("1_r8db2")
+region_enabled = true
+region_rect = Rect2(1748, 0, 452, 719)
+script = ExtResource("2_2ty1m")
+emotion = 5

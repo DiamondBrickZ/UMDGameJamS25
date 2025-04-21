@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dny8yaysxtwma"]
+
+[ext_resource type="Texture2D" uid="uid://d2m2qi0nmjido" path="res://scenes/main_room/devil/Devil stills placeholder.png" id="1_x6rqe"]
+[ext_resource type="Script" uid="uid://dbprhfem0os3a" path="res://scenes/main_room/devil/devil.gd" id="2_skdi4"]
+
+[node name="Devil" type="Sprite3D"]
+texture = ExtResource("1_x6rqe")
+region_enabled = true
+region_rect = Rect2(2392, 0, 725, 1371)
+script = ExtResource("2_skdi4")
+current_emotion = 2
