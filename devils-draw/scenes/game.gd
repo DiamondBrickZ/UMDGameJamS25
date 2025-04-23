@@ -1,12 +1,15 @@
 ## GAME SCRIPT
 # Merges scenes between main room and shopkeeper, instancing to optimize
 extends Node3D
+class_name Game
 
 var main_room = preload("res://scenes/main_room/main_room.tscn")
 var shopkeeper_bar = preload("res://scenes/shopkeeper/shopkeeper_bar.tscn")
+var main_menu = preload("res://scenes/main_menu/main_menu.tscn")
 
 var main_room_instance : Node3D
 var shopkeeper_bar_instance : Node3D
+var main_menu_instance : Node3D
 var transitioning = false
 var cam_speed : float = 1.0
 var increment : float = 0.0
@@ -22,12 +25,13 @@ enum Locations {
 	TABLE,
 	SHOP,
 	DEVIL,
-	SPIRITS
+	SPIRITS,
+	MAIN_MENU
 }
 
 # LOCATIONS
 @export var location_cams : Array[Camera3D] = []
-@export var current_location := Locations.SHOP
+@export var current_location := Locations.MAIN_MENU
 
 # SIGNALS
 signal location_changed(new_location)
@@ -46,7 +50,10 @@ func instance_scene(new_location: Locations):
 		add_child(shopkeeper_bar_instance)
 		
 		# slide in shop menu
-		await get_tree().create_timer(0.5).timeout
+		if current_location == Locations.MAIN_MENU:
+			await get_tree().create_timer(2.5).timeout
+		else:
+			await get_tree().create_timer(0.5).timeout
 		ui.shop_menu.slide_in()
 		
 		GameManager.shop_dialogue.emit("welcome_back")
@@ -54,10 +61,10 @@ func instance_scene(new_location: Locations):
 		# remove the main room instance
 		await get_tree().create_timer(2).timeout
 		if main_room_instance: main_room_instance.queue_free()
-		
+		if main_menu_instance: main_menu_instance.queue_free()
+
 		await get_tree().create_timer(3).timeout
 		transitioning = false
-		
 	elif new_location == Locations.TABLE:
 		main_room_instance = main_room.instantiate()
 		casino_doors.open()
@@ -71,16 +78,35 @@ func instance_scene(new_location: Locations):
 		await get_tree().create_timer(2).timeout
 		if shopkeeper_bar_instance: shopkeeper_bar_instance.queue_free()
 		
-		await get_tree().create_timer(5).timeout
+		await get_tree().create_timer(3).timeout
+		transitioning = false
+	elif new_location == Locations.MAIN_MENU:
+		main_menu_instance = main_menu.instantiate()
+		transitioning = true
+		add_child(main_menu_instance)
+		
+		await get_tree().create_timer(2).timeout
 		transitioning = false
 
 func change_location(new_location: Locations):
 	if not transitioning:	# dont allow movement while moving
-		if current_location == Locations.TABLE and new_location == Locations.SHOP:
+		
+		if new_location == Locations.MAIN_MENU:
+			ui.hide()
+			var effect = AudioServer.get_bus_effect(1, 0)
+			var tween=get_tree().create_tween()
+			tween.tween_property(effect, "cutoff_hz", 16000.0, 1.0)
+		
+		if current_location == Locations.MAIN_MENU:
+			ui.show()
+			ui.effects.anim_player.play("player_death")
+			await get_tree().create_timer(2).timeout
+
+		if new_location == Locations.SHOP:
 			instance_scene(Locations.SHOP)
 			var effect = AudioServer.get_bus_effect(1, 0)
 			var tween=get_tree().create_tween()
-			tween.tween_property(effect, "cutoff_hz", 1500.0, 1.0)
+			tween.tween_property(effect, "cutoff_hz", 4500.0, 1.0)
 		if current_location == Locations.SHOP and new_location == Locations.TABLE:
 			instance_scene(Locations.TABLE)
 			var effect = AudioServer.get_bus_effect(1, 0)
@@ -89,6 +115,7 @@ func change_location(new_location: Locations):
 		
 		current_location = new_location
 		location_changed.emit(new_location)
+		
 
 func _on_player_died():
 	can_navigate = false

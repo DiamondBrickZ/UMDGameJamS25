@@ -20,13 +20,14 @@ func _on_card_played(card: Card, character : int):
 	# instantiate 3d card
 	var new_card = card_3d.instantiate()
 	new_card.card = card
-	add_child(new_card)
 		
 	if character == 0:
+		add_child(new_card)
 		new_card.global_position = player_marker.global_position
 	else:
 		# create a slight delay
 		await get_tree().create_timer(0.4).timeout
+		add_child(new_card)
 		new_card.global_position = devil_marker.global_position
 
 func _process(delta):

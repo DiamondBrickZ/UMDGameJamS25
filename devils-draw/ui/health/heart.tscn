@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4fwq2850xrlk"]
+
+[ext_resource type="Texture2D" uid="uid://b80o5li557a0r" path="res://ui/health/icons/Hearts (Health Bar).png" id="1_2vei8"]
+[ext_resource type="Shader" uid="uid://b8rn1d63yke3n" path="res://ui/health/heart.gdshader" id="1_uv07p"]
+[ext_resource type="Script" uid="uid://dwatnhpbjdj78" path="res://ui/health/heart.gd" id="2_uv07p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qv32h"]
+shader = ExtResource("1_uv07p")
+shader_parameter/height = 0.1
+
+[node name="Heart" type="Sprite2D"]
+material = SubResource("ShaderMaterial_qv32h")
+use_parent_material = true
+texture = ExtResource("1_2vei8")
+region_enabled = true
+region_rect = Rect2(0, 0, 168, 147)
+script = ExtResource("2_uv07p")

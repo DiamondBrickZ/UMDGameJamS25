@@ -114,7 +114,7 @@ transform = Transform3D(0.256331, 0, 0.250887, 0, 0.358678, 0, -0.250887, 0, 0.2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55386, 0.0524659)
 player_marker = NodePath("../PlayerMarker")
 devil_marker = NodePath("../DevilMarker")
-separation = 0.001
+separation = 0.005
 size = 0.71
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

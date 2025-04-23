@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4x6nqr2k6nlw"]
-
-[ext_resource type="Texture2D" uid="uid://b80o5li557a0r" path="res://ui/health/icons/Hearts (Health Bar).png" id="1_ugdo1"]
-
-[node name="CoolHeart" type="Sprite2D"]
-texture = ExtResource("1_ugdo1")
-region_enabled = true
-region_rect = Rect2(0, 1017.4, 168, 219.508)

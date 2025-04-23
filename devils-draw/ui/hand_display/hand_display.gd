@@ -2,7 +2,7 @@
 extends Control
 
 @export var card_name_label : Label
-@export var cards : Panel
+@export var cards : Control
 
 var card_viewer_2d = preload("res://gameplay/cards/card_viewers/ui_card_viewer.tscn")
 

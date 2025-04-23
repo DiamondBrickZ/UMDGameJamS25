@@ -4,6 +4,20 @@ extends Node
 
 var game : Node3D
 
+enum GameState {
+	MAIN_MENU,
+	SHOP,
+	PLAYING,
+	PAUSED
+}
+
+var current_game_state := GameState.MAIN_MENU:
+	set(new_val):
+		current_game_state = new_val
+		game_state_change.emit(current_game_state)
+
+@onready var music = $BackgroundMusic
+
 # GAME INFO: 0 for player, 1 for devil
 @export var game_info : Dictionary = {
 	0: {		## PLAYER
@@ -61,18 +75,16 @@ signal status_effect_change(character: int, effect: StatusEffect, applied: bool)
 signal dealt_damage(character: int, amount: float)
 signal player_died()
 signal game_end()
+signal game_start()
+signal game_state_change(game_state: GameState)
 signal card_played(card: Card, character: int)
 signal shop_dialogue(text: String)
-
-@onready var background_music = $BackgroundMusic
 
 func _ready():
 	# get game loop node from scene to enact actions.
 	game = get_tree().current_scene
 	
 	dealt_damage.connect(_on_dealt_damage)
-	
-	background_music.bus = &"BackgroundMusic"
 
 func _process(delta):
 	
@@ -81,6 +93,9 @@ func _process(delta):
 	for card in game_info[1]["hand"]:
 		$Debug.text += card.title + "\n"
 	
+	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.PAUSED: return
+	
+	# game effects
 	for character in range(2):
 		
 		# status effects

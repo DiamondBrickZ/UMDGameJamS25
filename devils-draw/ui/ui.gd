@@ -9,6 +9,7 @@ extends CanvasLayer
 @export var energy_bar : ProgressBar
 @export var ui_animations : AnimationPlayer
 @export var shop_menu : Control
+@export var effects : Control
 
 func _on_draw_cards_pressed():
 	# send a message to draw cards
