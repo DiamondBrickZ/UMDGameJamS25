@@ -3,7 +3,6 @@ extends Node3D
 
 func _on_button_pressed():
 	get_parent().change_location(Game.Locations.SHOP)
-	GameManager.current_game_state = GameManager.GameState.PLAYING
 	$CanvasLayer/AnimationPlayer.play("start")
 	await get_tree().create_timer(2).timeout
 	canvas_layer.hide()

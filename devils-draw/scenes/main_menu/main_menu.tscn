@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c60gdhmk3utc7"]
+[gd_scene load_steps=12 format=3 uid="uid://c60gdhmk3utc7"]
 
 [ext_resource type="Script" uid="uid://cu8kbgdbecqx7" path="res://scenes/main_menu/main_menu.gd" id="1_3c04x"]
 [ext_resource type="PackedScene" uid="uid://dny8yaysxtwma" path="res://scenes/main_room/devil/devil.tscn" id="1_i5wg5"]
 [ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://scenes/main_room/draw_pile/draw_pile.tscn" id="2_3c04x"]
 [ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://scenes/main_room/spirit_bottle/spirit_bottle.tscn" id="3_joh67"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="4_u184e"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="6_3ovsr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6mijq"]
 albedo_color = Color(0.242092, 0.127615, 0.0862125, 1)
@@ -147,6 +148,7 @@ offset_left = 202.0
 offset_top = 25.0
 offset_right = 1286.0
 offset_bottom = 346.0
+theme_override_fonts/normal_font = ExtResource("6_3ovsr")
 theme_override_font_sizes/normal_font_size = 149
 text = "Devil's Draw"
 
@@ -156,6 +158,7 @@ offset_left = 215.0
 offset_top = 209.0
 offset_right = 1299.0
 offset_bottom = 318.0
+theme_override_fonts/normal_font = ExtResource("6_3ovsr")
 theme_override_font_sizes/normal_font_size = 30
 text = "by Julian, Andrew, Trina and Haroon"
 
@@ -165,8 +168,9 @@ offset_left = 220.0
 offset_top = 467.0
 offset_right = 532.0
 offset_bottom = 535.0
+theme_override_fonts/font = ExtResource("6_3ovsr")
 theme_override_font_sizes/font_size = 34
-text = "Start Game"
+text = "Strike a deal."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {

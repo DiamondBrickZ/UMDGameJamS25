@@ -47,6 +47,7 @@ func instance_scene(new_location: Locations):
 		shopkeeper_bar_instance = shopkeeper_bar.instantiate()
 		casino_doors.close()
 		transitioning = true
+		GameManager.current_game_state = GameManager.GameState.SHOP
 		add_child(shopkeeper_bar_instance)
 		
 		# slide in shop menu
@@ -69,6 +70,7 @@ func instance_scene(new_location: Locations):
 		main_room_instance = main_room.instantiate()
 		casino_doors.open()
 		transitioning = true
+		GameManager.current_game_state = GameManager.GameState.PLAYING
 		add_child(main_room_instance)
 		
 		# slide out shop menu
@@ -115,7 +117,6 @@ func change_location(new_location: Locations):
 		
 		current_location = new_location
 		location_changed.emit(new_location)
-		
 
 func _on_player_died():
 	can_navigate = false

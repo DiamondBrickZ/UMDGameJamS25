@@ -11,10 +11,14 @@ enum GameState {
 	PAUSED
 }
 
+@onready var main_theme = $MainTheme
+@onready var shop_theme = $ShopTheme
+@onready var menu_theme = $MenuTheme
+
 var current_game_state := GameState.MAIN_MENU:
 	set(new_val):
+		change_game_state(new_val)
 		current_game_state = new_val
-		game_state_change.emit(current_game_state)
 
 @onready var music = $BackgroundMusic
 
@@ -51,7 +55,7 @@ var current_game_state := GameState.MAIN_MENU:
 var discard_pile : Array[Card] = []
 
 # DEVIL INFO
-var time_left : float = 90.0
+var time_left : float = 9.0
 var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 
 # PLAYER INFO
@@ -74,7 +78,7 @@ signal failed_move()
 signal status_effect_change(character: int, effect: StatusEffect, applied: bool)
 signal dealt_damage(character: int, amount: float)
 signal player_died()
-signal game_end()
+signal game_end(won: bool)
 signal game_start()
 signal game_state_change(game_state: GameState)
 signal card_played(card: Card, character: int)
@@ -85,6 +89,9 @@ func _ready():
 	game = get_tree().current_scene
 	
 	dealt_damage.connect(_on_dealt_damage)
+	current_game_state = GameState.MAIN_MENU
+	main_theme.volume_db = -80.0
+	shop_theme.volume_db = -80.0
 
 func _process(delta):
 	
@@ -131,14 +138,15 @@ func _process(delta):
 		if game_info[character]["health"] < 0 and character == 0:
 			player_death()
 		elif game_info[character]["health"] < 0 and character == 1:
-			game_end.emit()
+			game_end.emit(true)
 	
 	# decrease time
 	time_left -= 1 * delta
 	
 	# if the time limit ends, end the game
-	if time_left <= 0:
-		game_end.emit()
+	if time_left <= 0 and not current_game_state == GameState.PAUSED:
+		current_game_state = GameState.PAUSED
+		game_end.emit(false)
 
 func _on_dealt_damage(character: int, _amount: float):
 	if game_info[character]["health"] <= 0:
@@ -370,3 +378,25 @@ func buy_card(card: Card, cost: int):
 	else:
 		print('not enough gold')
 		shop_dialogue.emit("not_enough_gold")
+
+func change_game_state(new_state: GameState):
+	# change music
+	if new_state != current_game_state:
+		var tween = get_tree().create_tween().set_parallel()
+		# tone down current music
+		if current_game_state == GameState.MAIN_MENU:
+			tween.tween_property(menu_theme, "volume_db", -80.0, 5.0)
+		if current_game_state == GameState.SHOP:
+			tween.tween_property(shop_theme, "volume_db", -80.0, 5.0)
+		if current_game_state == GameState.PLAYING:
+			tween.tween_property(main_theme, "volume_db", -80.0, 5.0)
+		
+		# ramp up new music
+		if new_state == GameState.MAIN_MENU:
+			tween.tween_property(menu_theme, "volume_db", 0.0, 1.0)
+		if new_state == GameState.SHOP:
+			tween.tween_property(shop_theme, "volume_db", 0.0, 1.0)
+		if new_state == GameState.PLAYING:
+			tween.tween_property(main_theme, "volume_db", 0.0, 1.0)
+	
+	game_state_change.emit(current_game_state)

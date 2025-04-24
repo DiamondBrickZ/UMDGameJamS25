@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://nhhm2l2cjaue"]
+
+[ext_resource type="Script" uid="uid://dhkkpxsqm0emb" path="res://scenes/endings/lose.gd" id="1_1bol7"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="2_tyl4e"]
+
+[node name="Lose" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_1bol7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.163288, 0.0916887, 0.103887, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -383.0
+offset_top = -231.0
+offset_right = 383.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_tyl4e")
+theme_override_font_sizes/normal_font_size = 113
+text = "You Died"
+horizontal_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -578.0
+offset_top = -77.0
+offset_right = 578.0
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_tyl4e")
+theme_override_font_sizes/normal_font_size = 38
+text = "You played with the cards you were dealt... poorly. 
+
+If only you had one more hand..."
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -145.0
+offset_top = -290.0
+offset_right = 145.0
+offset_bottom = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_tyl4e")
+theme_override_font_sizes/font_size = 26
+text = "Make one more deal."
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

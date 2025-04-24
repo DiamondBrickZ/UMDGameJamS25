@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cjyubt5bxipin"
+path="res://.godot/imported/devils draw shop theme.ogg-9e3d2a949424955b2ae0692ba141398b.oggvorbisstr"
+
+[deps]
+
+source_file="res://music/devils draw shop theme.ogg"
+dest_files=["res://.godot/imported/devils draw shop theme.ogg-9e3d2a949424955b2ae0692ba141398b.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

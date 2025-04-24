@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://sbmneegilonx"]
+[gd_scene load_steps=26 format=3 uid="uid://sbmneegilonx"]
 
 [ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bgsj01wpn3fgw" path="res://ui/health/player_health_bar.tscn" id="9_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://da6yfbxd5gd35" path="res://ui/devil_health/devil_health.tscn" id="10_vtaks"]
+[ext_resource type="PackedScene" uid="uid://nhhm2l2cjaue" path="res://scenes/endings/lose.tscn" id="12_dinhu"]
+[ext_resource type="PackedScene" uid="uid://8n7yo6dp7tqo" path="res://scenes/endings/won.tscn" id="13_kvuet"]
 
 [sub_resource type="Animation" id="Animation_0tnpc"]
 length = 0.001
@@ -347,47 +349,6 @@ offset_top = 166.0
 offset_right = -30.0
 offset_bottom = -209.0
 
-[node name="PanUp" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 135.0
-grow_horizontal = 2
-mouse_default_cursor_shape = 2
-
-[node name="PanRight" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_bottom = -40.0
-grow_horizontal = 0
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-
-[node name="PanDown" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -394.0
-offset_bottom = -257.0
-grow_horizontal = 2
-grow_vertical = 0
-mouse_default_cursor_shape = 2
-
-[node name="PanLeft" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 70.0
-offset_bottom = -40.0
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-
 [node name="Hand" type="Panel" parent="UI"]
 z_index = -165
 anchors_preset = 12
@@ -405,12 +366,12 @@ layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 offset_left = 258.0
-offset_top = -267.0
+offset_top = -262.0
 offset_right = -258.0
-offset_bottom = -69.0
+offset_bottom = -64.0
 grow_vertical = 0
-base_scale = 2.055
-separation = 162.585
+base_scale = 2.434
+separation = 180.0
 rotation_amount = 12.0
 
 [node name="EnergyMeter" parent="UI" instance=ExtResource("6_vtaks")]
@@ -516,6 +477,57 @@ offset_top = 9.0
 offset_right = -52.0
 offset_bottom = 9.0
 grow_horizontal = 2
+
+[node name="Lose" parent="UI" instance=ExtResource("12_dinhu")]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Won" parent="UI" instance=ExtResource("13_kvuet")]
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanUp" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 135.0
+grow_horizontal = 2
+mouse_default_cursor_shape = 2
+
+[node name="PanRight" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+
+[node name="PanDown" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -436.0
+offset_bottom = -299.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_default_cursor_shape = 2
+
+[node name="PanLeft" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 70.0
+offset_bottom = -40.0
+grow_vertical = 2
+mouse_default_cursor_shape = 2
 
 [connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
 [connection signal="gui_input" from="UI/PanRight" to="." method="_on_pan_right_gui_input"]

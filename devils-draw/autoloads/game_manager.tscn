@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://blanc8a1ss1ij"]
+[gd_scene load_steps=17 format=3 uid="uid://blanc8a1ss1ij"]
 
 [ext_resource type="Script" uid="uid://cmulyo5vwpjs8" path="res://autoloads/game_manager.gd" id="1_3ovu6"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_es8io"]
@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://d2wch2hiobxl4" path="res://icon.svg" id="5_2ygb1"]
 [ext_resource type="Resource" uid="uid://yiirr01o14tf" path="res://gameplay/status_effects/drunken_high.tres" id="6_qdk7c"]
 [ext_resource type="AudioStream" uid="uid://d536gaj1sfjp" path="res://music/devils draw boss theme main loop.ogg" id="7_hkcw4"]
-[ext_resource type="Script" uid="uid://bycuay54fvqqv" path="res://autoloads/background_music.gd" id="8_2ygb1"]
+[ext_resource type="Script" uid="uid://bycuay54fvqqv" path="res://music/background_music.gd" id="8_2ygb1"]
 [ext_resource type="AudioStream" uid="uid://d1csbtp5b3mil" path="res://music/devils draw boss theme intro.ogg" id="9_qdk7c"]
+[ext_resource type="AudioStream" uid="uid://cjyubt5bxipin" path="res://music/devils draw shop theme.ogg" id="10_vx1k0"]
 
 [sub_resource type="GDScript" id="GDScript_vx1k0"]
 script/source = "## COIN BAG CARD
@@ -109,11 +110,19 @@ offset_top = 96.0
 offset_right = 156.0
 offset_bottom = 181.0
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_hkcw4")
 autoplay = true
 bus = &"BackgroundMusic"
 parameters/looping = true
 script = ExtResource("8_2ygb1")
-main_menu_music = ExtResource("9_qdk7c")
-playing_music = ExtResource("7_hkcw4")
+
+[node name="ShopTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_vx1k0")
+autoplay = true
+script = ExtResource("8_2ygb1")
+
+[node name="MenuTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_qdk7c")
+autoplay = true
+script = ExtResource("8_2ygb1")
