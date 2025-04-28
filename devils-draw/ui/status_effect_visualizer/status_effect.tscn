@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cygj4oxwwcu71"]
+
+[ext_resource type="Texture2D" uid="uid://bs7tbi42sobws" path="res://ui/status_effect_visualizer/Tabs.png" id="1_yfhni"]
+[ext_resource type="Script" uid="uid://ee3labnqvvs3" path="res://ui/status_effect_visualizer/status_effect.gd" id="2_320u2"]
+
+[node name="StatusEffect" type="Sprite2D"]
+scale = Vector2(0.0630918, 0.0630918)
+texture = ExtResource("1_yfhni")
+hframes = 4
+vframes = 2
+frame = 6
+region_enabled = true
+region_rect = Rect2(108.588, 51.8369, 5112.91, 1584.91)
+script = ExtResource("2_320u2")
+current_effect = 5

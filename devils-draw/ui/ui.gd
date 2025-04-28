@@ -11,6 +11,9 @@ extends CanvasLayer
 @export var shop_menu : Control
 @export var effects : Control
 
+func _ready():
+	visible = false
+
 func _on_draw_cards_pressed():
 	# send a message to draw cards
 	get_tree().current_scene.draw_cards()

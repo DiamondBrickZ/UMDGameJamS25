@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://djloglnxylhnc"]
+
+[ext_resource type="Script" uid="uid://4eov88gn3bvd" path="res://ui/status_effect_visualizer/status_effect_visualizer.gd" id="1_lqqod"]
+
+[node name="StatusEffectVisualizer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 60.0
+script = ExtResource("1_lqqod")

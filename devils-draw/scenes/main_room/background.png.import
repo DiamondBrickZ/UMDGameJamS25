@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdgsyy1b3m5pl"
-path.s3tc="res://.godot/imported/shopkeeper_temp.png-8e53b93d1f075ed9accbf32d5ba7507d.s3tc.ctex"
+uid="uid://csnmndi75nc52"
+path.s3tc="res://.godot/imported/background.png-aef823cc54cb8b0ebc4c65d204659960.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/shopkeeper/shopkeeper_temp.png"
-dest_files=["res://.godot/imported/shopkeeper_temp.png-8e53b93d1f075ed9accbf32d5ba7507d.s3tc.ctex"]
+source_file="res://scenes/main_room/background.png"
+dest_files=["res://.godot/imported/background.png-aef823cc54cb8b0ebc4c65d204659960.s3tc.ctex"]
 
 [params]
 

@@ -55,7 +55,7 @@ var current_game_state := GameState.MAIN_MENU:
 var discard_pile : Array[Card] = []
 
 # DEVIL INFO
-var time_left : float = 9.0
+var time_left : float = 90.0
 var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 
 # PLAYER INFO
@@ -333,7 +333,9 @@ func player_death():
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
 	game_info[1]["hand"] = []
-	game_info[0]["status_effects"] = []
+	for effect in game_info[0]["status_effects"]:
+		game_info[0]["status_effects"].erase(effect)
+		status_effect_change.emit(0, effect, false)
 	
 	# emit signals, 
 	player_died.emit()

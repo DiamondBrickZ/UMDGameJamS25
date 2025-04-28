@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://sbmneegilonx"]
+[gd_scene load_steps=30 format=3 uid="uid://sbmneegilonx"]
 
 [ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
 [ext_resource type="Shader" uid="uid://q1hj44vs4iyd" path="res://shaders/abberation.gdshader" id="3_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bnyg1yodqens2" path="res://scenes/shopkeeper/shop/shop_menu.tscn" id="4_dinhu"]
 [ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://shaders/game_loop_3d.gdshader" id="4_gee14"]
+[ext_resource type="PackedScene" uid="uid://djloglnxylhnc" path="res://ui/status_effect_visualizer/status_effect_visualizer.tscn" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://b455tw00jtaxu" path="res://ui/hand_display/hand_display.tscn" id="5_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://cvxtskj4ktqxy" path="res://ui/energy_meter/energy_meter.tscn" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
@@ -150,6 +151,9 @@ _data = {
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_yqjtg"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trtic"]
+albedo_color = Color(0.216456, 0.0815538, 0.00644739, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gee14"]
 albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
 
@@ -249,6 +253,27 @@ _data = {
 &"player_death": SubResource("Animation_dinhu")
 }
 
+[sub_resource type="Shader" id="Shader_kvuet"]
+code = "shader_type canvas_item;
+
+uniform vec4 color: source_color;
+
+uniform float outerRadius : hint_range(0.0, 5.0) = 1.0;
+uniform float MainAlpha : hint_range(0.0, 1.0) = 1.0;
+
+void fragment() {
+	float x = abs(UV.x-.5)*2.0;
+	float y = abs(UV.y-.5)*2.0;
+	float v = (sqrt((2.0*x*x*x*x*x*x*x*x*x*x)+(2.0*y*y*y*y*y*y*y*y*y*y))/(outerRadius));
+	COLOR = vec4(color.xyz,v*MainAlpha);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trtic"]
+shader = SubResource("Shader_kvuet")
+shader_parameter/color = Color(0.128977, 0.704684, 0.942438, 1)
+shader_parameter/outerRadius = 2.981
+shader_parameter/MainAlpha = 1.0
+
 [node name="Game" type="Node3D" node_paths=PackedStringArray("ui", "cam", "casino_doors", "location_cams")]
 script = ExtResource("1_uwrxv")
 ui = NodePath("UI")
@@ -287,25 +312,27 @@ transform = Transform3D(0.869495, -0.0559158, -0.490767, 0, 0.993572, -0.113203,
 fov = 45.5
 
 [node name="CasinoDoors" type="Node3D" parent="." node_paths=PackedStringArray("left_door_marker", "right_door_marker")]
-transform = Transform3D(2.98935, 0, 0, 0, 2.98935, 0, 0, 0, 2.98935, 0, 0, 3.41932)
+transform = Transform3D(2.98935, 0, 0, 0, 3.63111, 0, 0, 0, 2.98935, -0.376272, 0, 3.41932)
 script = ExtResource("7_u5sy4")
 is_open = true
 left_door_marker = NodePath("Marker3D")
 right_door_marker = NodePath("Marker3D2")
 
 [node name="Marker3D" type="Marker3D" parent="CasinoDoors"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.508278, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -0.87242, 0, 1, 0, 1, 0, -3.81347e-08, -0.443159, 0, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CasinoDoors/Marker3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260028, 0.489383, 0)
 size = Vector3(0.491699, 1, 0.0686035)
+material = SubResource("StandardMaterial3D_trtic")
 
 [node name="Marker3D2" type="Marker3D" parent="CasinoDoors"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.51256, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 0.87242, 0, 1, 0, -1, 0, -3.81347e-08, 0.447441, 0, 0)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CasinoDoors/Marker3D2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248575, 0.489383, 0)
 size = Vector3(0.491699, 1, 0.0686035)
+material = SubResource("StandardMaterial3D_trtic")
 
 [node name="Room" type="CSGCombiner3D" parent="."]
 
@@ -325,9 +352,9 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_gee14")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Room/CSGBox3D4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35984, 7.15256e-07, -0.652039)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.05571, 7.15256e-07, -0.36084)
 operation = 2
-size = Vector3(2.99878, 1, 2.96838)
+size = Vector3(3.60704, 1, 2.55945)
 
 [node name="CSGBox3D5" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, -0.64672, 5.83701, 13.4775)
@@ -335,7 +362,6 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_gee14")
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu", "effects")]
-visible = false
 script = ExtResource("2_p57ef")
 hand_display = NodePath("Hand/HandDisplay")
 gold_label = NodePath("Stats/VBoxContainer/GoldLabel")
@@ -343,6 +369,12 @@ time_left = NodePath("Stats/VBoxContainer/TimeLeft")
 ui_animations = NodePath("Effects/EffectsAnimations")
 shop_menu = NodePath("ShopMenu")
 effects = NodePath("Effects")
+
+[node name="StatusEffectVisualizer" parent="UI" instance=ExtResource("4_trtic")]
+offset_left = 1380.0
+offset_top = 31.0
+offset_right = 1580.0
+offset_bottom = 91.0
 
 [node name="ShopMenu" parent="UI" instance=ExtResource("4_dinhu")]
 offset_top = 166.0
@@ -467,6 +499,16 @@ metadata/_edit_lock_ = true
 libraries = {
 &"": SubResource("AnimationLibrary_dinhu")
 }
+
+[node name="ColoredBorder" type="ColorRect" parent="UI/Effects"]
+visible = false
+material = SubResource("ShaderMaterial_trtic")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="DevilHealth" parent="UI" instance=ExtResource("10_vtaks")]
 anchors_preset = 5

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://brd684e10dcpd" path="res://scenes/shopkeeper/shopkeeper_bar.gd" id="1_f720x"]
 [ext_resource type="PackedScene" uid="uid://cf2xn4sjjsf3c" path="res://scenes/shopkeeper/shopkeeper/shopkeeper.tscn" id="2_bt1el"]
-[ext_resource type="Texture2D" uid="uid://bwuvxjqy1a1mf" path="res://scenes/shopkeeper/background/Door wall .png" id="3_t6w6l"]
 [ext_resource type="Texture2D" uid="uid://vojjk26ytefm" path="res://scenes/shopkeeper/background/Main wall.png" id="4_eu8u6"]
+[ext_resource type="Texture2D" uid="uid://bp4l6o0pjg8tx" path="res://scenes/shopkeeper/background/Door wall.png" id="4_sql68"]
 [ext_resource type="Texture2D" uid="uid://dqnq435q07sjo" path="res://scenes/shopkeeper/background/Ceiling .png" id="5_bt1el"]
 [ext_resource type="Texture2D" uid="uid://68r14qdbfob" path="res://scenes/shopkeeper/background/Floor.png" id="6_eu8u6"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="7_bt1el"]
@@ -80,25 +80,25 @@ shadow_enabled = true
 
 [node name="Background" type="Node3D" parent="."]
 
-[node name="Sprite3D2" type="Sprite3D" parent="Background"]
+[node name="DoorWall" type="Sprite3D" parent="Background"]
 transform = Transform3D(0.401795, 0, 0, 0, 0.305228, 0, 0, 0, 0.369864, 1.89899, 3.45006, 3.84292)
 shaded = true
-texture = ExtResource("3_t6w6l")
+texture = ExtResource("4_sql68")
 
-[node name="Sprite3D3" type="Sprite3D" parent="Background"]
+[node name="ScreenWall" type="Sprite3D" parent="Background"]
 transform = Transform3D(-1.44905e-08, 0, -0.31538, 0, 0.31538, 0, 0.331505, 0, -1.37857e-08, 6.94842, 3.50765, 10.0875)
 shaded = true
 alpha_cut = 1
 texture = ExtResource("4_eu8u6")
 
-[node name="Sprite3D4" type="Sprite3D" parent="Background"]
+[node name="Ceiling2" type="Sprite3D" parent="Background"]
 transform = Transform3D(-1.38603e-08, -0.596153, 3.2088e-08, 0, -2.60587e-08, -0.734087, 0.317088, -2.60587e-08, 1.40261e-15, -0.198781, 4.45833, 10.0824)
 shaded = true
 alpha_cut = 1
 texture = ExtResource("5_bt1el")
 
-[node name="Sprite3D5" type="Sprite3D" parent="Background"]
-transform = Transform3D(1.38603e-08, 0.596153, 3.2088e-08, -1.21171e-15, -2.60587e-08, 0.734087, 0.317088, -2.60587e-08, 1.40261e-15, 4.8241, 0.0597284, 9.85429)
+[node name="Floor" type="Sprite3D" parent="Background"]
+transform = Transform3D(1.38603e-08, 0.596153, 3.2088e-08, -1.21171e-15, -2.60587e-08, 0.734087, 0.317088, -2.60587e-08, 1.40261e-15, 4.8241, -0.0993104, 9.85429)
 shaded = true
 alpha_cut = 1
 texture = ExtResource("6_eu8u6")
