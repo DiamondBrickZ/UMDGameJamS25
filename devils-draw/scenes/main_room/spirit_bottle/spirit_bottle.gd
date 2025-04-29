@@ -4,17 +4,18 @@
 
 extends Area3D
 
-@export var label : Label3D
+@onready var menu_options = $SpiritsMenu
 
 func _ready():
-	get_tree().current_scene.location_changed.connect(_on_location_changed)
+	GameManager.location_changed.connect(_on_location_changed)
 	GameManager.soul_gained.connect(_on_soul_gained)
+	menu_options.hide()
 
 func _on_location_changed(new_location):
 	if new_location == get_tree().current_scene.Locations.SPIRITS:
-		label.visible = true
+		menu_options.visible = true
 	else:
-		label.visible = false
+		menu_options.visible = false
 
 func _on_soul_gained():
 	var tween = get_tree().create_tween()

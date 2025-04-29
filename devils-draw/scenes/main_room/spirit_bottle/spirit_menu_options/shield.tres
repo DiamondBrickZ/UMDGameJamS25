@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpiritOption" load_steps=2 format=3 uid="uid://bm2txfdxc121o"]
+
+[ext_resource type="Script" uid="uid://crdbbx8q0oe5k" path="res://scenes/main_room/spirit_bottle/spirit_menu_options/spirit_option.gd" id="1_y317i"]
+
+[resource]
+script = ExtResource("1_y317i")
+type = 3
+display = "Thick Skin"
+description = "Halves all damage taken."
+soul_cost = 5
+metadata/_custom_type_script = "uid://crdbbx8q0oe5k"

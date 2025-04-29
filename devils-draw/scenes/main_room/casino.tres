@@ -4,12 +4,13 @@
 background_mode = 1
 background_color = Color(0.38666, 0.21366, 0.217973, 1)
 tonemap_mode = 3
+tonemap_exposure = 1.55
+tonemap_white = 3.0
 glow_enabled = true
 glow_intensity = 1.1
 glow_bloom = 0.5
 glow_hdr_scale = 1.83
 fog_enabled = true
-fog_light_color = Color(0.515341, 0.237619, 0.260817, 1)
-fog_light_energy = 3.24
-fog_sun_scatter = 0.21
-fog_density = 0.0014
+fog_light_color = Color(0.0476384, 0.00192658, 0.010811, 1)
+fog_light_energy = 0.0
+fog_density = 0.0854

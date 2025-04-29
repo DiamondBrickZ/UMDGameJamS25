@@ -157,9 +157,6 @@ albedo_color = Color(0.216456, 0.0815538, 0.00644739, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gee14"]
 albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
-bg_color = Color(0.16, 0.16, 0.16, 0.239216)
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvpfn"]
 shader = ExtResource("3_u5sy4")
 shader_parameter/r_displacement = Vector2(3, 0)
@@ -274,9 +271,13 @@ shader_parameter/color = Color(0.128977, 0.704684, 0.942438, 1)
 shader_parameter/outerRadius = 2.981
 shader_parameter/MainAlpha = 1.0
 
-[node name="Game" type="Node3D" node_paths=PackedStringArray("ui", "cam", "casino_doors", "location_cams")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
+bg_color = Color(0.16, 0.16, 0.16, 0.239216)
+
+[node name="Game" type="Node3D" node_paths=PackedStringArray("ui", "effects", "cam", "casino_doors", "location_cams")]
 script = ExtResource("1_uwrxv")
 ui = NodePath("UI")
+effects = NodePath("Effects")
 cam = NodePath("Camera")
 casino_doors = NodePath("CasinoDoors")
 location_cams = [NodePath("LocationCameras/TableCam"), NodePath("LocationCameras/ShopCam"), NodePath("LocationCameras/DevilCam"), NodePath("LocationCameras/SpiritCam"), NodePath("LocationCameras/MainMenuCam")]
@@ -361,20 +362,91 @@ transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.3
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_gee14")
 
+[node name="Effects" type="CanvasLayer" parent="."]
+
+[node name="Effects" type="Control" parent="Effects" node_paths=PackedStringArray("dark_noise", "damage_effects", "anim_player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("8_dinhu")
+dark_noise = NodePath("DarkNoise")
+damage_effects = NodePath("DamageEffects")
+anim_player = NodePath("EffectsAnimations")
+metadata/_edit_lock_ = true
+
+[node name="ChromaticAbberation" type="ColorRect" parent="Effects/Effects"]
+z_index = -805
+material = SubResource("ShaderMaterial_kvpfn")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DarkNoise" type="ColorRect" parent="Effects/Effects"]
+z_index = -805
+material = SubResource("ShaderMaterial_dinhu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DamageEffects" type="ColorRect" parent="Effects/Effects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0.08, 0.08, 0)
+metadata/_edit_lock_ = true
+
+[node name="EffectsAnimations" type="AnimationPlayer" parent="Effects/Effects"]
+libraries = {
+&"": SubResource("AnimationLibrary_dinhu")
+}
+
+[node name="ColoredBorder" type="ColorRect" parent="Effects/Effects"]
+visible = false
+material = SubResource("ShaderMaterial_trtic")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu", "effects")]
 script = ExtResource("2_p57ef")
 hand_display = NodePath("Hand/HandDisplay")
 gold_label = NodePath("Stats/VBoxContainer/GoldLabel")
 time_left = NodePath("Stats/VBoxContainer/TimeLeft")
-ui_animations = NodePath("Effects/EffectsAnimations")
+ui_animations = NodePath("../Effects/Effects/EffectsAnimations")
 shop_menu = NodePath("ShopMenu")
-effects = NodePath("Effects")
+effects = NodePath("../Effects/Effects")
 
 [node name="StatusEffectVisualizer" parent="UI" instance=ExtResource("4_trtic")]
-offset_left = 1380.0
-offset_top = 31.0
-offset_right = 1580.0
-offset_bottom = 91.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -500.0
+offset_top = 30.0
+offset_right = -380.0
+offset_bottom = 116.0
+grow_horizontal = 0
+separation = 100.0
 
 [node name="ShopMenu" parent="UI" instance=ExtResource("4_dinhu")]
 offset_top = 166.0
@@ -445,70 +517,6 @@ grow_vertical = 1
 mouse_filter = 2
 separation = 80.0
 heart_size = 0.4
-
-[node name="Effects" type="Control" parent="UI" node_paths=PackedStringArray("dark_noise", "damage_effects", "anim_player")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("8_dinhu")
-dark_noise = NodePath("DarkNoise")
-damage_effects = NodePath("DamageEffects")
-anim_player = NodePath("EffectsAnimations")
-metadata/_edit_lock_ = true
-
-[node name="ChromaticAbberation" type="ColorRect" parent="UI/Effects"]
-z_index = -805
-material = SubResource("ShaderMaterial_kvpfn")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="DarkNoise" type="ColorRect" parent="UI/Effects"]
-z_index = -805
-material = SubResource("ShaderMaterial_dinhu")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="DamageEffects" type="ColorRect" parent="UI/Effects"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 0.08, 0.08, 0)
-metadata/_edit_lock_ = true
-
-[node name="EffectsAnimations" type="AnimationPlayer" parent="UI/Effects"]
-libraries = {
-&"": SubResource("AnimationLibrary_dinhu")
-}
-
-[node name="ColoredBorder" type="ColorRect" parent="UI/Effects"]
-visible = false
-material = SubResource("ShaderMaterial_trtic")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="DevilHealth" parent="UI" instance=ExtResource("10_vtaks")]
 anchors_preset = 5

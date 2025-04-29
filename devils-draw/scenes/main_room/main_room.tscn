@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://r0an8h2qp351"]
+[gd_scene load_steps=16 format=3 uid="uid://r0an8h2qp351"]
 
 [ext_resource type="Script" uid="uid://dn06ptxs4svk5" path="res://scenes/main_room/game_loop.gd" id="1_34y7g"]
 [ext_resource type="PackedScene" uid="uid://dny8yaysxtwma" path="res://scenes/main_room/devil/devil.tscn" id="2_ip11t"]
 [ext_resource type="Texture2D" uid="uid://csnmndi75nc52" path="res://scenes/main_room/background.png" id="3_mdlm6"]
+[ext_resource type="Script" uid="uid://dkm2n2fonwdyv" path="res://scenes/main_room/main_room_light.gd" id="3_sphia"]
 [ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://scenes/main_room/draw_pile/draw_pile.tscn" id="4_nfu6u"]
 [ext_resource type="Texture2D" uid="uid://do42py3mhbgxk" path="res://scenes/main_room/table.png" id="4_nsnb2"]
 [ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://scenes/main_room/spirit_bottle/spirit_bottle.tscn" id="5_qcty8"]
@@ -67,7 +68,7 @@ material = SubResource("StandardMaterial3D_a6g0p")
 [node name="Room" type="CSGCombiner3D" parent="Scene"]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Scene/Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.64633, -0.962047)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.80859, -0.962047)
 size = Vector3(58.9255, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
@@ -91,14 +92,15 @@ transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.3
 size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.88414, 0)
-light_color = Color(0.838479, 0.753008, 0.579599, 1)
+[node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
+transform = Transform3D(-0.999985, -8.74221e-08, 0.00553002, 0.00553002, 2.41725e-10, 0.999985, -8.74221e-08, 1, 2.41725e-10, 0, 1.88414, 0)
+light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 10.0
 shadow_enabled = true
-spot_range = 2.18
+spot_range = 2.48441
 spot_attenuation = 0.82
-spot_angle = 39.2956
+spot_angle = 26.6384
+script = ExtResource("3_sphia")
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.06083, 1.77155, 1.52783)
@@ -112,7 +114,6 @@ spot_angle = 39.2956
 transform = Transform3D(0.158706, -1.36378e-05, 2.26491e-06, 1.36378e-05, 0.158706, 8.33085e-07, -2.26491e-06, -8.33085e-07, 0.158706, 0, 0.134886, -3.38958)
 material_overlay = SubResource("ShaderMaterial_mdlm6")
 cast_shadow = 0
-shaded = true
 render_priority = -2
 texture = ExtResource("3_mdlm6")
 

@@ -61,6 +61,11 @@ var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 # PLAYER INFO
 var next_hand : Array[Card] = []
 var fake_membership : bool = false
+var passives = {
+	"damage_multiplier": 1.0,
+	"gold_multiplier": 1.0,
+	"shield_multiplier": 1.0
+}
 
 # CARDS
 @export var available_cards : Array[Card] = []
@@ -83,12 +88,12 @@ signal game_start()
 signal game_state_change(game_state: GameState)
 signal card_played(card: Card, character: int)
 signal shop_dialogue(text: String)
+signal location_changed(new_location)
 
 func _ready():
 	# get game loop node from scene to enact actions.
 	game = get_tree().current_scene
 	
-	dealt_damage.connect(_on_dealt_damage)
 	current_game_state = GameState.MAIN_MENU
 	main_theme.volume_db = -80.0
 	shop_theme.volume_db = -80.0
@@ -97,8 +102,10 @@ func _process(delta):
 	
 	# Debugging
 	$Debug.text = ""
-	for card in game_info[1]["hand"]:
-		$Debug.text += card.title + "\n"
+	#for card in game_info[1]["hand"]:
+		#$Debug.text += card.title + "\n"
+	for effect in game_info[0]["status_effects"]:
+		$Debug.text += effect.status_name + "\n"
 	
 	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.PAUSED: return
 	
@@ -148,15 +155,6 @@ func _process(delta):
 		current_game_state = GameState.PAUSED
 		game_end.emit(false)
 
-func _on_dealt_damage(character: int, _amount: float):
-	if game_info[character]["health"] <= 0:
-		if character == 0:
-			# player dies
-			player_death()
-		else:
-			# win game
-			pass
-
 func apply_status_effect(character: int, effect: StatusEffect):
 	
 	# if no stacking, then remove existing effects of same type
@@ -168,10 +166,6 @@ func apply_status_effect(character: int, effect: StatusEffect):
 	# otherwise, add the effect even if it already exists.
 	game_info[character]["status_effects"].append(effect)
 	status_effect_change.emit(character, effect, true)
-
-#func do_status_effect(character: int, effect: StatusEffect, delta):
-	#if effect.effect_type == StatusEffect.Effects.PARALYZED:
-	#
 
 func has_effect(character: int, effect_type: StatusEffect.Effects) -> bool:
 	for e : StatusEffect in game_info[character]["status_effects"]:
@@ -402,3 +396,23 @@ func change_game_state(new_state: GameState):
 			tween.tween_property(main_theme, "volume_db", 0.0, 1.0)
 	
 	game_state_change.emit(current_game_state)
+
+func sell_soul(spirit_option : SpiritOption):
+	var cost = spirit_option.soul_cost
+	
+	if game_info[0]["souls"] < cost:
+		print('cannot buy, not enough souls')
+		return false
+	
+	print('sold souls!')
+	game_info[0]["souls"] -= cost
+	soul_gained.emit()
+	
+	if spirit_option.type == SpiritOption.Type.HEALTH:
+		game_info[0]["max_health"] = 7.0
+	elif spirit_option.type == SpiritOption.Type.GOLD:
+		passives["gold_multiplier"] = 1.5
+	elif spirit_option.type == SpiritOption.Type.DAMAGE:
+		passives["damage_multiplier"] = 1.5
+	elif spirit_option.type == SpiritOption.Type.SHIELD:
+		passives["shield_multiplier"] = 0.5

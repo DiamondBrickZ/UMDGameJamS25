@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh8ve8ykble4k"]
+[gd_scene load_steps=8 format=3 uid="uid://bh8ve8ykble4k"]
 
 [ext_resource type="Script" uid="uid://dvr078mrn3lwk" path="res://scenes/main_room/spirit_bottle/spirit_bottle.gd" id="1_grd5d"]
 [ext_resource type="Shader" uid="uid://c82jgd0ubr5e6" path="res://scenes/main_room/spirit_bottle/spirit_bottle.gdshader" id="1_ivkwd"]
+[ext_resource type="PackedScene" uid="uid://bmfesj0dlprn2" path="res://scenes/main_room/spirit_bottle/spirits_menu/spirits_menu.tscn" id="3_ryfsv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bpcig"]
 transparency = 1
@@ -25,9 +26,8 @@ shader_parameter/base_color = Color(0.0812736, 0.48819, 0.523919, 1)
 height = 0.975586
 radius = 0.28125
 
-[node name="SpiritBottle" type="Area3D" node_paths=PackedStringArray("label")]
+[node name="SpiritBottle" type="Area3D"]
 script = ExtResource("1_grd5d")
-label = NodePath("Label3D")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 
@@ -62,8 +62,21 @@ light_energy = 2.778
 shadow_enabled = true
 omni_range = 2.64393
 
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26901, 0.761291, 0.014934)
-visible = false
-billboard = 2
-text = "Spirits"
+[node name="SpiritsMenu" parent="." instance=ExtResource("3_ryfsv")]
+transform = Transform3D(0.716608, 0, 0, 0, 0.716608, 0, 0, 0, 0.716608, 1.16811, 1.02006, 0.299621)
+
+[connection signal="input_event" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@87322" to="SpiritsMenu/@Area3D@87322" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@87322" to="SpiritsMenu/@Area3D@87322" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@87322" to="SpiritsMenu/@Area3D@87322" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@87323" to="SpiritsMenu/@Area3D@87323" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@87323" to="SpiritsMenu/@Area3D@87323" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@87323" to="SpiritsMenu/@Area3D@87323" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@87324" to="SpiritsMenu/@Area3D@87324" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@87324" to="SpiritsMenu/@Area3D@87324" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@87324" to="SpiritsMenu/@Area3D@87324" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@87325" to="SpiritsMenu/@Area3D@87325" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@87325" to="SpiritsMenu/@Area3D@87325" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@87325" to="SpiritsMenu/@Area3D@87325" method="_on_mouse_exited"]

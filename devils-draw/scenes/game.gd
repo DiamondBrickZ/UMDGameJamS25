@@ -17,6 +17,7 @@ var can_navigate : bool = true
 
 # REFERENCES
 @export var ui: CanvasLayer
+@export var effects: CanvasLayer
 @export var cam: Camera3D
 @export var casino_doors : Node3D
 
@@ -34,7 +35,6 @@ enum Locations {
 @export var current_location := Locations.MAIN_MENU
 
 # SIGNALS
-signal location_changed(new_location)
 signal new_instancing(new_location: Locations)
 
 func _ready():
@@ -100,9 +100,10 @@ func change_location(new_location: Locations):
 			tween.tween_property(effect, "cutoff_hz", 16000.0, 1.0)
 		
 		if current_location == Locations.MAIN_MENU:
-			ui.show()
+			effects.show()
 			ui.effects.anim_player.play("player_death")
 			await get_tree().create_timer(2).timeout
+			ui.show()
 
 		if new_location == Locations.SHOP:
 			instance_scene(Locations.SHOP)
@@ -116,7 +117,7 @@ func change_location(new_location: Locations):
 			tween.tween_property(effect, "cutoff_hz", 16000.0, 1.0)
 		
 		current_location = new_location
-		location_changed.emit(new_location)
+		GameManager.location_changed.emit(new_location)
 
 func _on_player_died():
 	can_navigate = false

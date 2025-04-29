@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SpiritOption" load_steps=2 format=3 uid="uid://dl45gpx1bly1d"]
+
+[ext_resource type="Script" uid="uid://crdbbx8q0oe5k" path="res://scenes/main_room/spirit_bottle/spirit_menu_options/spirit_option.gd" id="1_wi768"]
+
+[resource]
+script = ExtResource("1_wi768")
+type = 4
+display = "Ascension"
+description = "Gain a permanent soul heart."
+soul_cost = 5
+metadata/_custom_type_script = "uid://crdbbx8q0oe5k"
