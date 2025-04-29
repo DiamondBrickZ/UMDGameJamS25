@@ -5,13 +5,14 @@
 [ext_resource type="Script" uid="uid://dwatnhpbjdj78" path="res://ui/health/heart.gd" id="2_uv07p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qv32h"]
+resource_local_to_scene = true
 shader = ExtResource("1_uv07p")
-shader_parameter/height = 0.1
+shader_parameter/height = -0.1
 
 [node name="Heart" type="Sprite2D"]
 material = SubResource("ShaderMaterial_qv32h")
-use_parent_material = true
 texture = ExtResource("1_2vei8")
 region_enabled = true
 region_rect = Rect2(0, 0, 168, 147)
 script = ExtResource("2_uv07p")
+amount = 0.455

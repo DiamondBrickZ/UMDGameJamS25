@@ -7,10 +7,10 @@
 [ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://shaders/game_loop_3d.gdshader" id="4_gee14"]
 [ext_resource type="PackedScene" uid="uid://djloglnxylhnc" path="res://ui/status_effect_visualizer/status_effect_visualizer.tscn" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://b455tw00jtaxu" path="res://ui/hand_display/hand_display.tscn" id="5_0tnpc"]
-[ext_resource type="PackedScene" uid="uid://cvxtskj4ktqxy" path="res://ui/energy_meter/energy_meter.tscn" id="6_vtaks"]
 [ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bgsj01wpn3fgw" path="res://ui/health/player_health_bar.tscn" id="9_0tnpc"]
+[ext_resource type="Shader" uid="uid://bijuo0fvr68em" path="res://ui/gradient_up_down.gdshader" id="9_trtic"]
 [ext_resource type="PackedScene" uid="uid://da6yfbxd5gd35" path="res://ui/devil_health/devil_health.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://nhhm2l2cjaue" path="res://scenes/endings/lose.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://8n7yo6dp7tqo" path="res://scenes/endings/won.tscn" id="13_kvuet"]
@@ -267,12 +267,14 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trtic"]
 shader = SubResource("Shader_kvuet")
-shader_parameter/color = Color(0.128977, 0.704684, 0.942438, 1)
+shader_parameter/color = Color(0.137599, 0.0920965, 0.0708134, 1)
 shader_parameter/outerRadius = 2.981
 shader_parameter/MainAlpha = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kvuet"]
-bg_color = Color(0.16, 0.16, 0.16, 0.239216)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ir15t"]
+shader = ExtResource("9_trtic")
+shader_parameter/color1 = Color(0.400096, 0.187134, 0.081105, 0.894118)
+shader_parameter/color2 = Color(0.0881667, 0.00996591, 0.0067187, 1)
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("ui", "effects", "cam", "casino_doors", "location_cams")]
 script = ExtResource("1_uwrxv")
@@ -419,7 +421,6 @@ libraries = {
 }
 
 [node name="ColoredBorder" type="ColorRect" parent="Effects/Effects"]
-visible = false
 material = SubResource("ShaderMaterial_trtic")
 layout_mode = 1
 anchors_preset = 15
@@ -427,6 +428,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu", "effects")]
 script = ExtResource("2_p57ef")
@@ -441,20 +443,21 @@ effects = NodePath("../Effects/Effects")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -500.0
-offset_top = 30.0
-offset_right = -380.0
-offset_bottom = 116.0
+offset_left = -622.0
+offset_top = 112.0
+offset_right = -461.0
+offset_bottom = 170.0
 grow_horizontal = 0
 separation = 100.0
 
 [node name="ShopMenu" parent="UI" instance=ExtResource("4_dinhu")]
-offset_top = 166.0
+offset_top = 232.0
 offset_right = -30.0
-offset_bottom = -209.0
+offset_bottom = -340.0
 
 [node name="Hand" type="Panel" parent="UI"]
 z_index = -165
+material = SubResource("ShaderMaterial_ir15t")
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -463,7 +466,6 @@ offset_top = -299.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_kvuet")
 
 [node name="HandDisplay" parent="UI/Hand" instance=ExtResource("5_0tnpc")]
 layout_mode = 1
@@ -477,9 +479,6 @@ grow_vertical = 0
 base_scale = 2.434
 separation = 180.0
 rotation_amount = 12.0
-
-[node name="EnergyMeter" parent="UI" instance=ExtResource("6_vtaks")]
-mouse_filter = 2
 
 [node name="Stats" type="Panel" parent="UI"]
 offset_left = 13.0
@@ -505,38 +504,25 @@ layout_mode = 2
 text = "Gold:"
 
 [node name="HealthBar" parent="UI" instance=ExtResource("9_0tnpc")]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_bottom = 0.0
-offset_left = -400.0
-offset_top = 108.0
-offset_right = -66.0
-offset_bottom = 158.0
-grow_horizontal = 0
-grow_vertical = 1
-mouse_filter = 2
+position = Vector2(1531, 94)
 separation = 80.0
 heart_size = 0.4
 
 [node name="DevilHealth" parent="UI" instance=ExtResource("10_vtaks")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -52.0
-offset_top = 9.0
-offset_right = -52.0
-offset_bottom = 9.0
-grow_horizontal = 2
+position = Vector2(283, 119)
+scale = Vector2(-1.67, 1.67)
 
 [node name="Lose" parent="UI" instance=ExtResource("12_dinhu")]
 modulate = Color(1, 1, 1, 0)
 z_index = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="Won" parent="UI" instance=ExtResource("13_kvuet")]
 modulate = Color(1, 1, 1, 0)
 z_index = 2
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [node name="PanUp" type="Control" parent="UI"]
 layout_mode = 3
@@ -545,6 +531,7 @@ anchor_right = 1.0
 offset_bottom = 135.0
 grow_horizontal = 2
 mouse_default_cursor_shape = 2
+metadata/_edit_lock_ = true
 
 [node name="PanRight" type="Control" parent="UI"]
 layout_mode = 3
@@ -557,6 +544,7 @@ offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 2
 mouse_default_cursor_shape = 2
+metadata/_edit_lock_ = true
 
 [node name="PanDown" type="Control" parent="UI"]
 layout_mode = 3
@@ -569,6 +557,7 @@ offset_bottom = -299.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
+metadata/_edit_lock_ = true
 
 [node name="PanLeft" type="Control" parent="UI"]
 layout_mode = 3
@@ -578,6 +567,7 @@ offset_right = 70.0
 offset_bottom = -40.0
 grow_vertical = 2
 mouse_default_cursor_shape = 2
+metadata/_edit_lock_ = true
 
 [connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
 [connection signal="gui_input" from="UI/PanRight" to="." method="_on_pan_right_gui_input"]

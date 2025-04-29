@@ -15,7 +15,7 @@ enum State {
 		heart_state = new_state
 		refresh()
 
-var amount : float = 1.0
+@export_range(0.0, 1.0) var amount : float = 1.0
 
 func refresh():
 	if heart_state == State.FULL:
@@ -32,10 +32,6 @@ func refresh():
 		region_rect = Rect2(0, 0, 168, 147)
 
 func _process(delta):
-	if amount <= 0:
-		heart_state = State.EMPTY
-		refresh()
-	else:
-		heart_state = State.FULL
-		refresh()
-		material.set("shader_parameter/height", 0.1) #remap(amount, 0.0, 1.0, 0.2, -0.1)
+	heart_state = State.FULL
+	refresh()
+	material.set("shader_parameter/height", remap(amount, 0.0, 1.0, 0.2, -0.1))

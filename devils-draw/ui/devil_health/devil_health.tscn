@@ -1,29 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://da6yfbxd5gd35"]
+[gd_scene load_steps=12 format=3 uid="uid://da6yfbxd5gd35"]
 
 [ext_resource type="Script" uid="uid://wqksl627xg48" path="res://ui/devil_health/devil_health.gd" id="1_f4swd"]
+[ext_resource type="Texture2D" uid="uid://c12n1wvgm4i55" path="res://ui/devil_health/Player_Energy_Bar_and_Devil_Health_Bar.png" id="2_mn7xp"]
+[ext_resource type="Shader" uid="uid://d2lhmwrcd0a75" path="res://ui/devil_health/devil_health.gdshader" id="3_3nqmj"]
+[ext_resource type="PackedScene" uid="uid://cvxtskj4ktqxy" path="res://ui/energy_meter/energy_bar.tscn" id="4_go6fk"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4swd"]
-bg_color = Color(0.749083, 0.0981218, 0.330908, 1)
+[sub_resource type="Gradient" id="Gradient_3nqmj"]
+offsets = PackedFloat32Array(0.47619, 0.680272)
 
-[node name="DevilHealth" type="Control" node_paths=PackedStringArray("progress_bar")]
-layout_mode = 3
-anchors_preset = 0
-mouse_filter = 2
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_go6fk"]
+frequency = 0.0122
+fractal_gain = 0.59
+domain_warp_enabled = true
+domain_warp_amplitude = 27.725
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3nqmj"]
+seamless = true
+color_ramp = SubResource("Gradient_3nqmj")
+noise = SubResource("FastNoiseLite_go6fk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_go6fk"]
+shader = ExtResource("3_3nqmj")
+shader_parameter/ColorParameter = Color(0.989333, 0.139317, 0.0756184, 1)
+shader_parameter/ColorParameter2 = Color(0.74469, 0.117353, 0.262688, 1)
+shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_3nqmj")
+shader_parameter/scroll_speed = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nqmj"]
+bg_color = Color(0.551761, 0.105264, 0.148663, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go6fk"]
+albedo_color = Color(0.509921, 0.15366, 0.0477969, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gi83e"]
+material = SubResource("StandardMaterial3D_go6fk")
+
+[node name="DevilHealthBar" type="Node2D"]
 script = ExtResource("1_f4swd")
-progress_bar = NodePath("ProgressBar")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-layout_mode = 0
-offset_left = -100.0
-offset_top = 3.0
-offset_right = 236.0
-offset_bottom = 30.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_f4swd")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.151059, 0.151059)
+texture = ExtResource("2_mn7xp")
+region_enabled = true
+region_rect = Rect2(742.699, 45.4829, 1998.07, 703.024)
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = -205.0
-offset_top = 3.0
-offset_right = -110.0
-offset_bottom = 26.0
-text = "Devil Health"
+[node name="DevilHealth" type="ProgressBar" parent="Sprite2D"]
+z_index = -1
+material = SubResource("ShaderMaterial_go6fk")
+offset_left = -827.0
+offset_top = 73.0
+offset_right = 854.0
+offset_bottom = 165.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_3nqmj")
+max_value = 30.0
+value = 30.0
+fill_mode = 1
+show_percentage = false
+
+[node name="Polygon2D" type="MeshInstance2D" parent="Sprite2D"]
+modulate = Color(0.383217, 0.0713102, 0.0646738, 1)
+z_index = -1
+position = Vector2(734.812, 139.018)
+scale = Vector2(283.405, 283.405)
+mesh = SubResource("SphereMesh_gi83e")
+
+[node name="EnergyBar" parent="Sprite2D" instance=ExtResource("4_go6fk")]
+z_index = -1
+offset_left = -894.0
+offset_top = -66.0
+offset_right = 834.0
+offset_bottom = -7.0

@@ -100,9 +100,9 @@ theme_override_constants/separation = 20
 [node name="Label" type="RichTextLabel" parent="Control"]
 layout_mode = 2
 offset_left = 25.0
-offset_top = 609.0
+offset_top = 386.0
 offset_right = 299.0
-offset_bottom = 688.0
+offset_bottom = 465.0
 bbcode_enabled = true
 text = "[b]The Shop[/b]: Items bought at the shop will be your next life's starting hand"
 autowrap_mode = 2

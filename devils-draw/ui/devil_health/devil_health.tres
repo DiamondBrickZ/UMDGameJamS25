@@ -1,0 +1,111 @@
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://ckmuiteabx8jk"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_sce3p"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_wes5r"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_gtahx"]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_gtahx"]
+parameter_name = "Texture2DParameter"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sce3p"]
+source = 5
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_wes5r"]
+parameter_name = "ColorParameter"
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_6d1th"]
+parameter_name = "ColorParameter2"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_le7rm"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_gtahx"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_gtahx"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(1, 0.1)]
+op_type = 0
+operator = 2
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform vec4 ColorParameter : source_color;
+uniform vec4 ColorParameter2 : source_color;
+uniform sampler2D Texture2DParameter;
+
+
+
+void fragment() {
+// ColorParameter:4
+	vec4 n_out4p0 = ColorParameter;
+
+
+// ColorParameter:5
+	vec4 n_out5p0 = ColorParameter2;
+
+
+// Input:7
+	vec2 n_out7p0 = UV;
+
+
+// Input:11
+	float n_out11p0 = TIME;
+
+
+// VectorCompose:13
+	float n_in13p1 = 0.00000;
+	vec2 n_out13p0 = vec2(n_out11p0, n_in13p1);
+
+
+// VectorOp:12
+	vec2 n_out12p0 = n_out7p0 + n_out13p0;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture2DParameter, n_out12p0);
+
+
+// Mix:6
+	vec4 n_out6p0 = mix(n_out4p0, n_out5p0, n_out3p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out6p0.xyz);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(760, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_gtahx")
+nodes/fragment/2/position = Vector2(-1020, 280)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_sce3p")
+nodes/fragment/3/position = Vector2(-280, 200)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorParameter_wes5r")
+nodes/fragment/4/position = Vector2(80, -160)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorParameter_6d1th")
+nodes/fragment/5/position = Vector2(80, 40)
+nodes/fragment/6/node = SubResource("VisualShaderNodeMix_le7rm")
+nodes/fragment/6/position = Vector2(439.331, -50.6768)
+nodes/fragment/7/node = SubResource("VisualShaderNodeInput_gtahx")
+nodes/fragment/7/position = Vector2(-1160, -180)
+nodes/fragment/8/node = SubResource("VisualShaderNodeVectorOp_gtahx")
+nodes/fragment/8/position = Vector2(-560, -260)
+nodes/fragment/11/node = SubResource("VisualShaderNodeInput_sce3p")
+nodes/fragment/11/position = Vector2(-1720, 40)
+nodes/fragment/12/node = SubResource("VisualShaderNodeVectorOp_wes5r")
+nodes/fragment/12/position = Vector2(-660, -40)
+nodes/fragment/13/node = SubResource("VisualShaderNodeVectorCompose_gtahx")
+nodes/fragment/13/position = Vector2(-1068.93, 43.0351)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 1, 4, 0, 6, 0, 3, 0, 6, 2, 6, 0, 0, 0, 7, 0, 8, 0, 2, 0, 3, 2, 12, 0, 3, 0, 7, 0, 12, 0, 11, 0, 13, 0, 13, 0, 12, 1)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvxtskj4ktqxy"]
+
+[ext_resource type="Script" uid="uid://dhth2wnco8kkw" path="res://ui/energy_meter/energy_bar.gd" id="1_1qsft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2xgf"]
+bg_color = Color(0.353882, 0.770461, 0.826215, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="EnergyBar" type="ProgressBar"]
+offset_right = 283.0
+offset_bottom = 33.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_g2xgf")
+max_value = 10.0
+value = 4.65
+fill_mode = 1
+show_percentage = false
+script = ExtResource("1_1qsft")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://r0an8h2qp351"]
+[gd_scene load_steps=18 format=3 uid="uid://r0an8h2qp351"]
 
 [ext_resource type="Script" uid="uid://dn06ptxs4svk5" path="res://scenes/main_room/game_loop.gd" id="1_34y7g"]
 [ext_resource type="PackedScene" uid="uid://dny8yaysxtwma" path="res://scenes/main_room/devil/devil.tscn" id="2_ip11t"]
@@ -11,8 +11,14 @@
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="6_wx4vp"]
 [ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://theme.tres" id="7_yqk6x"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphia"]
+albedo_color = Color(0.0509996, 0.0071328, 0.000645078, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6g0p"]
 albedo_color = Color(0.242092, 0.127615, 0.0862125, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tffxv"]
+albedo_color = Color(0.0509996, 0.0071328, 0.000645078, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2xgf"]
 albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
@@ -50,13 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53553, 0)
 
 [node name="Table" type="CSGCombiner3D" parent="Scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0396788, 0)
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Scene/Table"]
-visible = false
-radius = 1.00635
-height = 0.0810547
-sides = 32
-material = SubResource("StandardMaterial3D_a6g0p")
+material_override = SubResource("StandardMaterial3D_sphia")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Scene/Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.793701, 0)
@@ -64,6 +64,21 @@ radius = 0.241699
 height = 1.60205
 sides = 32
 material = SubResource("StandardMaterial3D_a6g0p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013916, 0.0312653)
+cast_shadow = 3
+size = Vector3(2.0752, 0.0512695, 1.55832)
+material = SubResource("StandardMaterial3D_tffxv")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Scene/Table/CSGBox3D"]
+transform = Transform3D(0.69145, 0, 0.722424, 0, 1, 0, -0.722424, 0, 0.69145, 1.12614, -0.043677, 0.800351)
+operation = 2
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Scene/Table/CSGBox3D"]
+transform = Transform3D(0.673193, 0, -0.739467, 0, 1, 0, 0.739467, 0, 0.673193, -1.12388, -0.043677, 0.791314)
+operation = 2
+size = Vector3(1, 1, 0.972656)
 
 [node name="Room" type="CSGCombiner3D" parent="Scene"]
 
@@ -93,7 +108,7 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999985, -8.74221e-08, 0.00553002, 0.00553002, 2.41725e-10, 0.999985, -8.74221e-08, 1, 2.41725e-10, 0, 1.88414, 0)
+transform = Transform3D(-0.999999, -1.50996e-07, 0.00122221, 0.00122221, 9.22742e-11, 0.999999, -1.50996e-07, 1, 9.22742e-11, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 10.0
 shadow_enabled = true
@@ -120,7 +135,6 @@ texture = ExtResource("3_mdlm6")
 [node name="TableSprite" type="Sprite3D" parent="Scene"]
 transform = Transform3D(0.113647, 0, 0, 0, -4.96769e-09, 0.113647, 0, -0.113647, -4.96769e-09, 0, 0, 0)
 shaded = true
-double_sided = false
 render_priority = -1
 texture = ExtResource("4_nsnb2")
 
