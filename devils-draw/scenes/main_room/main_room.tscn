@@ -46,6 +46,7 @@ transform = Transform3D(0.286638, 0, 0, 0, 0.286638, 0, 0, 0, 0.286638, -0.01207
 
 [node name="Devil" parent="." node_paths=PackedStringArray("devil_dialogue", "dialogue_sprite_3d", "dialogue_timer") instance=ExtResource("2_ip11t")]
 transform = Transform3D(0.164442, 0, 0, 0, 0.164442, 0, 0, 0, 0.164442, 0, 2.23879, -1.67876)
+shaded = true
 render_priority = -1
 devil_dialogue = NodePath("../SubViewport/PanelContainer/MarginContainer/DevilDialogue")
 dialogue_sprite_3d = NodePath("../Dialogue")
@@ -108,7 +109,7 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999999, -1.50996e-07, 0.00122221, 0.00122221, 9.22742e-11, 0.999999, -1.50996e-07, 1, 9.22742e-11, 0, 1.88414, 0)
+transform = Transform3D(-0.999999, -1.50996e-07, -0.00123684, -0.00123684, -9.33788e-11, 0.999999, -1.50996e-07, 1, -9.33788e-11, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 10.0
 shadow_enabled = true
@@ -129,6 +130,7 @@ spot_angle = 39.2956
 transform = Transform3D(0.158706, -1.36378e-05, 2.26491e-06, 1.36378e-05, 0.158706, 8.33085e-07, -2.26491e-06, -8.33085e-07, 0.158706, 0, 0.134886, -3.38958)
 material_overlay = SubResource("ShaderMaterial_mdlm6")
 cast_shadow = 0
+shaded = true
 render_priority = -2
 texture = ExtResource("3_mdlm6")
 
@@ -145,6 +147,10 @@ devil_marker = NodePath("../DevilMarker")
 
 [node name="SpiritBottle" parent="." instance=ExtResource("5_qcty8")]
 transform = Transform3D(0.256331, 0, 0.250887, 0, 0.358678, 0, -0.250887, 0, 0.256331, -0.788975, 1.54844, 0.148437)
+
+[node name="OmniLight3D" parent="SpiritBottle" index="3"]
+light_energy = 0.763
+shadow_blur = 6.766
 
 [node name="PlayArea" parent="." node_paths=PackedStringArray("player_marker", "devil_marker") instance=ExtResource("6_tme6b")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55386, 0.0524659)
@@ -188,4 +194,21 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="input_event" from="SpiritBottle" to="." method="_on_spirit_bottle_input_event"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_mouse_exited"]
 [connection signal="timeout" from="DialogueTimer" to="Devil" method="_on_dialogue_timer_timeout"]
+
+[editable path="SpiritBottle"]

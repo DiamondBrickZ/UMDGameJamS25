@@ -443,10 +443,10 @@ effects = NodePath("../Effects/Effects")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -622.0
-offset_top = 112.0
-offset_right = -461.0
-offset_bottom = 170.0
+offset_left = -1862.0
+offset_top = 198.0
+offset_right = -1701.0
+offset_bottom = 256.0
 grow_horizontal = 0
 separation = 100.0
 
@@ -481,10 +481,14 @@ separation = 180.0
 rotation_amount = 12.0
 
 [node name="Stats" type="Panel" parent="UI"]
-offset_left = 13.0
-offset_top = 12.0
-offset_right = 230.0
-offset_bottom = 87.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.0
+offset_top = 17.0
+offset_right = 109.0
+offset_bottom = 84.0
+grow_horizontal = 2
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats"]
@@ -503,14 +507,23 @@ text = "Gold:"
 layout_mode = 2
 text = "Gold:"
 
-[node name="HealthBar" parent="UI" instance=ExtResource("9_0tnpc")]
-position = Vector2(1531, 94)
-separation = 80.0
-heart_size = 0.4
+[node name="PlayerHealthBar" parent="UI" instance=ExtResource("9_0tnpc")]
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 448.0
+offset_bottom = 125.0
+scale = Vector2(1.195, 1.195)
 
 [node name="DevilHealth" parent="UI" instance=ExtResource("10_vtaks")]
-position = Vector2(283, 119)
-scale = Vector2(-1.67, 1.67)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -554.0
+offset_top = 26.0
+offset_right = -221.0
+offset_bottom = 157.0
+grow_horizontal = 0
+scale = Vector2(1.655, 1.655)
 
 [node name="Lose" parent="UI" instance=ExtResource("12_dinhu")]
 modulate = Color(1, 1, 1, 0)

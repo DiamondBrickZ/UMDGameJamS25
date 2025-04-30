@@ -90,18 +90,18 @@ text = "Devil's Draw"
 layout_mode = 0
 offset_left = 215.0
 offset_top = 209.0
-offset_right = 1299.0
+offset_right = 1022.0
 offset_bottom = 318.0
 theme_override_fonts/normal_font = ExtResource("6_3ovsr")
 theme_override_font_sizes/normal_font_size = 30
-text = "by Julian, Andrew, Trina and Haroon"
+text = "by Julian, Andrew, Trina, Ann and Haroon"
 
 [node name="Button" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 220.0
-offset_top = 467.0
-offset_right = 532.0
-offset_bottom = 535.0
+offset_left = 687.0
+offset_top = 321.0
+offset_right = 999.0
+offset_bottom = 389.0
 theme_override_fonts/font = ExtResource("6_3ovsr")
 theme_override_font_sizes/font_size = 34
 text = "Strike a deal."
@@ -172,7 +172,7 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_lqpn7")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999879, -8.74175e-08, -0.0155608, -0.0155608, -6.80184e-10, 0.999879, -8.74175e-08, 1, -6.80184e-10, 0, 1.88414, 0)
+transform = Transform3D(-0.999911, -8.74189e-08, 0.0132989, 0.0132989, 5.81312e-10, 0.999911, -8.74189e-08, 1, 5.81312e-10, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 10.0
 shadow_enabled = true

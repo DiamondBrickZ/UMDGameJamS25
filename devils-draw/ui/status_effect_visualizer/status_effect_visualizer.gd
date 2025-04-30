@@ -21,5 +21,5 @@ func _on_status_effect_change(character: int, effect: StatusEffect, applied: boo
 		var new_effect : StatusEffect = GameManager.game_info[0]["status_effects"][i]
 		var new_child = STATUS_EFFECT.instantiate()
 		new_child.current_effect = new_effect.effect_type
-		new_child.position.x = -i * separation
+		new_child.position.x = i * separation
 		add_child(new_child)

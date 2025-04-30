@@ -1,5 +1,5 @@
 @tool
-extends Node2D
+extends Control
 
 @onready var devil_health = $Sprite2D/DevilHealth
 @onready var player_energy = $Sprite2D/PlayerEnergy

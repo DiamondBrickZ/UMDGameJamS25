@@ -1,7 +1,7 @@
 @tool
 ## HEALTH BAR
 # Displays amount of health via hearts
-extends Node2D
+extends Control
 
 @export var separation: float = 40
 @export var heart_size : float = 1.0
@@ -9,6 +9,7 @@ extends Node2D
 @export var speed : float = 1.0
 
 var increment : float = 0.0
+@onready var hearts = $Hearts
 
 const heart = preload("res://ui/health/heart.tscn")
 
@@ -24,6 +25,7 @@ var health :float
 func _ready():
 	GameManager.dealt_damage.connect(_on_dealt_damage)
 	
+	await get_tree().create_timer(0.2).timeout
 	create_hearts()
 
 func _on_dealt_damage(character: int, amount: float):
@@ -31,12 +33,12 @@ func _on_dealt_damage(character: int, amount: float):
 
 func create_hearts():
 	hearts_array = []
-	for child in get_children():
+	for child in hearts.get_children():
 		child.queue_free()
 	
 	for i in range(5):
 		var new_heart = heart.instantiate()
-		add_child(new_heart)
+		hearts.add_child(new_heart)
 		hearts_array.append(new_heart)
 
 func _process(delta):
@@ -49,8 +51,8 @@ func _process(delta):
 	
 	for i in range(len(hearts_array)):
 		var heart = hearts_array[i]
-		heart.position.y = sin(increment * delta * speed + i*10.0)
-		heart.position.x = i*separation
+		heart.position.y = size.y/2 + sin(increment * delta * speed + i*10.0)
+		heart.position.x = size.x/8 + i*separation
 		heart.scale = Vector2(heart_size, heart_size)
 		heart.amount = health - i
 	

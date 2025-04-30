@@ -60,6 +60,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0393777, 0)
 light_color = Color(0, 0.654511, 0.629813, 1)
 light_energy = 2.778
 shadow_enabled = true
+shadow_blur = 5.685
 omni_range = 2.64393
 
 [node name="SpiritsMenu" parent="." instance=ExtResource("3_ryfsv")]
@@ -68,15 +69,15 @@ transform = Transform3D(0.716608, 0, 0, 0, 0.716608, 0, 0, 0, 0.716608, 1.16811,
 [connection signal="input_event" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_input_event"]
 [connection signal="mouse_entered" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="SpiritsMenu/SpiritMenuOption" to="SpiritsMenu/SpiritMenuOption" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritsMenu/@Area3D@124774" to="SpiritsMenu/@Area3D@124774" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@124774" to="SpiritsMenu/@Area3D@124774" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@124774" to="SpiritsMenu/@Area3D@124774" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritsMenu/@Area3D@124775" to="SpiritsMenu/@Area3D@124775" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@124775" to="SpiritsMenu/@Area3D@124775" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@124775" to="SpiritsMenu/@Area3D@124775" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritsMenu/@Area3D@124776" to="SpiritsMenu/@Area3D@124776" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@124776" to="SpiritsMenu/@Area3D@124776" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@124776" to="SpiritsMenu/@Area3D@124776" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritsMenu/@Area3D@124777" to="SpiritsMenu/@Area3D@124777" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@124777" to="SpiritsMenu/@Area3D@124777" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@124777" to="SpiritsMenu/@Area3D@124777" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@92316" to="SpiritsMenu/@Area3D@92316" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@92316" to="SpiritsMenu/@Area3D@92316" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@92316" to="SpiritsMenu/@Area3D@92316" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@92317" to="SpiritsMenu/@Area3D@92317" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@92317" to="SpiritsMenu/@Area3D@92317" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@92317" to="SpiritsMenu/@Area3D@92317" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@92318" to="SpiritsMenu/@Area3D@92318" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@92318" to="SpiritsMenu/@Area3D@92318" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@92318" to="SpiritsMenu/@Area3D@92318" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritsMenu/@Area3D@92319" to="SpiritsMenu/@Area3D@92319" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritsMenu/@Area3D@92319" to="SpiritsMenu/@Area3D@92319" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritsMenu/@Area3D@92319" to="SpiritsMenu/@Area3D@92319" method="_on_mouse_exited"]

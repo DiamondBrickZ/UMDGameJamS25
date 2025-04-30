@@ -105,6 +105,7 @@ focus = 0.441
 riskiness = 0.559
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_left = 13.0
 offset_top = 96.0
 offset_right = 156.0

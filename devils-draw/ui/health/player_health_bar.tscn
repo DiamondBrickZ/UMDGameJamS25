@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://bgsj01wpn3fgw"]
+[gd_scene load_steps=3 format=3 uid="uid://bgsj01wpn3fgw"]
 
 [ext_resource type="Script" uid="uid://cl7y55f8npl3i" path="res://ui/health/health_bar.gd" id="1_8dbxa"]
+[ext_resource type="PackedScene" uid="uid://cvxtskj4ktqxy" path="res://ui/energy_meter/energy_bar.tscn" id="2_xnmy4"]
 
-[node name="PlayerHealthBar" type="Node2D"]
+[node name="PlayerHealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 429.0
+offset_bottom = 108.0
 script = ExtResource("1_8dbxa")
+separation = 80.0
+heart_size = 0.4
+
+[node name="EnergyBar" parent="." instance=ExtResource("2_xnmy4")]
+custom_minimum_size = Vector2(100, 10)
+layout_mode = 1
+offset_left = 17.0
+offset_top = 109.0
+offset_right = 446.0
+offset_bottom = 122.0
+fill_mode = 0
+
+[node name="Hearts" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
