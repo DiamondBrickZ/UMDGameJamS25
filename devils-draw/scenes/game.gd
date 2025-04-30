@@ -87,7 +87,7 @@ func instance_scene(new_location: Locations):
 		transitioning = true
 		add_child(main_menu_instance)
 		
-		await get_tree().create_timer(2).timeout
+		#await get_tree().create_timer(2).timeout
 		transitioning = false
 
 func change_location(new_location: Locations):

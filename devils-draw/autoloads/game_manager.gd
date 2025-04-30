@@ -327,7 +327,6 @@ func player_death():
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
 	game_info[1]["hand"] = []
-	game_info[1]["health"] = game_info[1]["max_health"]		# reset devil health
 	discard_pile = []
 	for effect in game_info[0]["status_effects"]:
 		game_info[0]["status_effects"].erase(effect)
@@ -351,8 +350,6 @@ func player_death():
 	next_hand = []
 
 func gain_soul():
-	# when the player gets a soul
-	#game.change_location(game.Locations.SPIRITS)
 	game_info[0]["souls"] += 1
 	soul_gained.emit()
 

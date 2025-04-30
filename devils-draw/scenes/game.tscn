@@ -312,7 +312,7 @@ transform = Transform3D(0.688355, -0.173026, 0.704436, 0, 0.971134, 0.238534, -0
 fov = 36.0
 
 [node name="MainMenuCam" type="Camera3D" parent="LocationCameras"]
-transform = Transform3D(0.869495, -0.0559158, -0.490767, 0, 0.993572, -0.113203, 0.493942, 0.0984296, 0.863906, -0.878, 1.675, 1.116)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.195, 0)
 fov = 45.5
 
 [node name="CasinoDoors" type="Node3D" parent="." node_paths=PackedStringArray("left_door_marker", "right_door_marker")]

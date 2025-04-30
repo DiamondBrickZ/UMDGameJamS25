@@ -7,13 +7,13 @@
 [sub_resource type="Resource" id="Resource_kfxx5"]
 script = ExtResource("2_u04md")
 subject = 0
-damage_amount = 1.0
+damage_amount = 0.5
 metadata/_custom_type_script = "uid://b0p88mrxmt066"
 
 [resource]
 script = ExtResource("2_mwfsw")
 title = "Mouse Trap"
-desc = "Ouch! Lose 1 heart."
+desc = "Ouch! Lose half a heart."
 energy_cost = 0.0
 card_actions = Array[ExtResource("1_npufj")]([SubResource("Resource_kfxx5")])
 card_rarity = 0

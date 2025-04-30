@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cu8kbgdbecqx7" path="res://scenes/main_menu/main_menu.gd" id="1_3c04x"]
 [ext_resource type="PackedScene" uid="uid://dny8yaysxtwma" path="res://scenes/main_room/devil/devil.tscn" id="1_i5wg5"]
-[ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://scenes/main_room/draw_pile/draw_pile.tscn" id="2_3c04x"]
-[ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://scenes/main_room/spirit_bottle/spirit_bottle.tscn" id="3_joh67"]
+[ext_resource type="Texture2D" uid="uid://b1qlybxhcof66" path="res://scenes/main_menu/start_game_button.png" id="3_4xg86"]
 [ext_resource type="Texture2D" uid="uid://csnmndi75nc52" path="res://scenes/main_room/background.png" id="4_4xg86"]
+[ext_resource type="Script" uid="uid://dwwsvdcu3auy3" path="res://scenes/main_menu/start_game_button.gd" id="4_thkx5"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="4_u184e"]
-[ext_resource type="Texture2D" uid="uid://do42py3mhbgxk" path="res://scenes/main_room/table.png" id="5_thkx5"]
 [ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="6_3ovsr"]
 [ext_resource type="Script" uid="uid://dkm2n2fonwdyv" path="res://scenes/main_room/main_room_light.gd" id="7_thkx5"]
+[ext_resource type="Texture2D" uid="uid://cybv6shpfyqec" path="res://scenes/main_menu/title_screen.png" id="8_thkx5"]
 
 [sub_resource type="Animation" id="Animation_3ovsr"]
 length = 0.001
@@ -65,46 +65,32 @@ script = ExtResource("1_3c04x")
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -1173.0
-offset_top = -280.0
-offset_bottom = 280.0
-grow_horizontal = 0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 202.0
-offset_top = 25.0
-offset_right = 1286.0
-offset_bottom = 346.0
-theme_override_fonts/normal_font = ExtResource("6_3ovsr")
-theme_override_font_sizes/normal_font_size = 149
-text = "Devil's Draw"
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 215.0
-offset_top = 209.0
-offset_right = 1022.0
-offset_bottom = 318.0
-theme_override_fonts/normal_font = ExtResource("6_3ovsr")
-theme_override_font_sizes/normal_font_size = 30
-text = "by Julian, Andrew, Trina, Ann and Haroon"
-
-[node name="Button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 687.0
-offset_top = 321.0
-offset_right = 999.0
-offset_bottom = 389.0
+[node name="StartGameButton" type="Button" parent="CanvasLayer/Control"]
+modulate = Color(0.9, 0.17655, 0.081, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -587.0
+offset_top = -57.5
+offset_right = 587.0
+offset_bottom = 57.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("6_3ovsr")
 theme_override_font_sizes/font_size = 34
-text = "Strike a deal."
+icon = ExtResource("3_4xg86")
+flat = true
+icon_alignment = 1
+script = ExtResource("4_thkx5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {
@@ -114,12 +100,6 @@ libraries = {
 [node name="Devil" parent="." instance=ExtResource("1_i5wg5")]
 transform = Transform3D(0.164442, 0, 0, 0, 0.164442, 0, 0, 0, 0.164442, 0, 2.23879, -1.67876)
 render_priority = -1
-
-[node name="DrawPile" parent="." instance=ExtResource("2_3c04x")]
-transform = Transform3D(0.286638, 0, 0, 0, 0.286638, 0, 0, 0, 0.286638, 0.70341, 1.5525, -0.10305)
-
-[node name="SpiritBottle" parent="." instance=ExtResource("3_joh67")]
-transform = Transform3D(0.256331, 0, 0.250887, 0, 0.358678, 0, -0.250887, 0, 0.256331, -0.788975, 1.54844, 0.148437)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_u184e")
@@ -172,22 +152,14 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_lqpn7")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999911, -8.74189e-08, 0.0132989, 0.0132989, 5.81312e-10, 0.999911, -8.74189e-08, 1, 5.81312e-10, 0, 1.88414, 0)
+transform = Transform3D(-0.999951, -1.50992e-07, -0.00988102, -0.00988102, -7.45996e-10, 0.999951, -1.50992e-07, 1, -7.45996e-10, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
-light_energy = 10.0
+light_energy = 2.67
 shadow_enabled = true
 spot_range = 2.48441
 spot_attenuation = 0.82
 spot_angle = 26.6384
 script = ExtResource("7_thkx5")
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.06083, 1.77155, 1.52783)
-light_color = Color(0.838479, 0.753008, 0.579599, 1)
-light_energy = 25.0
-shadow_enabled = true
-spot_range = 2.21508
-spot_angle = 39.2956
 
 [node name="Background" type="Sprite3D" parent="Scene"]
 transform = Transform3D(0.158706, -1.36378e-05, 2.26491e-06, 1.36378e-05, 0.158706, 8.33085e-07, -2.26491e-06, -8.33085e-07, 0.158706, 0, 0.134886, -3.38958)
@@ -197,10 +169,13 @@ render_priority = -2
 texture = ExtResource("4_4xg86")
 
 [node name="TableSprite" type="Sprite3D" parent="Scene"]
-transform = Transform3D(0.113647, 0, 0, 0, -4.96769e-09, 0.113647, 0, -0.113647, -4.96769e-09, 0, 0, 0)
+transform = Transform3D(0.144225, 0, 0, 0, -6.3043e-09, 0.144225, 0, -0.144225, -6.3043e-09, 0, 0, 0)
 shaded = true
 double_sided = false
 render_priority = -1
-texture = ExtResource("5_thkx5")
+texture = ExtResource("8_thkx5")
 
-[connection signal="pressed" from="CanvasLayer/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="gui_input" from="CanvasLayer/Control/StartGameButton" to="CanvasLayer/Control/StartGameButton" method="_on_gui_input"]
+[connection signal="mouse_entered" from="CanvasLayer/Control/StartGameButton" to="CanvasLayer/Control/StartGameButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/Control/StartGameButton" to="CanvasLayer/Control/StartGameButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CanvasLayer/Control/StartGameButton" to="." method="_on_button_pressed"]

@@ -9,7 +9,7 @@
 [sub_resource type="Resource" id="Resource_4rcnd"]
 script = ExtResource("2_34l8a")
 subject = 1
-damage_amount = 30.0
+damage_amount = 2.5
 metadata/_custom_type_script = "uid://b0p88mrxmt066"
 
 [sub_resource type="Resource" id="Resource_5pljl"]

@@ -2,7 +2,7 @@ extends Node3D
 @onready var canvas_layer = $CanvasLayer
 
 func _ready():
-	$CanvasLayer/AnimationPlayer.play("start", -1, -0.2, true)
+	$CanvasLayer/AnimationPlayer.play("start", -1, -0.4, true)
 
 func _on_button_pressed():
 	get_parent().change_location(Game.Locations.SHOP)

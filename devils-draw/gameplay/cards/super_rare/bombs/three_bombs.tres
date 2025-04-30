@@ -7,13 +7,13 @@
 [sub_resource type="Resource" id="Resource_640c7"]
 script = ExtResource("2_vctwb")
 subject = 1
-damage_amount = 40.0
+damage_amount = 2.5
 metadata/_custom_type_script = "uid://b0p88mrxmt066"
 
 [sub_resource type="Resource" id="Resource_3o53t"]
 script = ExtResource("2_vctwb")
 subject = 0
-damage_amount = 5.0
+damage_amount = 1.0
 metadata/_custom_type_script = "uid://b0p88mrxmt066"
 
 [resource]

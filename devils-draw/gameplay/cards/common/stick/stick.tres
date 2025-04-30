@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="Resource_wno12"]
 script = ExtResource("2_wno12")
 subject = 1
-damage_amount = 1.0
+damage_amount = 0.5
 metadata/_custom_type_script = "uid://b0p88mrxmt066"
 
 [resource]
