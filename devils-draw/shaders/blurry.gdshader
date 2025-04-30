@@ -19,12 +19,12 @@ vec3 gaussianblur(sampler2D sampler, vec2 pos, vec2 pixel_size, float sigmaUsed,
     vec3 blurredPixel = vec3(0.0);
     float total_weight = 0.0;
 	// Loop over the radius (tecnically its a square)
-    for(int i = -radius ; i <= radius; i++){ 
+    for(int i = -radius ; i <= radius; i++){
         for(int j = -radius; j <= radius; j++){
 			// Calculate the offset from the current pixel
 			vec2 offset = vec2(float(i), float(j))*pixel_size;
-			vec2 changedPos = pos + offset;        
-			
+			vec2 changedPos = pos + offset;
+
 			// Calculate the weight based on the Gaussian distribution multiplying both dimentions (how far are X and Y form the center (pos))
 			float weight = gaussianDistribution(float(i), sigmaUsed)*gaussianDistribution(float(j), sigmaUsed);
 			// Add the weighted color value to the blurred pixel
@@ -38,7 +38,7 @@ vec3 gaussianblur(sampler2D sampler, vec2 pos, vec2 pixel_size, float sigmaUsed,
 }
 void fragment() {
 	float y_strength = 1.0;
-	
+
     vec3 PixelBlurred = gaussianblur(SCREEN_TEXTURE, SCREEN_UV, SCREEN_PIXEL_SIZE, strength * y_strength, int(round(3.0 * strength)));
 	vec3 color = mix(PixelBlurred, vec3(0.0), mix_percentage);
     // The radius is 3*strength because it is the point where the Gaussian weight is near zero.

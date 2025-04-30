@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://8n7yo6dp7tqo"]
 
 [ext_resource type="Script" uid="uid://bv8c34iv07eo6" path="res://scenes/endings/won.gd" id="1_1wl66"]
-[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="2_xmqp6"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="2_xmqp6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wl66"]
 bg_color = Color(0.291547, 0.646882, 0.80178, 1)

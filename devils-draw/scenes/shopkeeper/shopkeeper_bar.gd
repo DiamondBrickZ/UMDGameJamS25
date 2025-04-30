@@ -4,21 +4,21 @@ extends Node3D
 @onready var dialogue_timer = $DialogueTimer
 @onready var sprite_3d = $Dialogue
 
-@export var player_buys : Array[String] = [
+var player_buys : Array[String] = [
 	"Pleasure doing business with you.",
 	"Good luck. You'll need it.",
 	"Heh, that's a good choice!",
 	"You'll be better off with this one."
 ]
 
-@export var welcome_back : Array[String] = [
+var welcome_back : Array[String] = [
 	"Heh, welcome back to the bar.",
 	"Takin' it well in there?",
 	"Back already?",
 	"I got a good feeling about this one."
 ]
 
-@export var player_revived : Array[String] = [
+var player_revived : Array[String] = [
 	"Welcome back to the land of the living. Kind of.",
 	"Ouch, that seemed like it hurt."
 ]
@@ -39,6 +39,8 @@ func write_dialogue(text : String):
 		text_to_write = player_revived.pick_random()
 	elif text == "not_enough_gold":
 		text_to_write = "I'm afraid you don't have enough gold in your pocket."
+	elif text == "intro":
+		text_to_write = "Oh! You're the new guy. "
 	
 	shopkeeper_dialogue.text = text_to_write
 	sprite_3d.visible = true

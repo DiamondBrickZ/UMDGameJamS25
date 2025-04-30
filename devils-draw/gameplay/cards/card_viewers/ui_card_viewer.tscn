@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dkpe0ro82et3u" path="res://gameplay/cards/rarities/Super_Rare Card Front.png" id="2_l35sr"]
 [ext_resource type="Resource" uid="uid://d140615cqcvtx" path="res://gameplay/cards/common/coin_bag/coin_bag.tres" id="2_ski44"]
 [ext_resource type="Texture2D" uid="uid://digsx2legubq5" path="res://gameplay/cards/rarities/Rare Card Front.png" id="3_vfsb6"]
-[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://theme.tres" id="5_vfsb6"]
+[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://ui/theme.tres" id="5_vfsb6"]
 [ext_resource type="Texture2D" uid="uid://bodudx2n3bba4" path="res://gameplay/cards/common/coin_bag/Coin_Bag_art.png" id="6_tndd0"]
 [ext_resource type="Shader" uid="uid://qmewkpp5cybr" path="res://shaders/blurry.gdshader" id="7_0p5vl"]
 
@@ -55,7 +55,7 @@ height = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ski44"]
 shader = ExtResource("7_0p5vl")
-shader_parameter/strength = 4.453
+shader_parameter/strength = 6.379
 shader_parameter/mix_percentage = 0.3
 
 [node name="UICardViewer" type="Area2D"]
@@ -134,10 +134,10 @@ material = SubResource("ShaderMaterial_ski44")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -39.0
-offset_top = -50.0
-offset_right = 39.0
-offset_bottom = 50.0
+offset_left = -43.0
+offset_top = -54.0
+offset_right = 43.0
+offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 

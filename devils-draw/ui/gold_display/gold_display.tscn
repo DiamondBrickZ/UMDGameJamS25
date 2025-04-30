@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4j6u2nha3kt1"]
+
+[ext_resource type="Texture2D" uid="uid://d3d6237e7ekn5" path="res://ui/gold_display/Gold_Mid_Icon.png" id="1_5avu4"]
+[ext_resource type="Script" uid="uid://csvbty4uj0h4p" path="res://ui/gold_display/gold_display.gd" id="1_a2315"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a2315"]
+albedo_color = Color(0.161215, 0.118618, 0.204567, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_if6xs"]
+material = SubResource("StandardMaterial3D_a2315")
+radius = 40.0
+height = 80.0
+
+[node name="GoldDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_a2315")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.447209, 0.447209)
+texture = ExtResource("1_5avu4")
+
+[node name="Label" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = -33.0
+offset_top = -29.0
+offset_right = 28.0
+offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 41
+text = "1"
+horizontal_alignment = 1
+
+[node name="Circle" type="MeshInstance2D" parent="."]
+modulate = Color(0.242778, 0.143952, 0.0384547, 1)
+mesh = SubResource("SphereMesh_if6xs")

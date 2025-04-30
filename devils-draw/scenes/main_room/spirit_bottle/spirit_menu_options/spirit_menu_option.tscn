@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://byk7jjvagdub6"]
 
 [ext_resource type="Script" uid="uid://c77pcn7ykhcrt" path="res://scenes/main_room/spirit_bottle/spirit_menu_options/spirit_menu_option.gd" id="1_siuy0"]
-[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="2_c5prc"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="2_c5prc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_s2mto"]
 height = 1.61426

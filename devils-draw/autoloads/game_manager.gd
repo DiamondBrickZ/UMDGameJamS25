@@ -11,64 +11,73 @@ enum GameState {
 	PAUSED
 }
 
+enum ModifierTypes {
+	HEALTH,
+	ENERGY,
+	DAMAGE,
+	GOLD,
+	SHIELD
+}
+
+# MUSIC
+
 @onready var main_theme = $MainTheme
 @onready var shop_theme = $ShopTheme
 @onready var menu_theme = $MenuTheme
+@onready var music = $BackgroundMusic
 
 var current_game_state := GameState.MAIN_MENU:
 	set(new_val):
 		change_game_state(new_val)
 		current_game_state = new_val
 
-@onready var music = $BackgroundMusic
-
-# GAME INFO: 0 for player, 1 for devil
 @export var game_info : Dictionary = {
 	0: {		## PLAYER
 		"status_effects": [],
 		"hand": [],
 		"energy": 50.0,
 		"max_energy": 50.0,
-		"energy_growth": 1.0,
 		"souls": 0,
 		"gold": 0,
 		"max_gold": 100,
 		"health": 5.0,
 		"max_health": 5.0,
-		"health_growth": 0.0
+		"modifiers": [
+			0.0, # health growth
+			1.0, # energy growth
+			1.0, # damage multiplier
+			1.0, # gold multiplier
+			1.0  # shield multiplier
+		]
 	},
 	1: {		## DEVIL
 		"status_effects": [],
 		"hand": [],
 		"energy": 50.0,
 		"max_energy": 50.0,
-		"energy_growth": 1.0,
-		"souls": 0,
 		"gold": 0,
 		"max_gold": 100,
 		"health": 30.0,
 		"max_health": 30.0,
-		"health_growth": 0.0
+		"modifiers": [
+			0.0, # health growth
+			1.0, # energy growth
+			1.0, # damage multiplier
+			1.0, # gold multiplier
+			1.0  # shield multiplier
+		]
 	}
 }
 
 var discard_pile : Array[Card] = []
 
-# DEVIL INFO
 var time_left : float = 90.0
 var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 
 # PLAYER INFO
 var next_hand : Array[Card] = []
 var fake_membership : bool = false
-var passives = {
-	"damage_multiplier": 1.0,
-	"gold_multiplier": 1.0,
-	"shield_multiplier": 1.0
-}
-
-# CARDS
-@export var available_cards : Array[Card] = []
+var fresh_water : bool = false
 
 @export_group("Devil Strategy")
 @export_range(0, 1) var aggressiveness : float = 1.0
@@ -155,6 +164,7 @@ func _process(delta):
 		current_game_state = GameState.PAUSED
 		game_end.emit(false)
 
+## STATUS EFFECTS
 func apply_status_effect(character: int, effect: StatusEffect):
 	
 	# if no stacking, then remove existing effects of same type
@@ -174,20 +184,12 @@ func has_effect(character: int, effect_type: StatusEffect.Effects) -> bool:
 	
 	return false
 
-func get_all_file_paths(path: String) -> Array[String]:  
-	var file_paths: Array[String] = []  
-	var dir = DirAccess.open(path)  
-	dir.list_dir_begin()  
-	var file_name = dir.get_next()  
-	while file_name != "":  
-		var file_path = path + "/" + file_name  
-		if dir.current_is_dir():  
-			file_paths += get_all_file_paths(file_path)  
-		else:  
-			file_paths.append(file_path)  
-		file_name = dir.get_next()  
-	return file_paths
+func is_drunk(character:int):
+	for effect in game_info[character]["status_effects"]:
+		if effect.effect_type == StatusEffect.Effects.DRUNKEN_HIGH:
+			return true
 
+## CARDS
 func draw_card(character: int = 0):
 	
 	var files = get_all_file_paths("res://gameplay/cards/")
@@ -267,16 +269,37 @@ func add_card(character: int, card: Card):
 	if character == 0:
 		game.ui.hand_display.add_card(card)
 
-func is_drunk(character:int):
-	for effect in game_info[character]["status_effects"]:
-		if effect.effect_type == StatusEffect.Effects.DRUNKEN_HIGH:
-			return true
+func buy_card(card: Card, cost: int):
+	# add this card to the next hand.
+	
+	# half cost if has fake membership
+	if fake_membership:
+		cost /= 2
+	
+	# determine if player has enough gold
+	if game_info[0]["gold"] >= cost:
+		game_info[0]["gold"] -= cost
+		var new_card = card.duplicate()
+		next_hand.append(new_card)
+		print("bought item")
+		shop_dialogue.emit("player_buys")
+		
+		# remove fake membership
+		fake_membership = false
+	else:
+		print('not enough gold')
+		shop_dialogue.emit("not_enough_gold")
 
+## DAMAGE
 func deal_damage(character: int, amount: float):
+	# add shield modifier
+	amount *= game_info[character]["modifiers"][ModifierTypes.SHIELD]
+	
 	# deals damage to character specified
 	game_info[character]["health"] -= amount
 	dealt_damage.emit(character, amount)
 
+## DEVIL
 func devil_turn():
 	# The devil plays his turn
 	var attack_cards = []
@@ -312,6 +335,7 @@ func devil_turn():
 	else:
 		draw_card(1)
 
+## ENERGY
 func deplete_energy(character: int, amount: float):
 	
 	# if not, then deplete energy
@@ -321,6 +345,7 @@ func not_enough_energy():
 	# little animation to show there's not enough energy to play a card
 	failed_move.emit()
 
+## GAME EVENTS
 func player_death():
 	# player ded
 	game_info[0]["gold"] = 0.0
@@ -349,31 +374,6 @@ func player_death():
 		print('adadijaing caraddd ', card.title)
 	next_hand = []
 
-func gain_soul():
-	game_info[0]["souls"] += 1
-	soul_gained.emit()
-
-func buy_card(card: Card, cost: int):
-	# add this card to the next hand.
-	
-	# half cost if has fake membership
-	if fake_membership:
-		cost /= 2
-	
-	# determine if player has enough gold
-	if game_info[0]["gold"] >= cost:
-		game_info[0]["gold"] -= cost
-		var new_card = card.duplicate()
-		next_hand.append(new_card)
-		print("bought item")
-		shop_dialogue.emit("player_buys")
-		
-		# remove fake membership
-		fake_membership = false
-	else:
-		print('not enough gold')
-		shop_dialogue.emit("not_enough_gold")
-
 func change_game_state(new_state: GameState):
 	# change music
 	if new_state != current_game_state:
@@ -396,6 +396,11 @@ func change_game_state(new_state: GameState):
 	
 	game_state_change.emit(current_game_state)
 
+## SOUL
+func gain_soul():
+	game_info[0]["souls"] += 1
+	soul_gained.emit()
+
 func sell_soul(spirit_option : SpiritOption):
 	var cost = spirit_option.soul_cost
 	
@@ -409,11 +414,25 @@ func sell_soul(spirit_option : SpiritOption):
 	if spirit_option.type == SpiritOption.Type.HEALTH:
 		game_info[0]["max_health"] = 7.0
 	elif spirit_option.type == SpiritOption.Type.GOLD:
-		passives["gold_multiplier"] = 1.5
-		print("got the gold multiplier!")
+		game_info[0]["modifiers"][ModifierTypes.GOLD] += 0.5
 	elif spirit_option.type == SpiritOption.Type.DAMAGE:
-		passives["damage_multiplier"] = 1.5
+		game_info[0]["modifiers"][ModifierTypes.DAMAGE] += 0.5
 	elif spirit_option.type == SpiritOption.Type.SHIELD:
-		passives["shield_multiplier"] = 0.5
+		game_info[0]["modifiers"][ModifierTypes.SHIELD] -= 0.5
 	
 	return true
+
+## UTILITY
+func get_all_file_paths(path: String) -> Array[String]:  
+	var file_paths: Array[String] = []  
+	var dir = DirAccess.open(path)  
+	dir.list_dir_begin()  
+	var file_name = dir.get_next()  
+	while file_name != "":  
+		var file_path = path + "/" + file_name  
+		if dir.current_is_dir():  
+			file_paths += get_all_file_paths(file_path)  
+		else:  
+			file_paths.append(file_path)  
+		file_name = dir.get_next()  
+	return file_paths

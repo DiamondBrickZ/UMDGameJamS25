@@ -4,7 +4,7 @@ class_name CardActionGainGold
 @export var gold_amount : float = 1.0
 
 func do_action(my_character: int):
-	gold_amount *= GameManager.passives["gold_multiplier"]
+	gold_amount *= GameManager.game_info[my_character]["modifiers"][GameManager.ModifierTypes.GOLD]
 	gold_amount = floor(gold_amount)
 	
 	print("Character " + str(my_character) + " gaining " + str(gold_amount) + " gold!")

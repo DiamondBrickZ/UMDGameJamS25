@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://sbmneegilonx"]
+[gd_scene load_steps=32 format=3 uid="uid://sbmneegilonx"]
 
 [ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://shaders/game_loop_3d.gdshader" id="4_gee14"]
 [ext_resource type="PackedScene" uid="uid://djloglnxylhnc" path="res://ui/status_effect_visualizer/status_effect_visualizer.tscn" id="4_trtic"]
 [ext_resource type="PackedScene" uid="uid://b455tw00jtaxu" path="res://ui/hand_display/hand_display.tscn" id="5_0tnpc"]
+[ext_resource type="PackedScene" uid="uid://d4j6u2nha3kt1" path="res://ui/gold_display/gold_display.tscn" id="7_ca42v"]
 [ext_resource type="PackedScene" uid="uid://dfoetxg5b2an1" path="res://ui/clock/clock.tscn" id="7_ir15t"]
 [ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
@@ -434,11 +435,22 @@ mouse_filter = 2
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu", "effects")]
 script = ExtResource("2_p57ef")
 hand_display = NodePath("Hand/HandDisplay")
-gold_label = NodePath("Stats/VBoxContainer/GoldLabel")
-time_left = NodePath("Stats/VBoxContainer/TimeLeft")
+gold_label = NodePath("")
+time_left = NodePath("")
 ui_animations = NodePath("../Effects/Effects/EffectsAnimations")
 shop_menu = NodePath("ShopMenu")
 effects = NodePath("../Effects/Effects")
+
+[node name="GoldDisplay" parent="UI" instance=ExtResource("7_ca42v")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 77.0
+offset_top = -307.0
+offset_right = 77.0
+offset_bottom = -307.0
+grow_vertical = 0
+scale = Vector2(0.460975, 0.460975)
 
 [node name="Clock" parent="UI" instance=ExtResource("7_ir15t")]
 anchors_preset = 2
@@ -502,33 +514,6 @@ base_scale = 2.434
 separation = 180.0
 rotation_amount = 12.0
 
-[node name="Stats" type="Panel" parent="UI"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 44.0
-offset_top = -117.0
-offset_right = 261.0
-offset_bottom = -50.0
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Stats"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GoldLabel" type="Label" parent="UI/Stats/VBoxContainer"]
-layout_mode = 2
-text = "Gold:"
-
-[node name="TimeLeft" type="Label" parent="UI/Stats/VBoxContainer"]
-layout_mode = 2
-text = "Gold:"
-
 [node name="PlayerHealthBar" parent="UI" instance=ExtResource("9_0tnpc")]
 offset_left = 14.0
 offset_top = 56.0
@@ -563,21 +548,11 @@ metadata/_edit_lock_ = true
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 135.0
+offset_left = 300.0
+offset_top = 327.0
+offset_right = -1162.0
+offset_bottom = 796.0
 grow_horizontal = 2
-mouse_default_cursor_shape = 2
-metadata/_edit_lock_ = true
-
-[node name="PanRight" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -88.0
-offset_bottom = -40.0
-grow_horizontal = 0
-grow_vertical = 2
 mouse_default_cursor_shape = 2
 metadata/_edit_lock_ = true
 
@@ -587,24 +562,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -436.0
-offset_bottom = -299.0
+offset_left = 1713.0
+offset_top = -288.0
+offset_right = -8.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_default_cursor_shape = 2
-metadata/_edit_lock_ = true
-
-[node name="PanLeft" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 70.0
-offset_bottom = -40.0
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-metadata/_edit_lock_ = true
 
 [connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
-[connection signal="gui_input" from="UI/PanRight" to="." method="_on_pan_right_gui_input"]
 [connection signal="gui_input" from="UI/PanDown" to="." method="_on_pan_down_gui_input"]
-[connection signal="gui_input" from="UI/PanLeft" to="." method="_on_pan_left_gui_input"]

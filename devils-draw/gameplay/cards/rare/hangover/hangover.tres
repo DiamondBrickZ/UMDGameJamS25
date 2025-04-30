@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://ctntalmbvlqa0"]
+
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_6uhf0"]
+[ext_resource type="Resource" uid="uid://bu68a0tuitgs1" path="res://gameplay/status_effects/tipsy.tres" id="2_2xx5p"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_moesg"]
+[ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_a2e04"]
+
+[sub_resource type="Resource" id="Resource_h4v5k"]
+script = ExtResource("3_a2e04")
+subject = 0
+duration = 15.0
+effect = ExtResource("2_2xx5p")
+metadata/_custom_type_script = "uid://bxjkgdcnwgjyv"
+
+[resource]
+script = ExtResource("2_moesg")
+title = "Hangover"
+desc = ""
+energy_cost = 0.0
+card_actions = Array[ExtResource("1_6uhf0")]([SubResource("Resource_h4v5k")])
+card_rarity = 1
+card_method = 0
+metadata/_custom_type_script = "uid://c3gd15hekfs2l"

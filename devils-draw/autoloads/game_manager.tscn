@@ -1,105 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://blanc8a1ss1ij"]
+[gd_scene load_steps=6 format=3 uid="uid://blanc8a1ss1ij"]
 
 [ext_resource type="Script" uid="uid://cmulyo5vwpjs8" path="res://autoloads/game_manager.gd" id="1_3ovu6"]
-[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_es8io"]
-[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="3_25hud"]
-[ext_resource type="Texture2D" uid="uid://chnb6d7dt5dil" path="res://gameplay/cards/coin_card.png" id="4_hkcw4"]
-[ext_resource type="Texture2D" uid="uid://d2wch2hiobxl4" path="res://icon.svg" id="5_2ygb1"]
-[ext_resource type="Resource" uid="uid://yiirr01o14tf" path="res://gameplay/status_effects/drunken_high.tres" id="6_qdk7c"]
 [ext_resource type="AudioStream" uid="uid://d536gaj1sfjp" path="res://music/devils draw boss theme main loop.ogg" id="7_hkcw4"]
 [ext_resource type="Script" uid="uid://bycuay54fvqqv" path="res://music/background_music.gd" id="8_2ygb1"]
 [ext_resource type="AudioStream" uid="uid://d1csbtp5b3mil" path="res://music/devils draw boss theme intro.ogg" id="9_qdk7c"]
 [ext_resource type="AudioStream" uid="uid://cjyubt5bxipin" path="res://music/devils draw shop theme.ogg" id="10_vx1k0"]
 
-[sub_resource type="GDScript" id="GDScript_vx1k0"]
-script/source = "## COIN BAG CARD
-extends Card
-class_name CoinBag
-
-@export var gold_amount : int = 5
-
-func play_card(character: int = 0):
-	print(\"Character \" + str(character) + \" gaining \" + str(gold_amount) + \" gold!\")
-	GameManager.game_info[character][\"gold\"] += gold_amount
-	return true
-"
-
-[sub_resource type="Resource" id="Resource_syeno"]
-script = SubResource("GDScript_vx1k0")
-gold_amount = 5
-title = "Coin Bag"
-desc = "Gain 5 gold"
-cover = ExtResource("4_hkcw4")
-energy_cost = 10.0
-card_actions = Array[ExtResource("3_25hud")]([null])
-card_rarity = 0
-card_method = 1
-metadata/_custom_type_script = "uid://khgfgyv4qm53"
-
-[sub_resource type="GDScript" id="GDScript_a6xnv"]
-script/source = "## EFFECT CARD
-# Gives the user a short effect of a status effect
-extends Card
-class_name EffectCard
-
-@export var effect : StatusEffect
-@export var duration : float = 10.0
-
-func play_card(character: int = 0):
-	print(\"Giving character \" + str(character) + \" \" + str(duration) + \" sec of \" + effect.status_name)
-	
-	# create new effect resource, as the time info should not be shared amongst all
-	var new_effect : StatusEffect = effect.duplicate()
-	new_effect.time_left = duration
-	GameManager.apply_status_effect(character, new_effect)
-	return true
-"
-
-[sub_resource type="Resource" id="Resource_6rync"]
-script = SubResource("GDScript_a6xnv")
-effect = ExtResource("6_qdk7c")
-duration = 10.0
-title = "Shot of Whiskey"
-desc = "it's a shot of whiskey"
-cover = ExtResource("5_2ygb1")
-energy_cost = 20.0
-card_actions = Array[ExtResource("3_25hud")]([])
-card_rarity = 0
-card_method = 1
-metadata/_custom_type_script = "uid://cogmuh4601q8x"
-
-[sub_resource type="GDScript" id="GDScript_hf8iu"]
-script/source = "## DAMAGE CARD
-# Deals damage to opponent
-extends Card
-class_name DamageCard
-
-@export var damage_amount : float = 1.0
-
-func play_card(character: int = 0):
-	if character == 0:
-		print(\"Dealing \" + str(damage_amount) + \" damage to devil\")
-		GameManager.deal_damage(1, damage_amount)
-	else:
-		print(\"Dealing \" + str(damage_amount) + \" damage to player\")
-		GameManager.deal_damage(0, damage_amount)
-"
-
-[sub_resource type="Resource" id="Resource_845nk"]
-script = SubResource("GDScript_hf8iu")
-damage_amount = 0.5
-title = "Stick"
-desc = "It's a stick."
-cover = ExtResource("4_hkcw4")
-energy_cost = 10.0
-card_actions = Array[ExtResource("3_25hud")]([])
-card_rarity = 0
-card_method = 1
-metadata/_custom_type_script = "uid://b47t5xdgxnaju"
-
 [node name="GameManager" type="Node"]
 script = ExtResource("1_3ovu6")
-available_cards = Array[ExtResource("2_es8io")]([SubResource("Resource_syeno"), SubResource("Resource_syeno"), SubResource("Resource_6rync"), SubResource("Resource_845nk")])
 ego = 0.387
 focus = 0.441
 riskiness = 0.559

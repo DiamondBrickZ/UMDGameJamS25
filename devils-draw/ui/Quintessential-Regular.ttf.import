@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://0n3rxhgeebkc"
-path="res://.godot/imported/Quintessential-Regular.ttf-5f895a31ad81297f24f34755d7178f67.fontdata"
+path="res://.godot/imported/Quintessential-Regular.ttf-fafbf60504070301f5b179b2cc93261d.fontdata"
 
 [deps]
 
-source_file="res://Quintessential-Regular.ttf"
-dest_files=["res://.godot/imported/Quintessential-Regular.ttf-5f895a31ad81297f24f34755d7178f67.fontdata"]
+source_file="res://ui/Quintessential-Regular.ttf"
+dest_files=["res://.godot/imported/Quintessential-Regular.ttf-fafbf60504070301f5b179b2cc93261d.fontdata"]
 
 [params]
 

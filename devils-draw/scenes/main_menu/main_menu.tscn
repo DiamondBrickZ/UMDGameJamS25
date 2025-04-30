@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csnmndi75nc52" path="res://scenes/main_room/background.png" id="4_4xg86"]
 [ext_resource type="Script" uid="uid://dwwsvdcu3auy3" path="res://scenes/main_menu/start_game_button.gd" id="4_thkx5"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="4_u184e"]
-[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="6_3ovsr"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="6_3ovsr"]
 [ext_resource type="Script" uid="uid://dkm2n2fonwdyv" path="res://scenes/main_room/main_room_light.gd" id="7_thkx5"]
 [ext_resource type="Texture2D" uid="uid://cybv6shpfyqec" path="res://scenes/main_menu/title_screen.png" id="8_thkx5"]
 

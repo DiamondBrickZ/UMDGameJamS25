@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dqnq435q07sjo" path="res://scenes/shopkeeper/background/Ceiling .png" id="5_bt1el"]
 [ext_resource type="Texture2D" uid="uid://68r14qdbfob" path="res://scenes/shopkeeper/background/Floor.png" id="6_eu8u6"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="7_bt1el"]
-[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://theme.tres" id="8_sql68"]
+[ext_resource type="Theme" uid="uid://dr5kpa83vsaek" path="res://ui/theme.tres" id="8_sql68"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sql68"]
 albedo_color = Color(0.277258, 0.159961, 0.0265369, 1)
@@ -45,37 +45,37 @@ environment = ExtResource("7_bt1el")
 [node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 6.46217)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 9.17398)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73808, 4.04219, 6.46217)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21188, 4.04219, 9.17398)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.30395, 4.04219, 13.1113)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.80973, 4.04219, 13.1113)
 light_color = Color(0.677948, 0.537823, 0.424626, 1)
-light_energy = 1.328
+light_energy = 0.481
 shadow_enabled = true
 
 [node name="Background" type="Node3D" parent="."]

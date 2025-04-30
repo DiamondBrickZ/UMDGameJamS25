@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://nhhm2l2cjaue"]
 
 [ext_resource type="Script" uid="uid://dhkkpxsqm0emb" path="res://scenes/endings/lose.gd" id="1_1bol7"]
-[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="2_tyl4e"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="2_tyl4e"]
 
 [node name="Lose" type="Control"]
 layout_mode = 3

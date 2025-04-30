@@ -1,8 +1,6 @@
 @tool
 extends Area2D
 
-@export var base_scale : float = 1.0
-
 var can_hover = true
 var hovering = false:
 	set(new_val):
@@ -15,10 +13,11 @@ var hovering = false:
 			#else:
 				#var tween = get_tree().create_tween()
 				#tween.tween_property(self, "scale", Vector2(base_scale, base_scale), 0.4).set_trans(Tween.TRANS_SINE)
-
 var target_position : Vector2
 var target_rotation : float
 var picked = false
+
+## REFERENCES
 var hand_display : Control
 @onready var display = $Display
 @onready var border = $Border
@@ -29,7 +28,8 @@ var hand_display : Control
 @onready var energy_cost = $MeshInstance2D/EnergyCost
 @onready var blur = $Blur
 
-
+## EXPORTS
+@export var base_scale : float = 1.0
 @export var card : Card:
 	set(new_card):
 		card = new_card
@@ -42,7 +42,6 @@ var hand_display : Control
 		
 		if display:
 			refresh()
-
 @export var refresh_button : bool = false:
 	set(new_val):
 		refresh_button = false
@@ -56,15 +55,7 @@ var hand_display : Control
 func _ready():
 	hand_display = get_parent().get_parent()
 	GameManager.card_played.connect(_on_card_played)
-	GameManager.status_effect_change.connect(_on_status_effect_change)
 	refresh()
-
-func _on_status_effect_change(character: int, effect: StatusEffect, applied: bool):
-	if character == 0 and effect.effect_type == StatusEffect.Effects.TIPSY:
-		if applied:
-			blur.visible = true
-		else:
-			blur.visible = false
 
 func _on_card_played(new_card:Card, character:int):
 	if new_card == card and character == 0:
@@ -110,9 +101,17 @@ func play_card_animation():
 	queue_free()
 
 func _process(delta):
+	if Engine.is_editor_hint():
+		return
+	
 	if not picked:
 		position = lerp(position, target_position, 0.1)
 		rotation = lerp(rotation, target_rotation, 0.1)
+	
+	if GameManager.has_effect(0, StatusEffect.Effects.TIPSY):
+		blur.visible = true
+	else:
+		blur.visible = false
 
 func refresh():
 	# set card textures

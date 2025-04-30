@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://dr5kpa83vsaek"]
 
-[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://Quintessential-Regular.ttf" id="1_e1x85"]
+[ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="1_e1x85"]
 
 [resource]
 default_font_size = 16
