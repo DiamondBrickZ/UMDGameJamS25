@@ -152,7 +152,7 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_lqpn7")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999951, -1.50992e-07, -0.00988102, -0.00988102, -7.45996e-10, 0.999951, -1.50992e-07, 1, -7.45996e-10, 0, 1.88414, 0)
+transform = Transform3D(-0.99995, -8.74206e-08, 0.00999271, 0.00999271, 4.36795e-10, 0.99995, -8.74206e-08, 1, 4.36795e-10, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 2.67
 shadow_enabled = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://sbmneegilonx"]
+[gd_scene load_steps=33 format=3 uid="uid://sbmneegilonx"]
 
 [ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://b455tw00jtaxu" path="res://ui/hand_display/hand_display.tscn" id="5_0tnpc"]
 [ext_resource type="PackedScene" uid="uid://d4j6u2nha3kt1" path="res://ui/gold_display/gold_display.tscn" id="7_ca42v"]
 [ext_resource type="PackedScene" uid="uid://dfoetxg5b2an1" path="res://ui/clock/clock.tscn" id="7_ir15t"]
+[ext_resource type="PackedScene" uid="uid://dq0ka0i22uhc6" path="res://ui/tooltip/tool_tip.tscn" id="7_rysoc"]
 [ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bgsj01wpn3fgw" path="res://ui/health/player_health_bar.tscn" id="9_0tnpc"]
@@ -432,14 +433,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "gold_label", "time_left", "ui_animations", "shop_menu", "effects")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hand_display", "ui_animations", "shop_menu", "effects")]
 script = ExtResource("2_p57ef")
 hand_display = NodePath("Hand/HandDisplay")
-gold_label = NodePath("")
-time_left = NodePath("")
 ui_animations = NodePath("../Effects/Effects/EffectsAnimations")
 shop_menu = NodePath("ShopMenu")
 effects = NodePath("../Effects/Effects")
+
+[node name="ToolTip" parent="UI" instance=ExtResource("7_rysoc")]
 
 [node name="GoldDisplay" parent="UI" instance=ExtResource("7_ca42v")]
 anchors_preset = 2

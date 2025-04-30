@@ -22,6 +22,6 @@ func _on_status_effect_change(char: int, effect: StatusEffect, applied: bool):
 	for i in range(len(GameManager.game_info[character]["status_effects"])):
 		var new_effect : StatusEffect = GameManager.game_info[character]["status_effects"][i]
 		var new_child = STATUS_EFFECT.instantiate()
-		new_child.current_effect = new_effect.effect_type
+		new_child.current_effect = new_effect
 		new_child.position.x = direction * i * separation
 		add_child(new_child)

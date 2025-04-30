@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4fwq2850xrlk"]
+[gd_scene load_steps=8 format=3 uid="uid://b4fwq2850xrlk"]
 
 [ext_resource type="Texture2D" uid="uid://b80o5li557a0r" path="res://ui/health/icons/Hearts (Health Bar).png" id="1_2vei8"]
 [ext_resource type="Shader" uid="uid://b8rn1d63yke3n" path="res://ui/health/heart.gdshader" id="1_uv07p"]
 [ext_resource type="Script" uid="uid://dwatnhpbjdj78" path="res://ui/health/heart.gd" id="2_uv07p"]
 
+[sub_resource type="Gradient" id="Gradient_uv07p"]
+offsets = PackedFloat32Array(0.256281, 0.592965)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uv07p"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qv32h"]
+color_ramp = SubResource("Gradient_uv07p")
+noise = SubResource("FastNoiseLite_uv07p")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qv32h"]
 resource_local_to_scene = true
 shader = ExtResource("1_uv07p")
-shader_parameter/height = -0.1
+shader_parameter/height = 0.0635
+shader_parameter/burning = 0.0
+shader_parameter/fire = SubResource("NoiseTexture2D_qv32h")
+shader_parameter/color1 = Color(0.607539, 0.301578, 0.0155791, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
 
 [node name="Heart" type="Sprite2D"]
 material = SubResource("ShaderMaterial_qv32h")

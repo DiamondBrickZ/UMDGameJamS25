@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cygj4oxwwcu71"]
+[gd_scene load_steps=4 format=3 uid="uid://cygj4oxwwcu71"]
 
 [ext_resource type="Texture2D" uid="uid://bs7tbi42sobws" path="res://ui/status_effect_visualizer/Tabs.png" id="1_yfhni"]
 [ext_resource type="Script" uid="uid://ee3labnqvvs3" path="res://ui/status_effect_visualizer/status_effect.gd" id="2_320u2"]
+[ext_resource type="PackedScene" uid="uid://bfwtnf4c4w7mx" path="res://ui/tooltip/tool_tip_component.tscn" id="3_7d0lt"]
 
 [node name="StatusEffect" type="Sprite2D"]
 scale = Vector2(0.0630918, 0.0630918)
@@ -12,4 +13,8 @@ frame = 6
 region_enabled = true
 region_rect = Rect2(108.588, 51.8369, 5112.91, 1584.91)
 script = ExtResource("2_320u2")
-current_effect = 5
+
+[node name="ToolTipComponent2D" parent="." instance=ExtResource("3_7d0lt")]
+tool_tip_text = "Testing"
+
+[editable path="ToolTipComponent2D"]

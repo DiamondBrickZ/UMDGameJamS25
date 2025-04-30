@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfwtnf4c4w7mx"]
+
+[ext_resource type="Script" uid="uid://crj14s3pc48jw" path="res://ui/tooltip/tool_tip_component.gd" id="1_iln03"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8hxo"]
+size = Vector2(1204.59, 697.397)
+
+[node name="ToolTipComponent2D" type="Area2D"]
+script = ExtResource("1_iln03")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d8hxo")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -35,3 +35,11 @@ func _process(delta):
 	heart_state = State.FULL
 	refresh()
 	material.set("shader_parameter/height", remap(amount, 0.0, 1.0, 0.2, -0.1))
+	
+	if Engine.is_editor_hint():
+		return
+	
+	if GameManager.has_effect(0, StatusEffect.Effects.BURNING):
+		material.set("shader_parameter/burning", lerp(material.get_shader_parameter("burning"), 1.5, 0.1))
+	else:
+		material.set("shader_parameter/burning", lerp(material.get_shader_parameter("burning"), 0.0, 0.1))

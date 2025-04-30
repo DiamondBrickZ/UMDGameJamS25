@@ -73,6 +73,7 @@ var discard_pile : Array[Card] = []
 
 var time_left : float = 90.0
 var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
+var tooltip_component : Node
 
 # PLAYER INFO
 var next_hand : Array[Card] = []

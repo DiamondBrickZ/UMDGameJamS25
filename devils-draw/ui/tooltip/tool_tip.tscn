@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq0ka0i22uhc6"]
+
+[ext_resource type="Script" uid="uid://cnefcupighvrf" path="res://ui/tooltip/tool_tip.gd" id="1_8qe4l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tvo2r"]
+bg_color = Color(0.18359, 0.18359, 0.18359, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ToolTip" type="PanelContainer"]
+z_index = 3
+offset_right = 254.0
+offset_bottom = 92.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tvo2r")
+script = ExtResource("1_8qe4l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "asdasdasdasdasd"
+fit_content = true
