@@ -12,9 +12,14 @@ var card_3d = preload("res://gameplay/cards/card_viewers/3d_card_viewer.tscn")
 
 func _ready():
 	GameManager.card_played.connect(_on_card_played)
+	GameManager.player_died.connect(_on_player_died)
 	
 	for card in GameManager.discard_pile:
 		_on_card_played(card, 1)
+
+func _on_player_died():
+	for i in get_children():
+		i.queue_free()
 
 func _on_card_played(card: Card, character : int):
 	# instantiate 3d card

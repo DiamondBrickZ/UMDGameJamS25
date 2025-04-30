@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://r0an8h2qp351"]
+[gd_scene load_steps=17 format=3 uid="uid://r0an8h2qp351"]
 
 [ext_resource type="Script" uid="uid://dn06ptxs4svk5" path="res://scenes/main_room/game_loop.gd" id="1_34y7g"]
 [ext_resource type="PackedScene" uid="uid://dny8yaysxtwma" path="res://scenes/main_room/devil/devil.tscn" id="2_ip11t"]
-[ext_resource type="Texture2D" uid="uid://csnmndi75nc52" path="res://scenes/main_room/background.png" id="3_mdlm6"]
 [ext_resource type="Script" uid="uid://dkm2n2fonwdyv" path="res://scenes/main_room/main_room_light.gd" id="3_sphia"]
 [ext_resource type="PackedScene" uid="uid://bo4xtilivjqnm" path="res://scenes/main_room/draw_pile/draw_pile.tscn" id="4_nfu6u"]
 [ext_resource type="Texture2D" uid="uid://do42py3mhbgxk" path="res://scenes/main_room/table.png" id="4_nsnb2"]
+[ext_resource type="Texture2D" uid="uid://c5etr3goetvop" path="res://scenes/main_room/Skulls bgpng.png" id="4_sphia"]
 [ext_resource type="PackedScene" uid="uid://bh8ve8ykble4k" path="res://scenes/main_room/spirit_bottle/spirit_bottle.tscn" id="5_qcty8"]
 [ext_resource type="PackedScene" uid="uid://bjdm2862gtnje" path="res://scenes/main_room/play_area/play_area.tscn" id="6_tme6b"]
 [ext_resource type="Environment" uid="uid://p7h2h03h2iqu" path="res://scenes/main_room/casino.tres" id="6_wx4vp"]
@@ -22,8 +22,6 @@ albedo_color = Color(0.0509996, 0.0071328, 0.000645078, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g2xgf"]
 albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mdlm6"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_mdlm6"]
 viewport_path = NodePath("SubViewport")
@@ -109,7 +107,7 @@ size = Vector3(25.5508, 0.223145, 41.1396)
 material = SubResource("StandardMaterial3D_g2xgf")
 
 [node name="MainRoomLight" type="SpotLight3D" parent="Scene"]
-transform = Transform3D(-0.999999, -1.50996e-07, -0.00123684, -0.00123684, -9.33788e-11, 0.999999, -1.50996e-07, 1, -9.33788e-11, 0, 1.88414, 0)
+transform = Transform3D(-0.99997, -1.50994e-07, 0.00766742, 0.00766742, 5.78874e-10, 0.99997, -1.50994e-07, 1, 5.78874e-10, 0, 1.88414, 0)
 light_color = Color(1, 0.682469, 0.406814, 1)
 light_energy = 10.0
 shadow_enabled = true
@@ -128,11 +126,11 @@ spot_angle = 39.2956
 
 [node name="Background" type="Sprite3D" parent="Scene"]
 transform = Transform3D(0.158706, -1.36378e-05, 2.26491e-06, 1.36378e-05, 0.158706, 8.33085e-07, -2.26491e-06, -8.33085e-07, 0.158706, 0, 0.134886, -3.38958)
-material_overlay = SubResource("ShaderMaterial_mdlm6")
-cast_shadow = 0
 shaded = true
 render_priority = -2
-texture = ExtResource("3_mdlm6")
+texture = ExtResource("4_sphia")
+region_enabled = true
+region_rect = Rect2(0, 294.47, 9712, 2396.53)
 
 [node name="TableSprite" type="Sprite3D" parent="Scene"]
 transform = Transform3D(0.113647, 0, 0, 0, -4.96769e-09, 0.113647, 0, -0.113647, -4.96769e-09, 0, 0, 0)
@@ -197,18 +195,18 @@ one_shot = true
 [connection signal="input_event" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_input_event"]
 [connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/SpiritMenuOption" to="SpiritBottle/SpiritsMenu/SpiritMenuOption" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93361" to="SpiritBottle/SpiritsMenu/@Area3D@93361" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93362" to="SpiritBottle/SpiritsMenu/@Area3D@93362" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93363" to="SpiritBottle/SpiritsMenu/@Area3D@93363" method="_on_mouse_exited"]
-[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_input_event"]
-[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@93364" to="SpiritBottle/SpiritsMenu/@Area3D@93364" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@106073" to="SpiritBottle/SpiritsMenu/@Area3D@106073" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@106073" to="SpiritBottle/SpiritsMenu/@Area3D@106073" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@106073" to="SpiritBottle/SpiritsMenu/@Area3D@106073" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@106074" to="SpiritBottle/SpiritsMenu/@Area3D@106074" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@106074" to="SpiritBottle/SpiritsMenu/@Area3D@106074" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@106074" to="SpiritBottle/SpiritsMenu/@Area3D@106074" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@106075" to="SpiritBottle/SpiritsMenu/@Area3D@106075" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@106075" to="SpiritBottle/SpiritsMenu/@Area3D@106075" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@106075" to="SpiritBottle/SpiritsMenu/@Area3D@106075" method="_on_mouse_exited"]
+[connection signal="input_event" from="SpiritBottle/SpiritsMenu/@Area3D@106076" to="SpiritBottle/SpiritsMenu/@Area3D@106076" method="_on_input_event"]
+[connection signal="mouse_entered" from="SpiritBottle/SpiritsMenu/@Area3D@106076" to="SpiritBottle/SpiritsMenu/@Area3D@106076" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SpiritBottle/SpiritsMenu/@Area3D@106076" to="SpiritBottle/SpiritsMenu/@Area3D@106076" method="_on_mouse_exited"]
 [connection signal="timeout" from="DialogueTimer" to="Devil" method="_on_dialogue_timer_timeout"]
 
 [editable path="SpiritBottle"]

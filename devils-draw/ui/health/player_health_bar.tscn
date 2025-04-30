@@ -15,10 +15,10 @@ heart_size = 0.4
 [node name="EnergyBar" parent="." instance=ExtResource("2_xnmy4")]
 custom_minimum_size = Vector2(100, 10)
 layout_mode = 1
-offset_left = 17.0
-offset_top = 109.0
-offset_right = 446.0
-offset_bottom = 122.0
+offset_left = 14.0
+offset_top = -5.0
+offset_right = 443.0
+offset_bottom = 8.0
 fill_mode = 0
 
 [node name="Hearts" type="Control" parent="."]

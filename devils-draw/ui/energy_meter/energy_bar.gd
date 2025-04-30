@@ -9,12 +9,13 @@ func _process(delta):
 	value = lerp(value, GameManager.game_info[player]["energy"], 0.1)
 	
 	var border_color : Color
+	var style_box : StyleBoxFlat = get_theme_stylebox("fill")
 	
 	# drunken high
 	if GameManager.has_effect(player, StatusEffect.Effects.DRUNKEN_HIGH):
 		border_color = Color.NAVY_BLUE
 	else:
-		border_color = Color.WHITE_SMOKE
+		border_color = Color.NAVY_BLUE
 	
-	if material:
-		material.border_color = lerp(material.border_color, border_color, 0.1)
+	if style_box:
+		style_box.border_color = lerp(style_box.border_color, border_color, 0.1)

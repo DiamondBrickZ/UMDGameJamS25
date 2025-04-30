@@ -327,6 +327,8 @@ func player_death():
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
 	game_info[1]["hand"] = []
+	game_info[1]["health"] = game_info[1]["max_health"]		# reset devil health
+	discard_pile = []
 	for effect in game_info[0]["status_effects"]:
 		game_info[0]["status_effects"].erase(effect)
 		status_effect_change.emit(0, effect, false)
@@ -404,7 +406,6 @@ func sell_soul(spirit_option : SpiritOption):
 		print('cannot buy, not enough souls')
 		return false
 	
-	print('sold souls!')
 	game_info[0]["souls"] -= cost
 	soul_gained.emit()
 	
@@ -412,7 +413,10 @@ func sell_soul(spirit_option : SpiritOption):
 		game_info[0]["max_health"] = 7.0
 	elif spirit_option.type == SpiritOption.Type.GOLD:
 		passives["gold_multiplier"] = 1.5
+		print("got the gold multiplier!")
 	elif spirit_option.type == SpiritOption.Type.DAMAGE:
 		passives["damage_multiplier"] = 1.5
 	elif spirit_option.type == SpiritOption.Type.SHIELD:
 		passives["shield_multiplier"] = 0.5
+	
+	return true

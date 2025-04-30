@@ -23,7 +23,8 @@ func set_data():
 
 func _on_input_event(camera, event, event_position, normal, shape_idx):
 	if Input.is_action_just_pressed("action"):
-		GameManager.sell_soul(spirit_option)
+		if GameManager.sell_soul(spirit_option):
+			been_bought = true
 
 func _on_mouse_entered():
 	hovering = true
@@ -33,8 +34,8 @@ func _on_mouse_exited():
 
 func _process(delta):
 	if hovering and not been_bought:
-		label.modulate = lerp(label.modulate, Color.LIGHT_BLUE, 0.1)
-	elif hovering and not been_bought:
+		label.modulate = lerp(label.modulate, Color.BLUE, 0.1)
+	elif not hovering and not been_bought:
 		label.modulate = lerp(label.modulate, Color.WHITE, 0.1)
 	
 	if been_bought:

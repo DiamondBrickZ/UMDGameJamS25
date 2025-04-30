@@ -2,26 +2,27 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c12n1wvgm4i55"
-path="res://.godot/imported/Player_Energy_Bar_and_Devil_Health_Bar.png-6aa1f3f9339356fa26ebf4168473cae5.ctex"
+uid="uid://c5etr3goetvop"
+path.s3tc="res://.godot/imported/Skulls bgpng.png-f342d8d4a980969bd5bdaf59b5aadbdd.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
-source_file="res://ui/devil_health/Player_Energy_Bar_and_Devil_Health_Bar.png"
-dest_files=["res://.godot/imported/Player_Energy_Bar_and_Devil_Health_Bar.png-6aa1f3f9339356fa26ebf4168473cae5.ctex"]
+source_file="res://scenes/main_room/Skulls bgpng.png"
+dest_files=["res://.godot/imported/Skulls bgpng.png-f342d8d4a980969bd5bdaf59b5aadbdd.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +32,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

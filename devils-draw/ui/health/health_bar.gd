@@ -21,6 +21,7 @@ const heart = preload("res://ui/health/heart.tscn")
 
 var hearts_array : Array[Sprite2D] = []
 var health :float
+var total_hearts: int
 
 func _ready():
 	GameManager.dealt_damage.connect(_on_dealt_damage)
@@ -32,17 +33,20 @@ func _on_dealt_damage(character: int, amount: float):
 	pass
 
 func create_hearts():
+	total_hearts = GameManager.game_info[0]["max_health"]
+
 	hearts_array = []
 	for child in hearts.get_children():
 		child.queue_free()
 	
-	for i in range(5):
+	for i in range(total_hearts):
 		var new_heart = heart.instantiate()
 		hearts.add_child(new_heart)
 		hearts_array.append(new_heart)
 
 func _process(delta):
-	var total_hearts: int = GameManager.game_info[0]["max_health"]
+	if total_hearts != int(GameManager.game_info[0]["max_health"]):
+		create_hearts()
 	
 	health = lerpf(health, GameManager.game_info[0]["health"], 0.01)
 	
