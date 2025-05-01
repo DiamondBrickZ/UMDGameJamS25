@@ -71,7 +71,7 @@ var current_game_state := GameState.MAIN_MENU:
 
 var discard_pile : Array[Card] = []
 
-var time_left : float = 90.0
+var time_left : float = 60.0
 var game_time_left : float = 7 * 60.0 # once this runs out, the game ends
 var tooltip_component : Node
 
@@ -193,6 +193,9 @@ func is_drunk(character:int):
 ## CARDS
 func draw_card(character: int = 0):
 	
+	if len(game_info[character]["hand"]) >= 7:
+		return false
+	
 	var files = get_all_file_paths("res://gameplay/cards/")
 	var card_resources = []
 	for file in files:
@@ -231,6 +234,9 @@ func draw_card(character: int = 0):
 	var new_card : Card = rand_card.duplicate()
 	game_info[character]["hand"].append(new_card)
 	card_drawn.emit(new_card, character)
+	
+	if character == 0:
+		GameManager.devil_turn()
 	
 	await get_tree().create_timer(0.5).timeout
 	
@@ -360,7 +366,7 @@ func player_death():
 	
 	# emit signals, 
 	player_died.emit()
-	time_left = 90.0
+	time_left = 60.0
 	gain_soul()
 	print("Player dies")
 	game.change_location(game.Locations.SHOP)

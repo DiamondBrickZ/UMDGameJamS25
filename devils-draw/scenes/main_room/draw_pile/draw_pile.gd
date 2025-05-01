@@ -15,7 +15,6 @@ func _ready():
 func _on_input_event(_camera, _event, _event_position, _normal, _shape_idx):
 	if Input.is_action_just_pressed("action") and can_draw:
 		GameManager.draw_card()
-		GameManager.devil_turn()
 		can_draw = false
 		timer.start()
 

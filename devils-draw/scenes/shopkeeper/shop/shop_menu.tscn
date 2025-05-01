@@ -99,6 +99,7 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Paper" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(127, 348)
 scale = Vector2(0.0919722, 0.0919722)
 texture = ExtResource("9_7s5c5")
