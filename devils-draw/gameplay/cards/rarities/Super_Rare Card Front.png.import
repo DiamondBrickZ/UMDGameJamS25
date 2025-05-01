@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Super_Rare Card Front.png-7b425c964350f8b8692
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

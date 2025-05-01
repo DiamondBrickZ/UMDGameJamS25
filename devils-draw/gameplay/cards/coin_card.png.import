@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chnb6d7dt5dil"
-path.s3tc="res://.godot/imported/coin_card.png-8e0a43b4ebbe694fc987f1951216208c.s3tc.ctex"
+path="res://.godot/imported/coin_card.png-8e0a43b4ebbe694fc987f1951216208c.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://gameplay/cards/coin_card.png"
-dest_files=["res://.godot/imported/coin_card.png-8e0a43b4ebbe694fc987f1951216208c.s3tc.ctex"]
+dest_files=["res://.godot/imported/coin_card.png-8e0a43b4ebbe694fc987f1951216208c.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

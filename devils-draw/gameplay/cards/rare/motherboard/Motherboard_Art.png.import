@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Motherboard_Art.png-f2586ad43964d09b5c9334624
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

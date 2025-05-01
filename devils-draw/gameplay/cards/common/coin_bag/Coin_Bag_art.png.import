@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Coin_Bag_art.png-8fd13b60c7539c3572ab953c759f
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Mouse_Trap_Art.png-a05d1de15c92ee2be1a7e6f593
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

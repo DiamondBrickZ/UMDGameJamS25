@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/timer (hand).png-e88e08ab8d819489e8d3db8e2202
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

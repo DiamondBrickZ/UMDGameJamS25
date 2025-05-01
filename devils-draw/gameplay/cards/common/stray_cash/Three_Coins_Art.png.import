@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Three_Coins_Art.png-0787616e1891ef1cfc123a492
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

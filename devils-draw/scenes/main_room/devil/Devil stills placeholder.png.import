@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d2m2qi0nmjido"
-path.s3tc="res://.godot/imported/Devil stills placeholder.png-2b63793648ca9a7a3493f4f7e1db332b.s3tc.ctex"
+path="res://.godot/imported/Devil stills placeholder.png-2b63793648ca9a7a3493f4f7e1db332b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://scenes/main_room/devil/Devil stills placeholder.png"
-dest_files=["res://.godot/imported/Devil stills placeholder.png-2b63793648ca9a7a3493f4f7e1db332b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Devil stills placeholder.png-2b63793648ca9a7a3493f4f7e1db332b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

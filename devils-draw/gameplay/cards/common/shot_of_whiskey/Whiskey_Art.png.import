@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Whiskey_Art.png-d65a669ecc4d34ebf32771be16a32
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

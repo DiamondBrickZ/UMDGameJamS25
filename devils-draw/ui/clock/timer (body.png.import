@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/timer (body.png-f0ab5761e59d61807d20137c06f48
 
 [params]
 
-compress/mode=0
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
