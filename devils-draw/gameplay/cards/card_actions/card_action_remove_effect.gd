@@ -10,7 +10,7 @@ func do_action(my_character: int):
 	var effects_removed = 0
 	for effect in GameManager.game_info[my_character]["status_effects"]:
 		if effect.effect_tag == StatusEffect.Tag.NEGATIVE and effects_removed < max_num:
-			GameManager.game_info[my_character]["status_effects"].erase(effect)
+			GameManager.remove_status_effect(my_character, effect)
 			effects_removed += 1
 	
 	print("Removed negative effects!")

@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://q6nq074gsid7"]
+
+[ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/casino_doors/casino_doors.gd" id="1_eeydr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trtic"]
+albedo_color = Color(0.216456, 0.0815538, 0.00644739, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eeydr"]
+size = Vector3(1, 1.05817, 1)
+
+[node name="CasinoDoors" type="Area3D" node_paths=PackedStringArray("left_door_marker", "right_door_marker")]
+transform = Transform3D(2.98935, 0, 0, 0, 3.63111, 0, 0, 0, 2.98935, 0, 0, 0)
+script = ExtResource("1_eeydr")
+is_open = true
+left_door_marker = NodePath("Marker3D")
+right_door_marker = NodePath("Marker3D2")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -0.87242, 0, 1, 0, 1, 0, -3.81347e-08, -0.443159, 0, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260028, 0.489383, 0)
+size = Vector3(0.491699, 1, 0.0686035)
+material = SubResource("StandardMaterial3D_trtic")
+
+[node name="Marker3D2" type="Marker3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 0.87242, 0, 1, 0, -1, 0, -3.81347e-08, 0.447441, 0, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Marker3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248575, 0.489383, 0)
+size = Vector3(0.491699, 1, 0.0686035)
+material = SubResource("StandardMaterial3D_trtic")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999997, 0, 0, 0, 1, 0, 0.49057, 0)
+shape = SubResource("BoxShape3D_eeydr")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

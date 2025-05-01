@@ -67,7 +67,7 @@ func instance_scene(new_location: Locations):
 		if main_room_instance: main_room_instance.queue_free()
 		if main_menu_instance: main_menu_instance.queue_free()
 
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(1).timeout
 		transitioning = false
 	elif new_location == Locations.TABLE:
 		main_room_instance = main_room.instantiate()
@@ -83,7 +83,7 @@ func instance_scene(new_location: Locations):
 		await get_tree().create_timer(2).timeout
 		if shopkeeper_bar_instance: shopkeeper_bar_instance.queue_free()
 		
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(1).timeout
 		transitioning = false
 	elif new_location == Locations.MAIN_MENU:
 		main_menu_instance = main_menu.instantiate()

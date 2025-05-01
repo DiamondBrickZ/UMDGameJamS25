@@ -20,6 +20,14 @@ enum ModifierTypes {
 	SHIELD
 }
 
+enum Locations {
+	TABLE,
+	SHOP,
+	DEVIL,
+	SPIRITS,
+	MAIN_MENU
+}
+
 # MUSIC
 
 @onready var main_theme = $MainTheme
@@ -116,8 +124,8 @@ func _process(delta):
 	$Debug.text = ""
 	#for card in game_info[1]["hand"]:
 		#$Debug.text += card.title + "\n"
-	for effect in game_info[0]["status_effects"]:
-		$Debug.text += effect.status_name + "\n"
+	#for effect in game_info[0]["status_effects"]:
+		#$Debug.text += effect.status_name + "\n"
 	
 	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.PAUSED or current_game_state == GameState.INTRO: return
 	
@@ -131,8 +139,7 @@ func _process(delta):
 			effect.time_left -= 1 * delta
 			if effect.time_left <= 0:
 				#remove effect
-				game_info[character]["status_effects"].erase(effect)
-				status_effect_change.emit(character, effect, false)
+				remove_status_effect(character, effect)
 		
 		if has_effect(character, StatusEffect.Effects.BLEEDING) or has_effect(character, StatusEffect.Effects.BURNING) or has_effect(character, StatusEffect.Effects.POISONED):
 			game_info[character]["modifiers"][ModifierTypes.HEALTH] = -0.1
@@ -181,7 +188,7 @@ func apply_status_effect(character: int, effect: StatusEffect):
 	if not effect.stacking:
 		for e : StatusEffect in game_info[character]["status_effects"]:
 			if e.effect_type == effect.effect_type:
-				game_info[character]["status_effects"].erase(e)
+				remove_status_effect(character, e)
 	
 	# otherwise, add the effect even if it already exists.
 	game_info[character]["status_effects"].append(effect)
@@ -198,6 +205,14 @@ func is_drunk(character:int):
 	for effect in game_info[character]["status_effects"]:
 		if effect.effect_type == StatusEffect.Effects.DRUNKEN_HIGH:
 			return true
+
+func remove_status_effect(character: int, effect: StatusEffect):
+	status_effect_change.emit(0, effect, false)
+	game_info[character]["status_effects"].erase(effect)
+
+func remove_all_status_effects(character: int):
+	for effect in game_info[character]["status_effects"]:
+		remove_status_effect(character, effect)
 
 ## CARDS
 func draw_card(character: int = 0):
@@ -364,9 +379,7 @@ func not_enough_energy():
 ## GAME EVENTS
 func player_death():
 	# player ded
-	for effect in game_info[0]["status_effects"]:
-		status_effect_change.emit(0, effect, false)
-		game_info[0]["status_effects"].erase(effect)
+	remove_all_status_effects(0)
 	game_info[0]["health"] = 0.0
 	gain_soul()
 	player_died.emit()
@@ -387,7 +400,7 @@ func player_death():
 	discard_pile = []
 	
 	# if it doesn't get rid of all status effects, clear it
-	game_info[0]["status_effects"].clear()
+	remove_all_status_effects(0)
 	
 	await get_tree().create_timer(4.5).timeout
 	game.cam_speed = 1.0
@@ -419,6 +432,11 @@ func change_game_state(new_state: GameState):
 			tween.tween_property(main_theme, "volume_db", 0.0, 1.0)
 	
 	game_state_change.emit(current_game_state)
+
+func change_location(location: Locations):
+	if game.change_location(location):
+		return true
+	return false
 
 ## SOUL
 func gain_soul():

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5ihcm05dv5sp" path="res://scenes/game.gd" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bpdwwq6slbjfl" path="res://ui/ui.gd" id="2_p57ef"]
+[ext_resource type="PackedScene" uid="uid://q6nq074gsid7" path="res://scenes/casino_doors/casino_doors.tscn" id="2_rysoc"]
 [ext_resource type="Shader" uid="uid://q1hj44vs4iyd" path="res://shaders/abberation.gdshader" id="3_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://bnyg1yodqens2" path="res://scenes/shopkeeper/shop/shop_menu.tscn" id="4_dinhu"]
 [ext_resource type="Shader" uid="uid://dbkltyvvqu80l" path="res://shaders/game_loop_3d.gdshader" id="4_gee14"]
@@ -10,13 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://d4j6u2nha3kt1" path="res://ui/gold_display/gold_display.tscn" id="7_ca42v"]
 [ext_resource type="PackedScene" uid="uid://dfoetxg5b2an1" path="res://ui/clock/clock.tscn" id="7_ir15t"]
 [ext_resource type="PackedScene" uid="uid://dq0ka0i22uhc6" path="res://ui/tooltip/tool_tip.tscn" id="7_rysoc"]
-[ext_resource type="Script" uid="uid://cpdvml45wjq0k" path="res://scenes/shopkeeper/casino_doors.gd" id="7_u5sy4"]
 [ext_resource type="Script" uid="uid://x1lfi0qgr6i5" path="res://ui/visual_effects/effects.gd" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://bgsj01wpn3fgw" path="res://ui/health/player_health_bar.tscn" id="9_0tnpc"]
 [ext_resource type="Shader" uid="uid://bijuo0fvr68em" path="res://ui/gradient_up_down.gdshader" id="9_trtic"]
 [ext_resource type="PackedScene" uid="uid://da6yfbxd5gd35" path="res://ui/devil_health/devil_health.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://nhhm2l2cjaue" path="res://scenes/endings/lose.tscn" id="12_dinhu"]
 [ext_resource type="PackedScene" uid="uid://8n7yo6dp7tqo" path="res://scenes/endings/won.tscn" id="13_kvuet"]
+[ext_resource type="Script" uid="uid://tujt4owxgqrw" path="res://scenes/back_to_shop.gd" id="18_ssvqc"]
 
 [sub_resource type="Animation" id="Animation_0tnpc"]
 length = 0.001
@@ -153,9 +154,6 @@ _data = {
 }
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_yqjtg"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_trtic"]
-albedo_color = Color(0.216456, 0.0815538, 0.00644739, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gee14"]
 albedo_color = Color(0.133878, 0.143112, 0.139174, 1)
@@ -317,28 +315,8 @@ fov = 36.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.195, 0)
 fov = 45.5
 
-[node name="CasinoDoors" type="Node3D" parent="." node_paths=PackedStringArray("left_door_marker", "right_door_marker")]
+[node name="CasinoDoors" parent="." instance=ExtResource("2_rysoc")]
 transform = Transform3D(2.98935, 0, 0, 0, 3.63111, 0, 0, 0, 2.98935, -0.376272, 0, 3.41932)
-script = ExtResource("7_u5sy4")
-is_open = true
-left_door_marker = NodePath("Marker3D")
-right_door_marker = NodePath("Marker3D2")
-
-[node name="Marker3D" type="Marker3D" parent="CasinoDoors"]
-transform = Transform3D(-4.37114e-08, 0, -0.87242, 0, 1, 0, 1, 0, -3.81347e-08, -0.443159, 0, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="CasinoDoors/Marker3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.260028, 0.489383, 0)
-size = Vector3(0.491699, 1, 0.0686035)
-material = SubResource("StandardMaterial3D_trtic")
-
-[node name="Marker3D2" type="Marker3D" parent="CasinoDoors"]
-transform = Transform3D(-4.37114e-08, 0, 0.87242, 0, 1, 0, -1, 0, -3.81347e-08, 0.447441, 0, 0)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CasinoDoors/Marker3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248575, 0.489383, 0)
-size = Vector3(0.491699, 1, 0.0686035)
-material = SubResource("StandardMaterial3D_trtic")
 
 [node name="Room" type="CSGCombiner3D" parent="."]
 
@@ -545,31 +523,19 @@ z_index = 2
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
-[node name="PanUp" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 300.0
-offset_top = 327.0
-offset_right = -1162.0
-offset_bottom = 796.0
-grow_horizontal = 2
-mouse_default_cursor_shape = 2
-metadata/_edit_lock_ = true
-
-[node name="PanDown" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 12
+[node name="BackToShop" type="Button" parent="UI"]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1713.0
-offset_top = -288.0
-offset_right = -8.0
-offset_bottom = -18.0
-grow_horizontal = 2
+offset_left = -379.0
+offset_top = -154.0
+offset_right = -65.0
+offset_bottom = -44.0
+grow_horizontal = 0
 grow_vertical = 0
-mouse_default_cursor_shape = 2
+text = "Go back to shop."
+script = ExtResource("18_ssvqc")
 
-[connection signal="gui_input" from="UI/PanUp" to="." method="_on_pan_up_gui_input"]
-[connection signal="gui_input" from="UI/PanDown" to="." method="_on_pan_down_gui_input"]
+[connection signal="pressed" from="UI/BackToShop" to="UI/BackToShop" method="_on_pressed"]

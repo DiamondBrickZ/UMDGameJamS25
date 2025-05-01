@@ -1,25 +1,25 @@
 [gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://ctntalmbvlqa0"]
 
-[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_dtdxg"]
-[ext_resource type="Resource" uid="uid://bu68a0tuitgs1" path="res://gameplay/status_effects/tipsy.tres" id="2_h8gfq"]
-[ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_3bonr"]
-[ext_resource type="Texture2D" uid="uid://dik4qpjdabjan" path="res://gameplay/cards/rare/hangover/Hangover_Art.png" id="4_fu2sr"]
-[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="5_mk8w0"]
+[ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_6uhf0"]
+[ext_resource type="Resource" uid="uid://bu68a0tuitgs1" path="res://gameplay/status_effects/tipsy.tres" id="2_2xx5p"]
+[ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_moesg"]
+[ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_a2e04"]
+[ext_resource type="Texture2D" uid="uid://dik4qpjdabjan" path="res://gameplay/cards/rare/hangover/Hangover_Art.png" id="4_a2e04"]
 
 [sub_resource type="Resource" id="Resource_h4v5k"]
-script = ExtResource("3_3bonr")
+script = ExtResource("3_a2e04")
 subject = 0
-duration = 15.0
-effect = ExtResource("2_h8gfq")
+duration = 5.0
+effect = ExtResource("2_2xx5p")
 metadata/_custom_type_script = "uid://bxjkgdcnwgjyv"
 
 [resource]
-script = ExtResource("5_mk8w0")
+script = ExtResource("2_moesg")
 title = "Hangover"
 desc = ""
-cover = ExtResource("4_fu2sr")
+cover = ExtResource("4_a2e04")
 energy_cost = 0.0
-card_actions = Array[ExtResource("1_dtdxg")]([SubResource("Resource_h4v5k")])
+card_actions = Array[ExtResource("1_6uhf0")]([SubResource("Resource_h4v5k")])
 card_rarity = 1
 card_method = 0
 metadata/_custom_type_script = "uid://c3gd15hekfs2l"

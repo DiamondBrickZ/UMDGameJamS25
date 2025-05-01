@@ -1,5 +1,5 @@
 @tool
-extends Node3D
+extends Area3D
 
 @export var is_open: bool = false:
 	set(new_val):
@@ -23,3 +23,9 @@ func close():
 	var tween = get_tree().create_tween().set_parallel()
 	tween.tween_property(left_door_marker, "rotation", Vector3(0, 0, 0), 0.5).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(right_door_marker, "rotation", Vector3(0, 0, 0), 0.5).set_trans(Tween.TRANS_SINE)
+
+func _on_input_event(camera, event, event_position, normal, shape_idx):
+	if event is InputEventMouseButton:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			get_tree().current_scene.change_location(Game.Locations.TABLE)
+			print('hiiii')

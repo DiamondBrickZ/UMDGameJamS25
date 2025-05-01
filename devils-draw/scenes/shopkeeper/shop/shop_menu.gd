@@ -35,8 +35,7 @@ func populate_menu():
 	for i in range(num_options):
 		var new_item = menu_item.instantiate()
 		var rand_card : Card = cards.pick_random()
-		#list.remove_at(rand_card)		# prevent from choosing the same one
-		var gold_cost : int = int(rand_card.energy_cost/2)
+		var gold_cost : int = max(int(rand_card.energy_cost/2), 2)
 		var item_name : String = rand_card.title + " (Cost: " + str(gold_cost) + ")"
 		new_item.text = item_name
 		container.add_child(new_item)
