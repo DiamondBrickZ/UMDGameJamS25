@@ -364,26 +364,27 @@ func not_enough_energy():
 ## GAME EVENTS
 func player_death():
 	# player ded
-	game_info[0]["health"] = game_info[0]["max_health"]
-
-	# emit signals, 
-	player_died.emit()
-	time_left = 60.0
+	for effect in game_info[0]["status_effects"]:
+		status_effect_change.emit(0, effect, false)
+		game_info[0]["status_effects"].erase(effect)
+	game_info[0]["health"] = 0.0
 	gain_soul()
+	player_died.emit()
+	
+	await get_tree().create_timer(1).timeout
+
+	time_left = 60.0
 	print("Player dies")
-	game.change_location(game.Locations.SHOP)
-	game.cam_speed = 0.5
 	
 	await get_tree().create_timer(0.5).timeout
+	game.change_location(game.Locations.SHOP)
+	game.cam_speed = 0.5
 	game_info[0]["gold"] = 0.0
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
 	game_info[0]["hand"] = []
 	game_info[1]["hand"] = []
 	discard_pile = []
-	for effect in game_info[0]["status_effects"]:
-		game_info[0]["status_effects"].erase(effect)
-		status_effect_change.emit(0, effect, false)
 	
 	# if it doesn't get rid of all status effects, clear it
 	game_info[0]["status_effects"].clear()

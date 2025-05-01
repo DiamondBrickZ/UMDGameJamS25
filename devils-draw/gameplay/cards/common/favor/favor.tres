@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://d1dm630tuls8g"]
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://d1dm630tuls8g"]
 
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_0aylq"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_6g535"]
 [ext_resource type="Script" uid="uid://clvdg3kvgqrek" path="res://gameplay/cards/card_actions/card_action_favor.gd" id="2_75w23"]
+[ext_resource type="Texture2D" uid="uid://b2wc1b4baqioj" path="res://gameplay/cards/common/favor/Favor_Art.png" id="3_75w23"]
 
 [sub_resource type="Resource" id="Resource_ryknx"]
 script = ExtResource("2_75w23")
@@ -12,6 +13,7 @@ metadata/_custom_type_script = "uid://clvdg3kvgqrek"
 script = ExtResource("2_6g535")
 title = "Favor"
 desc = "Recieve a card from your opponents hand."
+cover = ExtResource("3_75w23")
 energy_cost = 10.0
 card_actions = Array[ExtResource("1_0aylq")]([SubResource("Resource_ryknx")])
 card_rarity = 0

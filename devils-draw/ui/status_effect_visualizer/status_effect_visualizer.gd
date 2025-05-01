@@ -7,12 +7,17 @@ const STATUS_EFFECT = preload("res://ui/status_effect_visualizer/status_effect.t
 
 func _ready():
 	GameManager.status_effect_change.connect(_on_status_effect_change)
+	GameManager.player_died.connect(_on_player_died)
 
 func _on_status_effect_change(char: int, effect: StatusEffect, applied: bool):
 	
 	# only do for selected character
 	if character != char:
 		return
+	
+	refresh()
+
+func refresh():
 	
 	# clear existing effects
 	for i in get_children():
@@ -25,3 +30,6 @@ func _on_status_effect_change(char: int, effect: StatusEffect, applied: bool):
 		new_child.current_effect = new_effect
 		new_child.position.x = direction * i * separation
 		add_child(new_child)
+
+func _on_player_died():
+	refresh()

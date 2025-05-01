@@ -14,7 +14,7 @@ metadata/_custom_type_script = "uid://ddrdcpd66t7sk"
 [resource]
 script = ExtResource("2_rrveh")
 title = "Bandages"
-desc = "Removes one negative status effect from the user."
+desc = "Mom's Secret Weapon"
 cover = ExtResource("3_urwgb")
 energy_cost = 15.0
 card_actions = Array[ExtResource("1_n0lmo")]([SubResource("Resource_i8m26")])

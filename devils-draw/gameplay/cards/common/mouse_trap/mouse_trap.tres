@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Card" load_steps=5 format=3 uid="uid://clny0xcuef54u"]
+[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://clny0xcuef54u"]
 
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_npufj"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_mwfsw"]
 [ext_resource type="Script" uid="uid://b0p88mrxmt066" path="res://gameplay/cards/card_actions/card_action_damage.gd" id="2_u04md"]
+[ext_resource type="Texture2D" uid="uid://brhvp1hursdjr" path="res://gameplay/cards/common/mouse_trap/Mouse_Trap_Art.png" id="3_u04md"]
 
 [sub_resource type="Resource" id="Resource_kfxx5"]
 script = ExtResource("2_u04md")
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://b0p88mrxmt066"
 script = ExtResource("2_mwfsw")
 title = "Mouse Trap"
 desc = "Ouch! Lose half a heart."
+cover = ExtResource("3_u04md")
 energy_cost = 0.0
 card_actions = Array[ExtResource("1_npufj")]([SubResource("Resource_kfxx5")])
 card_rarity = 0

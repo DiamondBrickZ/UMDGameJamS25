@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Card" load_steps=6 format=3 uid="uid://c85amhel35bl3"]
+[gd_resource type="Resource" script_class="Card" load_steps=7 format=3 uid="uid://c85amhel35bl3"]
 
 [ext_resource type="Script" uid="uid://cxqobnhrllpr2" path="res://gameplay/cards/card_actions/card_action.gd" id="1_xagfg"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_dtxu4"]
 [ext_resource type="Resource" uid="uid://c4uxgpqnlc5bh" path="res://gameplay/status_effects/poisoned.tres" id="2_rlng6"]
 [ext_resource type="Script" uid="uid://bxjkgdcnwgjyv" path="res://gameplay/cards/card_actions/card_action_apply_effect.gd" id="3_cf37n"]
+[ext_resource type="Texture2D" uid="uid://ctmh8d81qjo4x" path="res://gameplay/cards/rare/poisoned_syringe/Poisoned_Syringe_Art.png" id="4_cf37n"]
 
 [sub_resource type="Resource" id="Resource_qhljt"]
 script = ExtResource("3_cf37n")
@@ -16,6 +17,7 @@ metadata/_custom_type_script = "uid://bxjkgdcnwgjyv"
 script = ExtResource("2_dtxu4")
 title = "Poisoned Syringe"
 desc = ""
+cover = ExtResource("4_cf37n")
 energy_cost = 0.0
 card_actions = Array[ExtResource("1_xagfg")]([SubResource("Resource_qhljt")])
 card_rarity = 0
