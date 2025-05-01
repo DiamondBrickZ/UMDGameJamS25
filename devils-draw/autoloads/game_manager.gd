@@ -8,7 +8,8 @@ enum GameState {
 	MAIN_MENU,
 	SHOP,
 	PLAYING,
-	PAUSED
+	PAUSED,
+	INTRO
 }
 
 enum ModifierTypes {
@@ -30,6 +31,7 @@ var current_game_state := GameState.MAIN_MENU:
 	set(new_val):
 		change_game_state(new_val)
 		current_game_state = new_val
+var do_tutorial = true
 
 @export var game_info : Dictionary = {
 	0: {		## PLAYER
@@ -117,7 +119,7 @@ func _process(delta):
 	for effect in game_info[0]["status_effects"]:
 		$Debug.text += effect.status_name + "\n"
 	
-	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.PAUSED: return
+	if current_game_state == GameState.MAIN_MENU or current_game_state == GameState.PAUSED or current_game_state == GameState.INTRO: return
 	
 	# game effects
 	for character in range(2):
@@ -164,6 +166,17 @@ func _process(delta):
 	if time_left <= 0 and not current_game_state == GameState.PAUSED:
 		current_game_state = GameState.PAUSED
 		game_end.emit(false)
+
+func start_game():
+	game_start.emit()
+	game.change_location(Game.Locations.SHOP)
+	current_game_state = GameState.SHOP
+
+func start_intro():
+	current_game_state = GameState.INTRO
+	game.change_location(Game.Locations.SHOP)
+	await get_tree().create_timer(4).timeout
+	shop_dialogue.emit("intro")
 
 ## STATUS EFFECTS
 func apply_status_effect(character: int, effect: StatusEffect):
@@ -355,6 +368,17 @@ func not_enough_energy():
 ## GAME EVENTS
 func player_death():
 	# player ded
+	game_info[0]["health"] = game_info[0]["max_health"]
+
+	# emit signals, 
+	player_died.emit()
+	time_left = 60.0
+	gain_soul()
+	print("Player dies")
+	game.change_location(game.Locations.SHOP)
+	game.cam_speed = 0.5
+	
+	await get_tree().create_timer(0.5).timeout
 	game_info[0]["gold"] = 0.0
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
@@ -364,13 +388,6 @@ func player_death():
 		game_info[0]["status_effects"].erase(effect)
 		status_effect_change.emit(0, effect, false)
 	
-	# emit signals, 
-	player_died.emit()
-	time_left = 60.0
-	gain_soul()
-	print("Player dies")
-	game.change_location(game.Locations.SHOP)
-	game.cam_speed = 0.5
 	await get_tree().create_timer(4.5).timeout
 	game.cam_speed = 1.0
 	shop_dialogue.emit("player_revived")

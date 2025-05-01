@@ -129,7 +129,9 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme = ExtResource("8_sql68")
 theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
 text = "asdasdsaasudhkaushdkuahsdukhasukdhakudshasdasdasd"
+fit_content = true
 
 [node name="DialogueTimer" type="Timer" parent="."]
 wait_time = 3.0

@@ -47,17 +47,20 @@ func instance_scene(new_location: Locations):
 		shopkeeper_bar_instance = shopkeeper_bar.instantiate()
 		casino_doors.close()
 		transitioning = true
-		GameManager.current_game_state = GameManager.GameState.SHOP
+		if not GameManager.current_game_state == GameManager.GameState.INTRO:
+			GameManager.current_game_state = GameManager.GameState.SHOP
 		add_child(shopkeeper_bar_instance)
 		
 		# slide in shop menu
-		if current_location == Locations.MAIN_MENU:
-			await get_tree().create_timer(2.5).timeout
-		else:
-			await get_tree().create_timer(0.5).timeout
-		ui.shop_menu.slide_in()
+		if GameManager.current_game_state != GameManager.GameState.INTRO:
+			if current_location == Locations.MAIN_MENU:
+				await get_tree().create_timer(2.5).timeout
+			else:
+				await get_tree().create_timer(0.5).timeout
+			ui.shop_menu.slide_in()
 		
-		GameManager.shop_dialogue.emit("welcome_back")
+		if not GameManager.current_game_state == GameManager.GameState.INTRO:
+			GameManager.shop_dialogue.emit("welcome_back")
 		
 		# remove the main room instance
 		await get_tree().create_timer(2).timeout

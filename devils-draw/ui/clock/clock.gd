@@ -14,5 +14,5 @@ func _process(delta):
 	else:
 		time_left = GameManager.time_left
 	
-	var target = remap(time_left, 0.0, 90.0, 0.0, -2*PI)
+	var target = remap(time_left, 0.0, 60.0, 0.0, -2*PI)
 	hand.rotation = lerp(hand.rotation, target, 0.1)
