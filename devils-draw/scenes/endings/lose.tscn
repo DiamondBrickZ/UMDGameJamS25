@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://nhhm2l2cjaue"]
+[gd_scene load_steps=5 format=3 uid="uid://nhhm2l2cjaue"]
 
 [ext_resource type="Script" uid="uid://dhkkpxsqm0emb" path="res://scenes/endings/lose.gd" id="1_1bol7"]
 [ext_resource type="FontFile" uid="uid://0n3rxhgeebkc" path="res://ui/Quintessential-Regular.ttf" id="2_tyl4e"]
+[ext_resource type="Texture2D" uid="uid://buib6hibtpran" path="res://scenes/endings/bad end - restart button.png" id="3_xlawg"]
+[ext_resource type="Texture2D" uid="uid://cin64t8r7wj8b" path="res://scenes/endings/bad end.png" id="4_yrnvr"]
 
 [node name="Lose" type="Control"]
 layout_mode = 3
@@ -14,6 +16,7 @@ mouse_filter = 2
 script = ExtResource("1_1bol7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +26,7 @@ grow_vertical = 2
 color = Color(0.163288, 0.0916887, 0.103887, 1)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,6 +45,7 @@ text = "You Died"
 horizontal_alignment = 1
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -60,7 +65,19 @@ text = "You played with the cards you were dealt... poorly.
 If only you had one more hand..."
 horizontal_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_yrnvr")
+stretch_mode = 6
+
 [node name="Button" type="Button" parent="."]
+modulate = Color(1, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -75,6 +92,9 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_tyl4e")
 theme_override_font_sizes/font_size = 26
-text = "Make one more deal."
+icon = ExtResource("3_xlawg")
+flat = true
 
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

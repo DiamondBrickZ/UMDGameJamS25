@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cpny3em43kym4" path="res://ui/devil_health/devil_energy_long.png" id="4_kxvde"]
 
 [sub_resource type="Gradient" id="Gradient_7thi8"]
+offsets = PackedFloat32Array(0.366834, 0.703518)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j0qqu"]
 
@@ -20,12 +21,13 @@ shader = ExtResource("3_3nqmj")
 shader_parameter/ColorParameter = Color(0.529156, 0.136308, 0.216663, 1)
 shader_parameter/ColorParameter2 = Color(0.89492, 0.199808, 0.230804, 1)
 shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_kxvde")
-shader_parameter/scroll_speed = 0.3
+shader_parameter/scroll_speed = 0.15
 shader_parameter/amount = 0.545
 shader_parameter/start = 0.07
 shader_parameter/end = 0.955
 
 [sub_resource type="Gradient" id="Gradient_j0qqu"]
+offsets = PackedFloat32Array(0.447236, 0.788945)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kxvde"]
 
@@ -38,7 +40,7 @@ shader = ExtResource("3_3nqmj")
 shader_parameter/ColorParameter = Color(0.426403, 0.558308, 0.939297, 1)
 shader_parameter/ColorParameter2 = Color(0.0249534, 0.31137, 0.515784, 1)
 shader_parameter/Texture2DParameter = SubResource("NoiseTexture2D_x8qb6")
-shader_parameter/scroll_speed = 0.085
+shader_parameter/scroll_speed = 0.3
 shader_parameter/amount = 0.861
 shader_parameter/start = 0.13
 shader_parameter/end = 0.543

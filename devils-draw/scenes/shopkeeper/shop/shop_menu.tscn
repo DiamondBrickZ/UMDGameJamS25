@@ -75,17 +75,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Paper" type="Sprite2D" parent="Control"]
-position = Vector2(127, 348)
+position = Vector2(55, 348)
 scale = Vector2(0.0919722, 0.0919722)
 texture = ExtResource("9_7s5c5")
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
-offset_left = -85.0
+offset_left = -157.0
 offset_top = 301.0
-offset_right = 145.0
-offset_bottom = 451.0
+offset_right = 283.0
+offset_bottom = 501.0
 theme_override_constants/h_separation = 40
 theme_override_constants/v_separation = 40
 columns = 2

@@ -12,7 +12,7 @@ uniform float end = 1.0;
 
 void fragment() {
 
-	vec2 uv = UV * vec2(1.0, 0.1) * vec2(2.0*sin(1.0*UV.x), 2.0*sin(UV.x)) + vec2(TIME * scroll_speed, 0.0);
+	vec2 uv = UV * vec2(1.0, 1.0) * vec2(2.0*sin(1.0*UV.x), 2.0*sin(UV.x)) + vec2(TIME * scroll_speed, 0.0);
 	vec4 tex = texture(Texture2DParameter, uv);
 	vec4 color = mix(ColorParameter, ColorParameter2, tex);
 

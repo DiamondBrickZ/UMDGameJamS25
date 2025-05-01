@@ -31,7 +31,7 @@ var current_game_state := GameState.MAIN_MENU:
 	set(new_val):
 		change_game_state(new_val)
 		current_game_state = new_val
-var do_tutorial = true
+var do_tutorial = false
 
 @export var game_info : Dictionary = {
 	0: {		## PLAYER
@@ -63,7 +63,7 @@ var do_tutorial = true
 		"max_health": 30.0,
 		"modifiers": [
 			0.0, # health growth
-			1.0, # energy growth
+			2.0, # energy growth
 			1.0, # damage multiplier
 			1.0, # gold multiplier
 			1.0  # shield multiplier
@@ -134,26 +134,22 @@ func _process(delta):
 				game_info[character]["status_effects"].erase(effect)
 				status_effect_change.emit(character, effect, false)
 		
-		if has_effect(character, StatusEffect.Effects.PARALYZED):
-			game_info[character]["energy_growth"] = 0.0
+		if has_effect(character, StatusEffect.Effects.BLEEDING) or has_effect(character, StatusEffect.Effects.BURNING) or has_effect(character, StatusEffect.Effects.POISONED):
+			game_info[character]["modifiers"][ModifierTypes.HEALTH] = -0.1
 		else:
-			game_info[character]["energy_growth"] = 1.0
-		
-		if has_effect(character, StatusEffect.Effects.BLEEDING):
-			game_info[character]["health_growth"] = -0.1
-		else:
-			game_info[character]["health_growth"] = 0.0
+			game_info[character]["modifiers"][ModifierTypes.HEALTH] = 0.0
 		
 		# ENERGY
 		if game_info[character]["energy"] <= game_info[character]["max_energy"]:
-			game_info[character]["energy"] += game_info[character]["energy_growth"] * delta * game_info[character]["energy_growth"]
+			if not has_effect(character, StatusEffect.Effects.PARALYZED):
+				game_info[character]["energy"] += game_info[character]["modifiers"][ModifierTypes.ENERGY] * delta
 		
 		# don't let it go below 0
 		if game_info[character]["energy"] < 0.0:
 			game_info[character]["energy"] = 0.0
 		
 		# HEALTH
-		game_info[character]["health"] += game_info[character]["health_growth"] * delta
+		game_info[character]["health"] += game_info[character]["modifiers"][ModifierTypes.HEALTH] * delta
 		if game_info[character]["health"] < 0 and character == 0:
 			player_death()
 		elif game_info[character]["health"] < 0 and character == 1:
@@ -207,6 +203,7 @@ func is_drunk(character:int):
 func draw_card(character: int = 0):
 	
 	if len(game_info[character]["hand"]) >= 7:
+		print("can't draw, too many cards")
 		return false
 	
 	var files = get_all_file_paths("res://gameplay/cards/")
@@ -358,7 +355,6 @@ func devil_turn():
 ## ENERGY
 func deplete_energy(character: int, amount: float):
 	
-	# if not, then deplete energy
 	game_info[character]["energy"] -= amount
 
 func not_enough_energy():
@@ -382,11 +378,15 @@ func player_death():
 	game_info[0]["gold"] = 0.0
 	game_info[0]["energy"] = game_info[0]["max_energy"]
 	game_info[0]["health"] = game_info[0]["max_health"]
+	game_info[0]["hand"] = []
 	game_info[1]["hand"] = []
 	discard_pile = []
 	for effect in game_info[0]["status_effects"]:
 		game_info[0]["status_effects"].erase(effect)
 		status_effect_change.emit(0, effect, false)
+	
+	# if it doesn't get rid of all status effects, clear it
+	game_info[0]["status_effects"].clear()
 	
 	await get_tree().create_timer(4.5).timeout
 	game.cam_speed = 1.0
@@ -395,7 +395,6 @@ func player_death():
 	# add next hand after death
 	for card in next_hand:
 		add_card(0, card)
-		print('adadijaing caraddd ', card.title)
 	next_hand = []
 
 func change_game_state(new_state: GameState):
