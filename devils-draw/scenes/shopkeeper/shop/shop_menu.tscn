@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnyg1yodqens2"]
+[gd_scene load_steps=14 format=3 uid="uid://bnyg1yodqens2"]
 
 [ext_resource type="Script" uid="uid://ve755mdku7h4" path="res://scenes/shopkeeper/shop/shop_menu.gd" id="1_fiyis"]
 [ext_resource type="Script" uid="uid://c3gd15hekfs2l" path="res://gameplay/cards/card.gd" id="2_x46ma"]
@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://d2sorl8qyttnu" path="res://gameplay/cards/common/red_heart/red_heart.tres" id="6_0tvj1"]
 [ext_resource type="Resource" uid="uid://cxbyf2dh15crl" path="res://gameplay/cards/common/stick/stick.tres" id="7_7s5c5"]
 [ext_resource type="Resource" uid="uid://cjbc6ehdd5hun" path="res://gameplay/cards/rare/motherboard/motherboard.tres" id="8_m6h1c"]
+[ext_resource type="Texture2D" uid="uid://j1hgpak5padf" path="res://scenes/shopkeeper/shop/card_shop.png" id="9_7s5c5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k3i3g"]
 bg_color = Color(0.180005, 0.180005, 0.180005, 1)
@@ -97,16 +98,10 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="RichTextLabel" parent="Control"]
-layout_mode = 2
-offset_left = 25.0
-offset_top = 386.0
-offset_right = 299.0
-offset_bottom = 465.0
-bbcode_enabled = true
-text = "[b]The Shop[/b]: Items bought at the shop will be your next life's starting hand"
-autowrap_mode = 2
-vertical_alignment = 2
+[node name="Paper" type="Sprite2D" parent="."]
+position = Vector2(127, 348)
+scale = Vector2(0.0919722, 0.0919722)
+texture = ExtResource("9_7s5c5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
