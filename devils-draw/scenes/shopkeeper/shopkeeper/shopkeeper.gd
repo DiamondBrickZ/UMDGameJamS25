@@ -80,6 +80,8 @@ var intro_i : int = 100000
 func _ready():
 	sprite_3d.visible = false
 	GameManager.shop_dialogue.connect(write_dialogue)
+	if GameManager.do_tutorial:
+		intro_i = 0
 
 func write_dialogue(text : String):
 	var text_to_write : String = ""
@@ -96,7 +98,6 @@ func write_dialogue(text : String):
 		text_to_write = "I'm afraid you don't have enough gold in your pocket."
 		emotion = Emotion.FRIENDLY
 	elif text == "intro":
-		intro_i = 0
 		text_to_write = intro[intro_i]
 		intro_i += 1
 	

@@ -217,9 +217,10 @@ func remove_all_status_effects(character: int):
 ## CARDS
 func draw_card(character: int = 0):
 	
-	if len(game_info[character]["hand"]) >= 7:
-		print("can't draw, too many cards")
-		return false
+	if character == 0:
+		if len(game_info[character]["hand"]) >= 7:
+			print("can't draw, too many cards")
+			return false
 	
 	var files = get_all_file_paths("res://gameplay/cards/")
 	var card_resources = []
